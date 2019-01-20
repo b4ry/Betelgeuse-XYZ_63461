@@ -1,0 +1,7 @@
+[Bb]in
+[Dd]ebug*/
+obj/
+.vs/
+logs
+Library/
+Temp/
