@@ -40,6 +40,8 @@ namespace Assets.Scripts.Controllers
             regionSummaryPanelLabelTextMesh = regionSummaryPanelLabel.GetComponent<TextMeshProUGUI>();
             regionSummaryPanelSizeTextMesh = regionSummaryPanelSize.GetComponent<TextMeshProUGUI>();
             regionSummaryPanelBiomesTextMesh = regionSummaryPanelBiomes.GetComponent<TextMeshProUGUI>();
+
+            gameObject.AddComponent<PolygonCollider2D>();
         }
 
         void Start()
@@ -156,7 +158,7 @@ namespace Assets.Scripts.Controllers
                 regionSummaryPanelExploreButton.onClick.RemoveAllListeners();
                 regionSummaryPanelExploreButton.onClick.AddListener(delegate
                 {
-                    Explore();
+                    ChartRegion();
                 });
             }
 
@@ -225,7 +227,7 @@ namespace Assets.Scripts.Controllers
             isInitial = true;
         }
 
-        public void Explore()
+        public void ChartRegion()
         {
             regionModel.Visited = true;
 
