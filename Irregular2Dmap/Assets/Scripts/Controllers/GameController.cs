@@ -5,17 +5,17 @@ namespace Assets.Scripts.Controllers
 {
     public class GameController : MonoBehaviour
     {
-        public static GameController instance = null;
+        public static GameController Instance = null;
 
         public List<GameObject> Regions = new List<GameObject>();
 
         void Awake()
         {
-            if (instance == null)
+            if (Instance == null)
             {
-                instance = this;
+                Instance = this;
             }
-            else if (instance != this)
+            else if (Instance != this)
             {
                 Destroy(gameObject);
             }

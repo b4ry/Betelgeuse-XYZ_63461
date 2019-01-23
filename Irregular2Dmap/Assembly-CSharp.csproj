@@ -65,6 +65,8 @@
     <Compile Include="Assets\Scripts\Controllers\SelectedRegionsController.cs" />
     <Compile Include="Assets\Scripts\Enums\Biome.cs" />
     <Compile Include="Assets\Scripts\Enums\Size.cs" />
+    <Compile Include="Assets\Scripts\Managers\IPanelManager.cs" />
+    <Compile Include="Assets\Scripts\Managers\RegionSummaryPanelManager.cs" />
     <Compile Include="Assets\Scripts\Models\RegionModel.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark01.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark01_UGUI.cs" />

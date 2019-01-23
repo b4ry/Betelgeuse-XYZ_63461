@@ -1,23 +1,19 @@
 ﻿using Assets.Scripts.Enums;
+using Assets.Scripts.Managers;
 using Assets.Scripts.Models;
 using System.IO;
 using System.Linq;
 using TMPro;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 namespace Assets.Scripts.Controllers
 {
-    public class RegionController : MonoBehaviour
+    public class RegionController : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     {
         private const string UnknownValue = "???";
         private const string UnchartedLandName = "Uncharted land";
-        public GameObject regionSummaryPanel;
-        public GameObject regionSummaryPanelLabel;
-        public GameObject regionSummaryPanelSize;
-        public GameObject regionSummaryPanelBiomes;
-
-        public Button regionSummaryPanelExploreButton;
 
         public Sprite regionSprite;
         public Sprite regionOutlineSprite;
@@ -30,16 +26,9 @@ namespace Assets.Scripts.Controllers
         private SpriteRenderer spriteRenderer;
         private RegionModel regionModel;
 
-        private TextMeshProUGUI regionSummaryPanelLabelTextMesh;
-        private TextMeshProUGUI regionSummaryPanelSizeTextMesh;
-        private TextMeshProUGUI regionSummaryPanelBiomesTextMesh;
-
         void Awake()
         {
             spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
-            regionSummaryPanelLabelTextMesh = regionSummaryPanelLabel.GetComponent<TextMeshProUGUI>();
-            regionSummaryPanelSizeTextMesh = regionSummaryPanelSize.GetComponent<TextMeshProUGUI>();
-            regionSummaryPanelBiomesTextMesh = regionSummaryPanelBiomes.GetComponent<TextMeshProUGUI>();
 
             gameObject.AddComponent<PolygonCollider2D>();
         }
@@ -53,7 +42,7 @@ namespace Assets.Scripts.Controllers
             string[] regionDefinition = File.ReadAllLines(fullPath);
             string[] neighbourNames = regionDefinition[3].Split(';');
 
-            var neighbourRegions = GameController.instance.Regions.Where(region => neighbourNames.Contains(region.name)).ToList();
+            var neighbourRegions = GameController.Instance.Regions.Where(region => neighbourNames.Contains(region.name)).ToList();
 
             regionModel = new RegionModel(regionDefinition[0], (Size)int.Parse(regionDefinition[1]), (Biome)int.Parse(regionDefinition[2]), neighbourRegions);
 
@@ -65,9 +54,9 @@ namespace Assets.Scripts.Controllers
                 regionSelected = true;
 
                 spriteRenderer.sprite = regionOutlineSprite;
-                SetupRegionSummaryPanel(regionModel.Name, regionModel.Size.ToString(), regionModel.Biomes.ToString(), false);
+                RegionSummaryPanelManager.Instance.SetupRegionSummaryPanel(regionModel.Name, regionModel.Size.ToString(), regionModel.Biomes.ToString(), false);
 
-                SelectedRegionsController.instance.SelectedRegionObjects.Add(this);
+                SelectedRegionsController.Instance.SelectedRegionObjects.Add(this);
             }
             else
             {
@@ -86,17 +75,6 @@ namespace Assets.Scripts.Controllers
             }
         }
 
-        private void SetupRegionSummaryPanel(string regionName, string size, string biomes, bool exploreButtonInteractable)
-        {
-            regionSummaryPanelLabelTextMesh.SetText(regionName);
-            regionSummaryPanelSizeTextMesh.SetText("Size: " + size);
-            regionSummaryPanelBiomesTextMesh.SetText("Biomes: " + biomes);
-
-            regionSummaryPanelExploreButton.interactable = exploreButtonInteractable;
-
-            regionSummaryPanel.SetActive(true);
-        }
-
         void OnMouseDown()
         {
             if (regionSelected) // DESELECT region
@@ -112,9 +90,9 @@ namespace Assets.Scripts.Controllers
 
                 regionSelected = false;
 
-                regionSummaryPanel.SetActive(false);
+                RegionSummaryPanelManager.Instance.SetActive(false);
 
-                SelectedRegionsController.instance.SelectedRegionObjects.Remove(this);
+                SelectedRegionsController.Instance.SelectedRegionObjects.Remove(this);
 
                 if (regionModel.Visited)
                 {
@@ -147,22 +125,20 @@ namespace Assets.Scripts.Controllers
             {
                 spriteRenderer.sprite = regionOutlineSprite;
 
-                SetupRegionSummaryPanel(regionModel.Name, regionModel.Size.ToString(), regionModel.Biomes.ToString(), false);
+                RegionSummaryPanelManager.Instance.SetupRegionSummaryPanel(regionModel.Name, regionModel.Size.ToString(), regionModel.Biomes.ToString(), false);
             }
             else
             {
                 spriteRenderer.sprite = regionFogOfWarOutlineSprite;
 
-                SetupRegionSummaryPanel(UnchartedLandName, UnknownValue, UnknownValue, true);
-
-                regionSummaryPanelExploreButton.onClick.RemoveAllListeners();
-                regionSummaryPanelExploreButton.onClick.AddListener(delegate
+                RegionSummaryPanelManager.Instance.SetupRegionSummaryPanel(UnchartedLandName, UnknownValue, UnknownValue, true);
+                RegionSummaryPanelManager.Instance.AddButtonListener(delegate
                 {
                     ChartRegion();
                 });
             }
 
-            foreach (var selectedRegion in SelectedRegionsController.instance.SelectedRegionObjects)
+            foreach (var selectedRegion in SelectedRegionsController.Instance.SelectedRegionObjects)
             {
                 selectedRegion.DeselectRegion();
             }
@@ -180,11 +156,11 @@ namespace Assets.Scripts.Controllers
                 }
             }
 
-            foreach(var region in GameController.instance.Regions)
+            foreach (var region in GameController.Instance.Regions)
             {
                 var regionController = region.GetComponent<RegionController>();
 
-                if(!regionController.regionModel.Visited && !regionController.regionSelected)
+                if (!regionController.regionModel.Visited && !regionController.regionSelected)
                 {
                     if (regionModel.Visited && regionModel.NeighbourRegions.Contains(region))
                     {
@@ -197,8 +173,8 @@ namespace Assets.Scripts.Controllers
                 }
             }
 
-            SelectedRegionsController.instance.SelectedRegionObjects.Clear();
-            SelectedRegionsController.instance.SelectedRegionObjects.Add(this);
+            SelectedRegionsController.Instance.SelectedRegionObjects.Clear();
+            SelectedRegionsController.Instance.SelectedRegionObjects.Add(this);
         }
 
         private void DeselectRegion()
@@ -233,10 +209,6 @@ namespace Assets.Scripts.Controllers
 
             spriteRenderer.sprite = regionOutlineSprite;
 
-            regionSummaryPanelLabelTextMesh.SetText(regionModel.Name);
-            regionSummaryPanelSizeTextMesh.SetText("Size: " + regionModel.Size.ToString());
-            regionSummaryPanelBiomesTextMesh.SetText("Biomes: " + regionModel.Biomes.ToString());
-
             if (regionModel.Visited)
             {
                 foreach (var neighbourRegion in regionModel.NeighbourRegions)
@@ -250,7 +222,17 @@ namespace Assets.Scripts.Controllers
                 }
             }
 
-            regionSummaryPanelExploreButton.interactable = false;
+            RegionSummaryPanelManager.Instance.SetupRegionSummaryPanel(regionModel.Name, regionModel.Size.ToString(), regionModel.Biomes.ToString(), false);
+        }
+
+        public void OnPointerEnter(PointerEventData eventData)
+        {
+            RegionSummaryPanelManager.Instance.ShowToolTip(true);
+        }
+
+        public void OnPointerExit(PointerEventData eventData)
+        {
+            RegionSummaryPanelManager.Instance.ShowToolTip(false);
         }
     }
 }

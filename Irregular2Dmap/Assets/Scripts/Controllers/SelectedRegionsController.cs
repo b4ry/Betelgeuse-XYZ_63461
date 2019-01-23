@@ -5,17 +5,17 @@ namespace Assets.Scripts.Controllers
 {
     public class SelectedRegionsController : MonoBehaviour
     {
-        public static SelectedRegionsController instance = null;
+        public static SelectedRegionsController Instance = null;
 
         public List<RegionController> SelectedRegionObjects = new List<RegionController>();
 
         void Awake()
         {
-            if (instance == null)
+            if (Instance == null)
             {
-                instance = this;
+                Instance = this;
             }
-            else if (instance != this)
+            else if (Instance != this)
             {
                 Destroy(gameObject);
             }
