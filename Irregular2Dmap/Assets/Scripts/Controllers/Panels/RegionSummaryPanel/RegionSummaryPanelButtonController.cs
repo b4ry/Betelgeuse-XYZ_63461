@@ -2,9 +2,9 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-namespace Assets.Scripts.Controllers
+namespace Assets.Scripts.Controllers.Panels.RegionSummaryPanel
 {
-    public class RegionSummaryPanelBiomeController : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
+    public class RegionSummaryPanelButtonController : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     {
         private GameObject cameraObject;
         private Camera cameraComponent;
@@ -23,19 +23,16 @@ namespace Assets.Scripts.Controllers
             var rectTransform = transform.GetComponent<RectTransform>();
 
             localMousePosition.x += rectTransform.anchoredPosition.x;
-            localMousePosition.y = -20;
+            localMousePosition.y = -10;
 
-            Debug.Log(localMousePosition);
-
-            RegionSummaryPanelManager.Instance.PositionBiomeTooltip(localMousePosition);
-            RegionSummaryPanelManager.Instance.SetBiomeTooltipText(gameObject.name);
-            RegionSummaryPanelManager.Instance.ShowBiomeTooltip(true);
+            RegionSummaryPanelManager.Instance.PositionButtonTooltip(localMousePosition);
+            RegionSummaryPanelManager.Instance.ShowButtonTooltip(true);
         }
 
         public void OnPointerExit(PointerEventData eventData)
         {
-            RegionSummaryPanelManager.Instance.ShowBiomeTooltip(false);
-            RegionSummaryPanelManager.Instance.PositionBiomeTooltip(localMousePosition * -1);
+            RegionSummaryPanelManager.Instance.ShowButtonTooltip(false);
+            RegionSummaryPanelManager.Instance.PositionButtonTooltip(localMousePosition * -1);
         }
     }
 }

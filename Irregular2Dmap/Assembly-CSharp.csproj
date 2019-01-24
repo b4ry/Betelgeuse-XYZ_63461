@@ -61,9 +61,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Scripts\Controllers\GameController.cs" />
+    <Compile Include="Assets\Scripts\Controllers\Panels\RegionSummaryPanel\RegionSummaryPanelBiomeController.cs" />
+    <Compile Include="Assets\Scripts\Controllers\Panels\RegionSummaryPanel\RegionSummaryPanelButtonController.cs" />
+    <Compile Include="Assets\Scripts\Controllers\Panels\RegionSummaryPanel\RegionSummaryPanelController.cs" />
     <Compile Include="Assets\Scripts\Controllers\RegionController.cs" />
-    <Compile Include="Assets\Scripts\Controllers\RegionSummaryPanelBiomeController.cs" />
-    <Compile Include="Assets\Scripts\Controllers\RegionSummaryPanelButtonController.cs" />
     <Compile Include="Assets\Scripts\Controllers\SelectedRegionsController.cs" />
     <Compile Include="Assets\Scripts\Enums\Biome.cs" />
     <Compile Include="Assets\Scripts\Enums\Size.cs" />

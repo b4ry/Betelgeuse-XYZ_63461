@@ -131,7 +131,7 @@ namespace Assets.Scripts.Managers
             for (int i = 0; i < biomesArray.Length; i++)
             {
                 var biomeObject = Instantiate(biomeImagePrefab, regionSummaryPanelBiomes.transform);
-                biomeObject.transform.localPosition += new Vector3(i * 20 + 60, 0);
+                biomeObject.transform.localPosition += new Vector3(i * 20 + 40, -1);
 
                 biomeObject.name = biomesArray[i];
 

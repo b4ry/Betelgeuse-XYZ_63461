@@ -1,14 +1,14 @@
 ﻿using Assets.Scripts.Enums;
 using Assets.Scripts.Managers;
 using Assets.Scripts.Models;
-using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 namespace Assets.Scripts.Controllers
 {
-    public class RegionController : MonoBehaviour
+    public class RegionController : MonoBehaviour, IPointerClickHandler
     {
         private const string UnknownValue = "???";
         private const string UnchartedLandName = "Uncharted land";
@@ -30,7 +30,7 @@ namespace Assets.Scripts.Controllers
 
             gameObject.AddComponent<PolygonCollider2D>();
         }
-        
+
         void Start()
         {
             var path = $"/Assets/RegionsDefinition/{gameObject.name}.txt";
@@ -73,7 +73,7 @@ namespace Assets.Scripts.Controllers
             }
         }
 
-        void OnMouseDown()
+        public void OnPointerClick(PointerEventData eventData)
         {
             if (regionSelected) // DESELECT region
             {
