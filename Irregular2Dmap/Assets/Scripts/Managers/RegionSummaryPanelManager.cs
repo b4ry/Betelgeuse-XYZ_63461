@@ -76,5 +76,11 @@ namespace Assets.Scripts.Managers
         {
             toolTip.SetActive(show);
         }
+
+        public void PositionTooltip(Vector3 cursorPosition)
+        {
+            cursorPosition.z = 0;
+            toolTip.transform.localPosition += cursorPosition;
+        }
     }
 }

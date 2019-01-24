@@ -3,14 +3,11 @@ using Assets.Scripts.Managers;
 using Assets.Scripts.Models;
 using System.IO;
 using System.Linq;
-using TMPro;
 using UnityEngine;
-using UnityEngine.EventSystems;
-using UnityEngine.UI;
 
 namespace Assets.Scripts.Controllers
 {
-    public class RegionController : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
+    public class RegionController : MonoBehaviour
     {
         private const string UnknownValue = "???";
         private const string UnchartedLandName = "Uncharted land";
@@ -223,16 +220,6 @@ namespace Assets.Scripts.Controllers
             }
 
             RegionSummaryPanelManager.Instance.SetupRegionSummaryPanel(regionModel.Name, regionModel.Size.ToString(), regionModel.Biomes.ToString(), false);
-        }
-
-        public void OnPointerEnter(PointerEventData eventData)
-        {
-            RegionSummaryPanelManager.Instance.ShowToolTip(true);
-        }
-
-        public void OnPointerExit(PointerEventData eventData)
-        {
-            RegionSummaryPanelManager.Instance.ShowToolTip(false);
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using UnityEngine.Events;
+﻿using UnityEngine;
+using UnityEngine.Events;
 
 namespace Assets.Scripts.Managers
 {
@@ -8,5 +9,6 @@ namespace Assets.Scripts.Managers
         void SetupRegionSummaryPanel(string regionName, string size, string biomes, bool exploreButtonInteractable);
         void AddButtonListener(UnityAction action);
         void ShowToolTip(bool show);
+        void PositionTooltip(Vector3 cursorPosition);
     }
 }
