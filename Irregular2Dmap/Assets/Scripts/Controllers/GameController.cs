@@ -8,6 +8,7 @@ namespace Assets.Scripts.Controllers
         public static GameController Instance = null;
 
         public List<GameObject> Regions = new List<GameObject>();
+        public GameObject MainCamera;
 
         void Awake()
         {

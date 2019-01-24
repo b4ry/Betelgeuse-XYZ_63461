@@ -1,6 +1,7 @@
 ﻿using Assets.Scripts.Enums;
 using Assets.Scripts.Managers;
 using Assets.Scripts.Models;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using UnityEngine;
@@ -29,7 +30,7 @@ namespace Assets.Scripts.Controllers
 
             gameObject.AddComponent<PolygonCollider2D>();
         }
-
+        
         void Start()
         {
             var path = $"/Assets/RegionsDefinition/{gameObject.name}.txt";
