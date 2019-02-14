@@ -1,6 +1,7 @@
 ﻿using Assets.Scripts.Enums;
 using Assets.Scripts.Managers;
 using Assets.Scripts.Models;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using UnityEngine;
@@ -38,11 +39,12 @@ namespace Assets.Scripts.Controllers
             var fullPath = string.Concat(directory, path);
 
             string[] regionDefinition = File.ReadAllLines(fullPath);
-            string[] neighbourNames = regionDefinition[3].Split(';');
+            string[] biomeRarities = regionDefinition[3].Split(';');
+            string[] neighbourNames = regionDefinition[4].Split(';');
 
             var neighbourRegions = GameController.Instance.Regions.Where(region => neighbourNames.Contains(region.name)).ToList();
 
-            regionModel = new RegionModel(regionDefinition[0], (Size)int.Parse(regionDefinition[1]), (Biome)int.Parse(regionDefinition[2]), neighbourRegions);
+            regionModel = new RegionModel(regionDefinition[0], (SizeEnum)int.Parse(regionDefinition[1]), (BiomeEnum)int.Parse(regionDefinition[2]), biomeRarities, neighbourRegions);
 
             if (isInitial)
             {
@@ -52,7 +54,7 @@ namespace Assets.Scripts.Controllers
                 regionSelected = true;
 
                 spriteRenderer.sprite = regionOutlineSprite;
-                RegionSummaryPanelManager.Instance.SetupRegionSummaryPanel(regionModel.Name, regionModel.Size.ToString(), regionModel.Biomes.ToString(), false);
+                RegionSummaryPanelManager.Instance.SetupRegionSummaryPanel(regionModel.Name, regionModel.Size.ToString(), regionModel.Biomes, false);
 
                 SelectedRegionsController.Instance.SelectedRegionObjects.Add(this);
             }
@@ -123,13 +125,13 @@ namespace Assets.Scripts.Controllers
             {
                 spriteRenderer.sprite = regionOutlineSprite;
 
-                RegionSummaryPanelManager.Instance.SetupRegionSummaryPanel(regionModel.Name, regionModel.Size.ToString(), regionModel.Biomes.ToString(), false);
+                RegionSummaryPanelManager.Instance.SetupRegionSummaryPanel(regionModel.Name, regionModel.Size.ToString(), regionModel.Biomes, false);
             }
             else
             {
                 spriteRenderer.sprite = regionFogOfWarOutlineSprite;
-
-                RegionSummaryPanelManager.Instance.SetupRegionSummaryPanel(UnchartedLandName, UnknownValue, UnknownValue, true);
+                
+                RegionSummaryPanelManager.Instance.SetupRegionSummaryPanel(UnchartedLandName, regionModel.Size.ToString(), regionModel.Biomes, true);
                 RegionSummaryPanelManager.Instance.AddButtonListener(delegate
                 {
                     ChartRegion();
@@ -220,7 +222,7 @@ namespace Assets.Scripts.Controllers
                 }
             }
 
-            RegionSummaryPanelManager.Instance.SetupRegionSummaryPanel(regionModel.Name, regionModel.Size.ToString(), regionModel.Biomes.ToString(), false);
+            RegionSummaryPanelManager.Instance.SetupRegionSummaryPanel(regionModel.Name, regionModel.Size.ToString(), regionModel.Biomes, false);
         }
     }
 }

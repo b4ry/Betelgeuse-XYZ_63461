@@ -2189,6 +2189,8 @@ MonoBehaviour:
   biomeTooltip: {fileID: 138296494}
   biomeImagePrefab: {fileID: 4352113173194531776, guid: 750b91eb9cc93a049ac1dcb46ec91900,
     type: 3}
+  biomeRarityImagePrefab: {fileID: 2819918708018688637, guid: e1314959f386f374d9e08d0ac40f3fce,
+    type: 3}
 --- !u!1 &1697854776
 GameObject:
   m_ObjectHideFlags: 0

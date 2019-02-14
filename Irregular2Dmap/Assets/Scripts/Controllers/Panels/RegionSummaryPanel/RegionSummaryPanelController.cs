@@ -31,7 +31,7 @@ namespace Assets.Scripts.Controllers.Panels.RegionSummaryPanel
                 z = 100
             };
 
-            newPosition.y += 631;
+            newPosition.y += 631; // panel height
 
             transform.position = cameraComponent.ScreenToWorldPoint(newPosition);
         }

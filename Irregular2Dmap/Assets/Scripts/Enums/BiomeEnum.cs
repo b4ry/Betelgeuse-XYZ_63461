@@ -3,7 +3,7 @@
 namespace Assets.Scripts.Enums
 {
     [Flags]
-    public enum Biome
+    public enum BiomeEnum
     {
         Invalid = 0,
         Plains = 1,

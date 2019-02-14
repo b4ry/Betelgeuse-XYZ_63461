@@ -1,6 +1,6 @@
 ﻿namespace Assets.Scripts.Enums
 {
-    public enum Size
+    public enum SizeEnum
     {
         Small,
         Medium,
