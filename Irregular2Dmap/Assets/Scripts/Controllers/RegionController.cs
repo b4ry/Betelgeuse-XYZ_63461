@@ -40,9 +40,9 @@ namespace Assets.Scripts.Controllers
             string[] biomeRarities = regionDefinition[3].Split(';');
             string[] neighbourNames = regionDefinition[4].Split(';');
 
-            var neighbourRegions = GameController.Instance.Regions.Where(region => neighbourNames.Contains(region.name)).ToList();
+            var neighbourRegions = GameController.Instance.RegionObjects.Where(region => neighbourNames.Contains(region.name)).ToList();
 
-            regionModel = new RegionModel(regionDefinition[0], (SizeEnum)int.Parse(regionDefinition[1]), (BiomeEnum)int.Parse(regionDefinition[2]), biomeRarities, neighbourRegions);
+            regionModel = new RegionModel(regionDefinition[0], (RegionSizeEnum)int.Parse(regionDefinition[1]), (BiomeEnum)int.Parse(regionDefinition[2]), biomeRarities, neighbourRegions);
 
             if (isInitial)
             {
@@ -154,7 +154,7 @@ namespace Assets.Scripts.Controllers
                 }
             }
 
-            foreach (var region in GameController.Instance.Regions)
+            foreach (var region in GameController.Instance.RegionObjects)
             {
                 var regionController = region.GetComponent<RegionController>();
 

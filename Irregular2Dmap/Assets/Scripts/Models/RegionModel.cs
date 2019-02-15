@@ -9,13 +9,13 @@ namespace Assets.Scripts.Models
     public class RegionModel
     {
         public string Name { get; set; }
-        public SizeEnum Size { get; set; }
+        public RegionSizeEnum Size { get; set; }
         public List<BiomeModel> Biomes { get; set; }
         public List<GameObject> NeighbourRegions { get; set; }
         public bool Visited { get; set; }
         public OddityModel Oddity { get; set; }
 
-        public RegionModel(string name, SizeEnum size, BiomeEnum biomes, string[] biomeRarities, List<GameObject> neighbourRegions)
+        public RegionModel(string name, RegionSizeEnum size, BiomeEnum biomes, string[] biomeRarities, List<GameObject> neighbourRegions)
         {
             Name = name;
             Size = size;
@@ -36,9 +36,38 @@ namespace Assets.Scripts.Models
             {
                 var biomeEnum = (BiomeEnum)Enum.Parse(typeof(BiomeEnum), biomesArray[i]);
                 var biomeRarityEnum = (RarityEnum)Enum.Parse(typeof(RarityEnum), biomeRarities[i]);
+                var newBiome = new BiomeModel(biomeEnum, biomeRarityEnum);
 
-                Biomes.Add(new BiomeModel(biomeEnum, biomeRarityEnum));
+                Biomes.Add(newBiome);
             }
+
+            DistributeAreaAmongBiomes();
+        }
+
+        private void DistributeAreaAmongBiomes()
+        {
+            int pool = 0;
+            int maxSize = (int)Size;
+            int biomeMaxSize = maxSize / Biomes.Count;
+
+            foreach (var biome in Biomes)
+            {
+                biome.Area = GameController.Instance.RNG.Next(1, biomeMaxSize + 1);
+                pool += biomeMaxSize - biome.Area;
+            }
+
+            int leftovers = pool / Biomes.Count;
+            int totalBiomesSize = 0;
+
+            foreach (var biome in Biomes)
+            {
+                biome.Area += leftovers;
+                totalBiomesSize += biome.Area;
+            }
+
+            int roundLeftover = maxSize - totalBiomesSize;
+
+            Biomes[GameController.Instance.RNG.Next(0, Biomes.Count)].Area += roundLeftover;
         }
 
         private void RandomizeOddityRating()

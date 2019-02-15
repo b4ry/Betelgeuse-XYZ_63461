@@ -1,5 +1,5 @@
 Kazak Karam Dum
-1
+100
 25
 Common;Common;Common
 Region5;Region2

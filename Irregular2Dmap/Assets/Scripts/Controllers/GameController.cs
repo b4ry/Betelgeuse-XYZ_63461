@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using Assets.Scripts.Models;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Assets.Scripts.Controllers
@@ -7,7 +8,8 @@ namespace Assets.Scripts.Controllers
     {
         public static GameController Instance = null;
 
-        public List<GameObject> Regions = new List<GameObject>();
+        public List<GameObject> RegionObjects = new List<GameObject>();
+
         public GameObject MainCamera;
 
         public System.Random RNG;
@@ -26,7 +28,7 @@ namespace Assets.Scripts.Controllers
             DontDestroyOnLoad(gameObject);
 
             RNG = new System.Random();
-            var initialRegion = Regions[RNG.Next(0, Regions.Count)];
+            var initialRegion = RegionObjects[RNG.Next(0, RegionObjects.Count)];
 
             initialRegion.GetComponent<RegionController>().SetInitial();
         }

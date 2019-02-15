@@ -1,4 +1,5 @@
-﻿using Assets.Scripts.Models;
+﻿using Assets.Scripts.Controllers;
+using Assets.Scripts.Models;
 using System.Collections.Generic;
 using System.Linq;
 using TMPro;

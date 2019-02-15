@@ -6,11 +6,13 @@ namespace Assets.Scripts.Models
     {
         public BiomeEnum Biome { get; set; }
         public RarityEnum Rarity { get; set; }
+        public int Area { get; set; }
 
         public BiomeModel(BiomeEnum biome, RarityEnum rarity)
         {
             Biome = biome;
             Rarity = rarity;
+            Area = 0;
         }
     }
 }
