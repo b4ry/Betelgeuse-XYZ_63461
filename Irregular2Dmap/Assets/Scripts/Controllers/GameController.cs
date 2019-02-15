@@ -10,6 +10,8 @@ namespace Assets.Scripts.Controllers
         public List<GameObject> Regions = new List<GameObject>();
         public GameObject MainCamera;
 
+        public System.Random RNG;
+
         void Awake()
         {
             if (Instance == null)
@@ -23,8 +25,8 @@ namespace Assets.Scripts.Controllers
 
             DontDestroyOnLoad(gameObject);
 
-            var random = new System.Random();
-            var initialRegion = Regions[random.Next(0, Regions.Count)];
+            RNG = new System.Random();
+            var initialRegion = Regions[RNG.Next(0, Regions.Count)];
 
             initialRegion.GetComponent<RegionController>().SetInitial();
         }

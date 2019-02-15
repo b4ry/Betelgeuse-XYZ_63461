@@ -1,7 +1,6 @@
 ﻿using Assets.Scripts.Enums;
 using Assets.Scripts.Managers;
 using Assets.Scripts.Models;
-using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using UnityEngine;
@@ -12,7 +11,6 @@ namespace Assets.Scripts.Controllers
     public class RegionController : MonoBehaviour, IPointerClickHandler
     {
         private const string UnknownValue = "???";
-        private const string UnchartedLandName = "Uncharted land";
 
         public Sprite regionSprite;
         public Sprite regionOutlineSprite;
@@ -54,7 +52,7 @@ namespace Assets.Scripts.Controllers
                 regionSelected = true;
 
                 spriteRenderer.sprite = regionOutlineSprite;
-                RegionSummaryPanelManager.Instance.SetupRegionSummaryPanel(regionModel.Name, regionModel.Size.ToString(), regionModel.Biomes, false);
+                RegionSummaryPanelManager.Instance.SetupRegionSummaryPanel(regionModel, false);
 
                 SelectedRegionsController.Instance.SelectedRegionObjects.Add(this);
             }
@@ -125,13 +123,13 @@ namespace Assets.Scripts.Controllers
             {
                 spriteRenderer.sprite = regionOutlineSprite;
 
-                RegionSummaryPanelManager.Instance.SetupRegionSummaryPanel(regionModel.Name, regionModel.Size.ToString(), regionModel.Biomes, false);
+                RegionSummaryPanelManager.Instance.SetupRegionSummaryPanel(regionModel, false);
             }
             else
             {
                 spriteRenderer.sprite = regionFogOfWarOutlineSprite;
                 
-                RegionSummaryPanelManager.Instance.SetupRegionSummaryPanel(UnchartedLandName, regionModel.Size.ToString(), regionModel.Biomes, true);
+                RegionSummaryPanelManager.Instance.SetupRegionSummaryPanel(regionModel, true);
                 RegionSummaryPanelManager.Instance.AddButtonListener(delegate
                 {
                     ChartRegion();
@@ -222,7 +220,7 @@ namespace Assets.Scripts.Controllers
                 }
             }
 
-            RegionSummaryPanelManager.Instance.SetupRegionSummaryPanel(regionModel.Name, regionModel.Size.ToString(), regionModel.Biomes, false);
+            RegionSummaryPanelManager.Instance.SetupRegionSummaryPanel(regionModel, false);
         }
     }
 }

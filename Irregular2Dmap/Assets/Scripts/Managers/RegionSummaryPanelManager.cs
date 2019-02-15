@@ -39,11 +39,15 @@ namespace Assets.Scripts.Managers
         [SerializeField]
         private GameObject biomeRarityImagePrefab;
 
+        [SerializeField]
+        private GameObject oddityImage;
+
         private List<GameObject> biomeImageObjects = new List<GameObject>();
         private List<GameObject> biomeRarityImageObjects = new List<GameObject>();
 
         private List<Sprite> biomeImageSprites = new List<Sprite>();
         private List<Sprite> biomeRarityImageSprites = new List<Sprite>();
+        private List<Sprite> oddityImageSprites = new List<Sprite>();
 
         void Awake()
         {
@@ -65,6 +69,7 @@ namespace Assets.Scripts.Managers
             //TODO: MOVE TO ASSET BUNDLES
             biomeImageSprites = Resources.LoadAll<Sprite>("UI/RegionSummaryPanel/BiomeSprites").ToList();
             biomeRarityImageSprites = Resources.LoadAll<Sprite>("UI/RegionSummaryPanel/BiomeSprites/Rarity").ToList();
+            oddityImageSprites = Resources.LoadAll<Sprite>("UI/RegionSummaryPanel/OdditySprites").ToList();
         }
 
         public void SetActive(bool active)
@@ -72,13 +77,29 @@ namespace Assets.Scripts.Managers
             regionSummaryPanel.SetActive(active);      
         }
 
-        public void SetupRegionSummaryPanel(string regionName, string size, List<BiomeModel> biomes, bool exploreButtonInteractable)
+        public void SetupRegionSummaryPanel(RegionModel regionModel, bool exploreButtonInteractable)
         {
+            var regionName = regionModel.Name;
+
+            if(exploreButtonInteractable)
+            {
+                regionName = "Uncharted Land";
+            }
+
             regionSummaryPanelLabelTextMesh.SetText(regionName);
-            regionSummaryPanelSizeTextMesh.SetText("Size: " + size);
+            regionSummaryPanelSizeTextMesh.SetText("Size: " + regionModel.Size);
             regionSummaryPanelBiomesTextMesh.SetText("Biomes: ");
 
-            SetupBiomeImages(biomes, exploreButtonInteractable);
+            SetupBiomeImages(regionModel.Biomes, exploreButtonInteractable);
+
+            if (!exploreButtonInteractable)
+            {
+                oddityImage.GetComponent<Image>().sprite = oddityImageSprites.FirstOrDefault(ois => ois.name.Equals(regionModel.Oddity.Name));
+            }
+            else
+            {
+                oddityImage.GetComponent<Image>().sprite = oddityImageSprites.FirstOrDefault(ois => ois.name.Equals("UnknownOddity"));
+            }
 
             regionSummaryPanelExploreButton.interactable = exploreButtonInteractable;
 
