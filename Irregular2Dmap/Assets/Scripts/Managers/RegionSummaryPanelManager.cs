@@ -1,5 +1,4 @@
-﻿using Assets.Scripts.Controllers;
-using Assets.Scripts.Models;
+﻿using Assets.Scripts.Models;
 using System.Collections.Generic;
 using System.Linq;
 using TMPro;
@@ -172,7 +171,7 @@ namespace Assets.Scripts.Managers
                     var biomeObject = Instantiate(biomeImagePrefab, regionSummaryPanelBiomes.transform);
 
                     biomeObject.transform.localPosition += new Vector3(i * 20 + 40, -1);
-                    biomeObject.name = biomes[i].Biome.ToString();
+                    biomeObject.name = biomes[i].Name;
                     biomeObject.GetComponent<Image>().sprite = biomeImageSprites.FirstOrDefault(bis => bis.name.Contains(biomeObject.name));
 
                     biomeImageObjects.Add(biomeObject);

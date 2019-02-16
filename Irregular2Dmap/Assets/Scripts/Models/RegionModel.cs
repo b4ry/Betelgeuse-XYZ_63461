@@ -15,7 +15,7 @@ namespace Assets.Scripts.Models
         public bool Visited { get; set; }
         public OddityModel Oddity { get; set; }
 
-        public RegionModel(string name, RegionSizeEnum size, BiomeEnum biomes, string[] biomeRarities, List<GameObject> neighbourRegions)
+        public RegionModel(string name, RegionSizeEnum size, string[] biomeNames, List<GameObject> neighbourRegions)
         {
             Name = name;
             Size = size;
@@ -23,22 +23,18 @@ namespace Assets.Scripts.Models
             Visited = false;
 
             RandomizeOddityRating();
-            CreateBiomes(biomes, biomeRarities);
+            CreateBiomes(biomeNames);
         }
 
-        private void CreateBiomes(BiomeEnum biomes, string[] biomeRarities)
+        private void CreateBiomes(string[] biomeNames)
         {
             Biomes = new List<BiomeModel>();
 
-            var biomesArray = biomes.ToString().Replace(" ", "").Split(',');
-
-            for (int i = 0; i < biomesArray.Length; i++)
+            foreach(var biomeName in biomeNames)
             {
-                var biomeEnum = (BiomeEnum)Enum.Parse(typeof(BiomeEnum), biomesArray[i]);
-                var biomeRarityEnum = (RarityEnum)Enum.Parse(typeof(RarityEnum), biomeRarities[i]);
-                var newBiome = new BiomeModel(biomeEnum, biomeRarityEnum);
+                var biomeModel = BiomeDefinitionsController.Instance.BiomeDefinitions[biomeName];
 
-                Biomes.Add(newBiome);
+                Biomes.Add(biomeModel);
             }
 
             DistributeAreaAmongBiomes();

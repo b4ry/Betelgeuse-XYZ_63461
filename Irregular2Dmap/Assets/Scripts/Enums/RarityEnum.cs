@@ -1,8 +1,5 @@
-﻿using System;
-
-namespace Assets.Scripts.Enums
+﻿namespace Assets.Scripts.Enums
 {
-    [Flags]
     public enum RarityEnum
     {
         Common,

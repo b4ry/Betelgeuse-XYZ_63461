@@ -71,14 +71,15 @@ namespace Assets.Scripts.Controllers
 
             var worldMapName = mapDefinition[0];
             var regionsNumber = mapDefinition[1];
+            var regionNames = mapDefinition[2].Split(';');
 
             worldMapObject.GetComponent<SpriteRenderer>().sprite = worldMapSprites.FirstOrDefault(wms => wms.name.Contains(worldMapName));
 
-            for(int i = 1; i <= int.Parse(regionsNumber); i++)
+            for(int i = 0; i < int.Parse(regionsNumber); i++)
             {
                 var regionObject = Instantiate(regionPrefab, regionsObject.transform);
 
-                regionObject.name = string.Concat("Region", i);
+                regionObject.name = regionNames[i];
 
                 var regionController = regionObject.GetComponent<RegionController>();
                 regionController.RegionSprite = regionNFOWSprites.FirstOrDefault(rnfows => rnfows.name.Contains(regionObject.name));

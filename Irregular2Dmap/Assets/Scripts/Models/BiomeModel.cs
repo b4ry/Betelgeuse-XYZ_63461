@@ -4,13 +4,14 @@ namespace Assets.Scripts.Models
 {
     public class BiomeModel
     {
-        public BiomeEnum Biome { get; set; }
+        //public BiomeEnum Biome { get; set; }
+        public string Name { get; set; }
         public RarityEnum Rarity { get; set; }
         public int Area { get; set; }
 
-        public BiomeModel(BiomeEnum biome, RarityEnum rarity)
+        public BiomeModel(string name, RarityEnum rarity)
         {
-            Biome = biome;
+            Name = name;
             Rarity = rarity;
             Area = 0;
         }

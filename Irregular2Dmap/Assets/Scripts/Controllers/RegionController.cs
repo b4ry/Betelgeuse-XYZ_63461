@@ -36,17 +36,14 @@ namespace Assets.Scripts.Controllers
             var fullPath = string.Concat(directory, path);
 
             string[] regionDefinition = File.ReadAllLines(fullPath);
-            string[] biomeRarities = regionDefinition[3].Split(';');
-            string[] neighbourNames = regionDefinition[4].Split(';');
+            string[] biomeNames = regionDefinition[2].Split(';');
+            string[] neighbourNames = regionDefinition[3].Split(';');
 
             var neighbourRegions = GameController.Instance.RegionObjects.Where(region => neighbourNames.Contains(region.name)).ToList();
 
-            RegionSizeEnum regionSizeEnum;
-            Enum.TryParse(regionDefinition[1], out regionSizeEnum);
+            Enum.TryParse(regionDefinition[1], out RegionSizeEnum regionSizeEnum);
 
-            var biomeEnums = (BiomeEnum)int.Parse(regionDefinition[2]);
-
-            regionModel = new RegionModel(regionDefinition[0], regionSizeEnum, biomeEnums, biomeRarities, neighbourRegions);
+            regionModel = new RegionModel(regionDefinition[0], regionSizeEnum, biomeNames, neighbourRegions);
 
             if (isInitial)
             {

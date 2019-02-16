@@ -1,5 +1,0 @@
-Dohr'andor
-Small
-67
-Common;Common;Common
-Region2;Region5;Region4

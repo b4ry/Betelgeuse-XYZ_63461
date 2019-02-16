@@ -8,7 +8,8 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <RootNamespace></RootNamespace>
+    <RootNamespace>
+    </RootNamespace>
     <ProjectGuid>{4763622C-E56F-0FF8-AA5F-97676D00AFE2}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
@@ -60,6 +61,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Scripts\Controllers\BiomeDefinitionsController.cs" />
     <Compile Include="Assets\Scripts\Controllers\GameController.cs" />
     <Compile Include="Assets\Scripts\Controllers\Panels\RegionSummaryPanel\RegionSummaryPanelBiomeController.cs" />
     <Compile Include="Assets\Scripts\Controllers\Panels\RegionSummaryPanel\RegionSummaryPanelButtonController.cs" />
@@ -74,6 +76,7 @@
     <Compile Include="Assets\Scripts\Models\BiomeModel.cs" />
     <Compile Include="Assets\Scripts\Models\OddityModel.cs" />
     <Compile Include="Assets\Scripts\Models\RegionModel.cs" />
+    <Compile Include="Assets\Scripts\Models\ResourceModel.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark01.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark01_UGUI.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark02.cs" />
@@ -110,17 +113,25 @@
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Surface-Mobile.shader" />
     <None Include="Assets\TextMesh Pro\Resources\LineBreaking Leading Characters.txt" />
     <None Include="Assets\MapsDefinition\Map1.txt" />
-    <None Include="Assets\RegionsDefinition\Map1\Region4.txt" />
+    <None Include="Assets\RegionsDefinition\Map1\Broken Valley.txt" />
+    <None Include="Assets\BiomesDefinition\Cave.txt" />
+    <None Include="Assets\BiomesDefinition\Mountains.txt" />
+    <None Include="Assets\BiomesDefinition\Desert.txt" />
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMPro_Properties.cginc" />
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_Bitmap-Custom-Atlas.shader" />
-    <None Include="Assets\RegionsDefinition\Map1\Region1.txt" />
-    <None Include="Assets\RegionsDefinition\Map1\Region2.txt" />
+    <None Include="Assets\BiomesDefinition\River.txt" />
+    <None Include="Assets\BiomesDefinition\Forest.txt" />
+    <None Include="Assets\RegionsDefinition\Map1\Kazak Karam Dum.txt" />
+    <None Include="Assets\BiomesDefinition\Plateau.txt" />
+    <None Include="Assets\RegionsDefinition\Map1\The Great Desert.txt" />
+    <None Include="Assets\BiomesDefinition\Lake.txt" />
     <None Include="Assets\TextMesh Pro\Examples &amp; Extras\Fonts\Oswald-Bold - OFL.txt" />
+    <None Include="Assets\BiomesDefinition\Plains.txt" />
     <None Include="Assets\TextMesh Pro\Resources\LineBreaking Following Characters.txt" />
     <None Include="Assets\TextMesh Pro\Sprites\EmojiOne Attribution.txt" />
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Mobile Masking.shader" />
     <None Include="Assets\TextMesh Pro\Examples &amp; Extras\Fonts\Anton OFL.txt" />
-    <None Include="Assets\RegionsDefinition\Map1\Region3.txt" />
+    <None Include="Assets\RegionsDefinition\Map1\Dohr'andor.txt" />
     <None Include="Assets\TextMesh Pro\Examples &amp; Extras\Fonts\Bangers - OFL.txt" />
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_Bitmap-Mobile.shader" />
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF Overlay.shader" />
@@ -130,6 +141,7 @@
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_Bitmap.shader" />
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMPro.cginc" />
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF.shader" />
+    <None Include="Assets\BiomesDefinition\AvailableBiomes.txt" />
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Mobile.shader" />
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_Sprite.shader" />
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Surface.shader" />
