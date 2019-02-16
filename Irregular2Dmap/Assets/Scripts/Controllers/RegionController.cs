@@ -115,8 +115,6 @@ namespace Assets.Scripts.Controllers
             else
             {
                 SelectRegion();
-
-                Debug.Log(regionModel.Biomes[0].Area);
             }
         }
 
