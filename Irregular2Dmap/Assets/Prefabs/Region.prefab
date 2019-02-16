@@ -69,7 +69,7 @@ SpriteRenderer:
   m_SortingLayerID: 273361227
   m_SortingLayer: 2
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 925e7f0875893724bb14c0db2da8b843, type: 3}
+  m_Sprite: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -77,7 +77,7 @@ SpriteRenderer:
   m_Size: {x: 8, y: 6}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!114 &7406234492291713762
@@ -92,13 +92,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f6f08c804d38a464da67786335841be4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  regionSummaryPanel: {fileID: 0}
-  regionSummaryPanelLabel: {fileID: 0}
-  regionSummaryPanelSize: {fileID: 0}
-  regionSummaryPanelBiomes: {fileID: 0}
-  regionSummaryPanelExploreButton: {fileID: 0}
-  regionSprite: {fileID: 21300000, guid: 925e7f0875893724bb14c0db2da8b843, type: 3}
-  regionOutlineSprite: {fileID: 21300000, guid: 2fdba06eb522eeb4da5465e361910596,
-    type: 3}
+  regionSprite: {fileID: 0}
+  regionOutlineSprite: {fileID: 0}
   regionFogOfWarSprite: {fileID: 0}
   regionFogOfWarOutlineSprite: {fileID: 0}

@@ -26,13 +26,11 @@ namespace Assets.Scripts.Controllers
         void Awake()
         {
             spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
-
-            gameObject.AddComponent<PolygonCollider2D>();
         }
 
         void Start()
         {
-            var path = $"/Assets/RegionsDefinition/{gameObject.name}.txt";
+            var path = $"/Assets/RegionsDefinition/{GameController.Instance.MapName}/{gameObject.name}.txt";
             var directory = Directory.GetCurrentDirectory();
             var fullPath = string.Concat(directory, path);
 
@@ -69,8 +67,12 @@ namespace Assets.Scripts.Controllers
                 else
                 {
                     gameObject.SetActive(false);
+
+                    spriteRenderer.sprite = regionFogOfWarSprite;
                 }
             }
+
+            gameObject.AddComponent<PolygonCollider2D>();
         }
 
         public void OnPointerClick(PointerEventData eventData)
