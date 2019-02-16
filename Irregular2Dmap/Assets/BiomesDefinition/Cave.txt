@@ -1,2 +1,3 @@
 Cave
 Common
+Iron;Silver;Gold
