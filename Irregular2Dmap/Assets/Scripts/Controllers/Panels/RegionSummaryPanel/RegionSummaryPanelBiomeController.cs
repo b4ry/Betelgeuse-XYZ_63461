@@ -1,4 +1,5 @@
 ﻿using Assets.Scripts.Managers;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -23,7 +24,7 @@ namespace Assets.Scripts.Controllers.Panels.RegionSummaryPanel
             var rectTransform = transform.GetComponent<RectTransform>();
 
             localMousePosition.x += rectTransform.anchoredPosition.x;
-            localMousePosition.y = -20;
+            localMousePosition.y = -20 - eventData.pointerEnter.transform.position.y;
 
             RegionSummaryPanelManager.Instance.PositionBiomeTooltip(localMousePosition);
             RegionSummaryPanelManager.Instance.SetBiomeTooltipText(gameObject.name);

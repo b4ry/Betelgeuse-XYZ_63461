@@ -48,10 +48,12 @@ namespace Assets.Scripts.Managers
         private GameObject oddityImage;
 
         private List<GameObject> biomeImageObjects = new List<GameObject>();
-        private List<GameObject> biomeRarityImageObjects = new List<GameObject>();
+        private List<GameObject> resourceImageObjects = new List<GameObject>();
+        private List<GameObject> rarityImageObjects = new List<GameObject>();
 
         private List<Sprite> biomeImageSprites = new List<Sprite>();
-        private List<Sprite> biomeRarityImageSprites = new List<Sprite>();
+        private List<Sprite> resourceImageSprites = new List<Sprite>();
+        private List<Sprite> rarityImageSprites = new List<Sprite>();
         private List<Sprite> oddityImageSprites = new List<Sprite>();
 
         void Awake()
@@ -74,20 +76,21 @@ namespace Assets.Scripts.Managers
 
             //TODO: MOVE TO ASSET BUNDLES
             biomeImageSprites = Resources.LoadAll<Sprite>("UI/RegionSummaryPanel/BiomeSprites").ToList();
-            biomeRarityImageSprites = Resources.LoadAll<Sprite>("UI/RegionSummaryPanel/BiomeSprites/Rarity").ToList();
+            resourceImageSprites = Resources.LoadAll<Sprite>("UI/RegionSummaryPanel/ResourceSprites").ToList();
+            rarityImageSprites = Resources.LoadAll<Sprite>("UI/RegionSummaryPanel/RaritySprites").ToList();
             oddityImageSprites = Resources.LoadAll<Sprite>("UI/RegionSummaryPanel/OdditySprites").ToList();
         }
 
         public void SetActive(bool active)
         {
-            regionSummaryPanel.SetActive(active);      
+            regionSummaryPanel.SetActive(active);
         }
 
         public void SetupRegionSummaryPanel(RegionModel regionModel, bool exploreButtonInteractable)
         {
             var regionName = regionModel.Name;
 
-            if(exploreButtonInteractable)
+            if (exploreButtonInteractable)
             {
                 regionName = "Uncharted Land";
             }
@@ -97,7 +100,46 @@ namespace Assets.Scripts.Managers
             regionSummaryPanelBiomesTextMesh.SetText("Biomes: ");
             regionSummaryPanelResourcesTextMesh.SetText("Resources: ");
 
+            if (resourceImageObjects.Count > 0)
+            {
+                foreach (var resourceImage in resourceImageObjects)
+                {
+                    Destroy(resourceImage);
+                }
+
+                resourceImageObjects.Clear();
+            }
+
+            if(rarityImageObjects.Count > 0)
+            {
+                foreach (var rarityImageObject in rarityImageObjects)
+                {
+                    Destroy(rarityImageObject);
+                }
+
+                rarityImageObjects.Clear();
+            }
+
+            if (biomeImageObjects.Count > 0)
+            {
+                foreach (var biomeImage in biomeImageObjects)
+                {
+                    Destroy(biomeImage);
+                }
+
+                biomeImageObjects.Clear();
+            }
+
             SetupBiomeImages(regionModel.Biomes, exploreButtonInteractable);
+
+            var resourcesToDisplay = new List<ResourceModel>();
+            
+            foreach (var biome in regionModel.Biomes)
+            {
+                resourcesToDisplay = resourcesToDisplay.Union(biome.Resources).ToList();
+            }
+
+            SetupResourceImages(resourcesToDisplay, exploreButtonInteractable);
 
             if (!exploreButtonInteractable)
             {
@@ -149,24 +191,57 @@ namespace Assets.Scripts.Managers
             biomeTooltip.GetComponentInChildren<Text>().text = text;
         }
 
+        private void SetupResourceImages(List<ResourceModel> resources, bool unchartedRegion)
+        {
+            for (int i = 0; i < resources.Count; i++)
+            {
+                if (!unchartedRegion)
+                {
+                    var rarityXPosition = i * 20 + 53;
+                    var resourceXPosition = i * 20 + 55;
+                    var yPosition = -1;
+
+                    if(i > 6)
+                    {
+                        rarityXPosition = (i-10) * 20 + 60;
+                        resourceXPosition = (i-10) * 20 + 62;
+
+                        yPosition = -21;
+                    }
+
+                    var rarityObject = Instantiate(rarityImagePrefab, regionSummaryPanelResources.transform);
+
+                    rarityObject.transform.localPosition += new Vector3(rarityXPosition, yPosition);
+
+                    var resourceObject = Instantiate(imagePrefab, regionSummaryPanelResources.transform);
+
+                    resourceObject.transform.localPosition += new Vector3(resourceXPosition, yPosition);
+                    resourceObject.name = resources[i].Name;
+                    resourceObject.GetComponent<Image>().sprite = resourceImageSprites.FirstOrDefault(bis => bis.name.Contains(resourceObject.name));
+
+                    resourceImageObjects.Add(resourceObject);
+
+                    rarityObject.GetComponent<Image>().sprite = rarityImageSprites.FirstOrDefault(bis => bis.name.Contains(resources[i].RarityEnum.ToString()));
+
+                    rarityImageObjects.Add(rarityObject);
+                }
+                else
+                {
+                    var resourceObject = Instantiate(imagePrefab, regionSummaryPanelResources.transform);
+
+                    resourceObject.transform.localPosition += new Vector3(i * 20 + 55, -1);
+                    resourceObject.name = "Unknown";
+                    resourceObject.GetComponent<Image>().sprite = biomeImageSprites.FirstOrDefault(bis => bis.name == "Unknown");
+
+                    resourceImageObjects.Add(resourceObject);
+
+                    break;
+                }
+            }
+        }
+
         private void SetupBiomeImages(List<BiomeModel> biomes, bool unchartedRegion)
         {
-            if (biomeImageObjects.Count > 0)
-            {
-                foreach (var biomeImage in biomeImageObjects)
-                {
-                    Destroy(biomeImage);
-                }
-
-                foreach(var biomeRarityImage in biomeRarityImageObjects)
-                {
-                    Destroy(biomeRarityImage);
-                }
-
-                biomeImageObjects.Clear();
-                biomeRarityImageObjects.Clear();
-            }
-
             for (int i = 0; i < biomes.Count; i++)
             {
                 if (!unchartedRegion)
@@ -183,9 +258,9 @@ namespace Assets.Scripts.Managers
 
                     biomeImageObjects.Add(biomeObject);
 
-                    biomeRarityObject.GetComponent<Image>().sprite = biomeRarityImageSprites.FirstOrDefault(bis => bis.name.Contains(biomes[i].Rarity.ToString()));
+                    biomeRarityObject.GetComponent<Image>().sprite = rarityImageSprites.FirstOrDefault(bis => bis.name.Contains(biomes[i].Rarity.ToString()));
 
-                    biomeRarityImageObjects.Add(biomeRarityObject);
+                    rarityImageObjects.Add(biomeRarityObject);
                 }
                 else
                 {

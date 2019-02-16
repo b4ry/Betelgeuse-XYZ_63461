@@ -25,8 +25,8 @@ namespace Assets.Scripts.Controllers
                 Destroy(gameObject);
             }
 
-            ReadBiomeDefinitions();
             ReadResourceDefinitions();
+            ReadBiomeDefinitions();
 
             DontDestroyOnLoad(gameObject);
         }
@@ -63,7 +63,18 @@ namespace Assets.Scripts.Controllers
 
                 Enum.TryParse(biomeDefinition[1], out RarityEnum biomeRarity);
 
-                var newBiomeModel = new BiomeModel(biomeDefinition[0], biomeRarity);
+                var biomeResourceModels = new List<ResourceModel>();
+                var resources = biomeDefinition[2].Split(';');
+                
+                foreach(var resource in resources)
+                {
+                    var resourceDefinition = ResourceDefinitions[resource];
+                    var newResourceModel = new ResourceModel(resourceDefinition.Name, resourceDefinition.RarityEnum);
+
+                    biomeResourceModels.Add(newResourceModel);
+                }
+
+                var newBiomeModel = new BiomeModel(biomeDefinition[0], biomeRarity, biomeResourceModels);
 
                 BiomeDefinitions.Add(biomeDefinition[0], newBiomeModel);
             }
