@@ -1,15 +1,15 @@
 ﻿using Assets.Scripts.Enums;
 using Assets.Scripts.Models;
+using Assets.Scripts.Readers;
 using System;
 using System.Collections.Generic;
-using System.IO;
 using UnityEngine;
 
 namespace Assets.Scripts.Controllers
 {
-    public class BiomeDefinitionsController : MonoBehaviour
+    public class DefinitionsController : MonoBehaviour
     {
-        public static BiomeDefinitionsController Instance = null;
+        public static DefinitionsController Instance = null;
 
         public Dictionary<string, BiomeModel> BiomeDefinitions = new Dictionary<string, BiomeModel>();
 
@@ -24,18 +24,14 @@ namespace Assets.Scripts.Controllers
                 Destroy(gameObject);
             }
 
-            var path = $"/Assets/BiomesDefinition/AvailableBiomes.txt";
-            var directory = Directory.GetCurrentDirectory();
-            var fullPath = string.Concat(directory, path);
-
-            string[] availableBiomes = File.ReadAllLines(fullPath);
+            var path = $"/Assets/Definitions/BiomesDefinition/AvailableBiomes.txt";
+            string[] availableBiomes = FileReader.ReadFile(path);
 
             foreach(var availableBiome in availableBiomes)
             {
-                path = $"/Assets/BiomesDefinition/{availableBiome}.txt";
-                fullPath = string.Concat(directory, path);
+                path = $"/Assets/Definitions/BiomesDefinition/{availableBiome}.txt";
 
-                string[] biomeDefinition = File.ReadAllLines(fullPath);
+                string[] biomeDefinition = FileReader.ReadFile(path);
 
                 Enum.TryParse(biomeDefinition[1], out RarityEnum biomeRarity);
 

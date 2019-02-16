@@ -526,7 +526,7 @@ GameObject:
   - component: {fileID: 268120415}
   - component: {fileID: 268120416}
   m_Layer: 0
-  m_Name: BiomeDefinitions
+  m_Name: Definitions
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -32,7 +32,7 @@ namespace Assets.Scripts.Models
 
             foreach(var biomeName in biomeNames)
             {
-                var biomeModel = BiomeDefinitionsController.Instance.BiomeDefinitions[biomeName];
+                var biomeModel = DefinitionsController.Instance.BiomeDefinitions[biomeName];
                 var newBiomeModel = new BiomeModel(biomeModel.Name, biomeModel.Rarity);
 
                 Biomes.Add(newBiomeModel);

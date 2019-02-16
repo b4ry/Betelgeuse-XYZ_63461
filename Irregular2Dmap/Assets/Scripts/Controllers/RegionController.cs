@@ -1,8 +1,8 @@
 ﻿using Assets.Scripts.Enums;
 using Assets.Scripts.Managers;
 using Assets.Scripts.Models;
+using Assets.Scripts.Readers;
 using System;
-using System.IO;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -31,11 +31,9 @@ namespace Assets.Scripts.Controllers
 
         void Start()
         {
-            var path = $"/Assets/RegionsDefinition/{GameController.Instance.MapName}/{gameObject.name}.txt";
-            var directory = Directory.GetCurrentDirectory();
-            var fullPath = string.Concat(directory, path);
+            var path = $"/Assets/Definitions/RegionsDefinition/{GameController.Instance.MapName}/{gameObject.name}.txt";
 
-            string[] regionDefinition = File.ReadAllLines(fullPath);
+            string[] regionDefinition = FileReader.ReadFile(path);
             string[] biomeNames = regionDefinition[2].Split(';');
             string[] neighbourNames = regionDefinition[3].Split(';');
 

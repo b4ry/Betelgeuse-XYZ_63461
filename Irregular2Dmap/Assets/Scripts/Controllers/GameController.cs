@@ -1,5 +1,5 @@
-﻿using System.Collections.Generic;
-using System.IO;
+﻿using Assets.Scripts.Readers;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
@@ -63,11 +63,9 @@ namespace Assets.Scripts.Controllers
 
         private void BuildMapFromItsDefinition()
         {
-            var path = $"/Assets/MapsDefinition/{MapName}.txt";
-            var directory = Directory.GetCurrentDirectory();
-            var fullPath = string.Concat(directory, path);
+            var path = $"/Assets/Definitions/MapsDefinition/{MapName}.txt";
 
-            string[] mapDefinition = File.ReadAllLines(fullPath);
+            string[] mapDefinition = FileReader.ReadFile(path);
 
             var worldMapName = mapDefinition[0];
             var regionsNumber = mapDefinition[1];
