@@ -1,5 +1,5 @@
 Dohr'andor
-80
+Small
 67
 Common;Common;Common
 Region2;Region5;Region4

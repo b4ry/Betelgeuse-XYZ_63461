@@ -40,12 +40,15 @@ namespace Assets.Scripts.Controllers
                 Destroy(gameObject);
             }
 
+            // TODO: WILL BE READ FROM STARTING MENU
+            MapName = "Map1";
+
             // TODO: ASSET BUNDLE
             worldMapSprites = Resources.LoadAll<Sprite>("Maps/Worlds").ToList();
-            regionNFOWSprites = Resources.LoadAll<Sprite>("Maps/Regions/NFOWs").ToList();
-            regionNFOWOutlineSprites = Resources.LoadAll<Sprite>("Maps/Regions/NFOWOutlines").ToList();
-            regionFOWSprites = Resources.LoadAll<Sprite>("Maps/Regions/FOWs").ToList();
-            regionFOWOutlineSprites = Resources.LoadAll<Sprite>("Maps/Regions/FOWOutlines").ToList();
+            regionNFOWSprites = Resources.LoadAll<Sprite>($"Maps/Regions/{MapName}/NFOWs").ToList();
+            regionNFOWOutlineSprites = Resources.LoadAll<Sprite>($"Maps/Regions/{MapName}/NFOWOutlines").ToList();
+            regionFOWSprites = Resources.LoadAll<Sprite>($"Maps/Regions/{MapName}/FOWs").ToList();
+            regionFOWOutlineSprites = Resources.LoadAll<Sprite>($"Maps/Regions/{MapName}/FOWOutlines").ToList();
 
             BuildMapFromItsDefinition();
 
@@ -60,8 +63,6 @@ namespace Assets.Scripts.Controllers
 
         private void BuildMapFromItsDefinition()
         {
-            MapName = "Map1";
-
             var path = $"/Assets/MapsDefinition/{MapName}.txt";
             var directory = Directory.GetCurrentDirectory();
             var fullPath = string.Concat(directory, path);

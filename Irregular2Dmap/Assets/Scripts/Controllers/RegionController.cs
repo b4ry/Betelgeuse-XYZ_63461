@@ -1,6 +1,7 @@
 ﻿using Assets.Scripts.Enums;
 using Assets.Scripts.Managers;
 using Assets.Scripts.Models;
+using System;
 using System.IO;
 using System.Linq;
 using UnityEngine;
@@ -40,7 +41,12 @@ namespace Assets.Scripts.Controllers
 
             var neighbourRegions = GameController.Instance.RegionObjects.Where(region => neighbourNames.Contains(region.name)).ToList();
 
-            regionModel = new RegionModel(regionDefinition[0], (RegionSizeEnum)int.Parse(regionDefinition[1]), (BiomeEnum)int.Parse(regionDefinition[2]), biomeRarities, neighbourRegions);
+            RegionSizeEnum regionSizeEnum;
+            Enum.TryParse(regionDefinition[1], out regionSizeEnum);
+
+            var biomeEnums = (BiomeEnum)int.Parse(regionDefinition[2]);
+
+            regionModel = new RegionModel(regionDefinition[0], regionSizeEnum, biomeEnums, biomeRarities, neighbourRegions);
 
             if (isInitial)
             {
