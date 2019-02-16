@@ -12,18 +12,22 @@ namespace Assets.Scripts.Controllers
         public GameObject MainCamera;
 
         public List<GameObject> RegionObjects = new List<GameObject>();
-        public List<Sprite> RegionNFOWSprites = new List<Sprite>();
-        public List<Sprite> RegionNFOWOutlineSprites = new List<Sprite>();
-        public List<Sprite> RegionFOWSprites = new List<Sprite>();
-        public List<Sprite> RegionFOWOutlineSprites = new List<Sprite>();
 
         public System.Random RNG { get; set; }
         public string MapName { get; set; }
 
         [SerializeField]
+        private GameObject worldMapObject;
+        [SerializeField]
         private GameObject regionPrefab;
         [SerializeField]
         private GameObject regionsObject;
+
+        private List<Sprite> worldMapSprites = new List<Sprite>();
+        private List<Sprite> regionNFOWSprites = new List<Sprite>();
+        private List<Sprite> regionNFOWOutlineSprites = new List<Sprite>();
+        private List<Sprite> regionFOWSprites = new List<Sprite>();
+        private List<Sprite> regionFOWOutlineSprites = new List<Sprite>();
 
         void Awake()
         {
@@ -37,12 +41,12 @@ namespace Assets.Scripts.Controllers
             }
 
             // TODO: ASSET BUNDLE
-            RegionNFOWSprites = Resources.LoadAll<Sprite>("Maps/Regions/NFOWs").ToList();
-            RegionNFOWOutlineSprites = Resources.LoadAll<Sprite>("Maps/Regions/NFOWOutlines").ToList();
-            RegionFOWSprites = Resources.LoadAll<Sprite>("Maps/Regions/FOWs").ToList();
-            RegionFOWOutlineSprites = Resources.LoadAll<Sprite>("Maps/Regions/FOWOutlines").ToList();
+            worldMapSprites = Resources.LoadAll<Sprite>("Maps/Worlds").ToList();
+            regionNFOWSprites = Resources.LoadAll<Sprite>("Maps/Regions/NFOWs").ToList();
+            regionNFOWOutlineSprites = Resources.LoadAll<Sprite>("Maps/Regions/NFOWOutlines").ToList();
+            regionFOWSprites = Resources.LoadAll<Sprite>("Maps/Regions/FOWs").ToList();
+            regionFOWOutlineSprites = Resources.LoadAll<Sprite>("Maps/Regions/FOWOutlines").ToList();
 
-            MapName = "Map1";
             BuildMapFromItsDefinition();
 
             RNG = new System.Random();
@@ -56,23 +60,30 @@ namespace Assets.Scripts.Controllers
 
         private void BuildMapFromItsDefinition()
         {
+            MapName = "Map1";
+
             var path = $"/Assets/MapsDefinition/{MapName}.txt";
             var directory = Directory.GetCurrentDirectory();
             var fullPath = string.Concat(directory, path);
 
             string[] mapDefinition = File.ReadAllLines(fullPath);
 
-            for(int i = 1; i <= int.Parse(mapDefinition[0]); i++)
+            var worldMapName = mapDefinition[0];
+            var regionsNumber = mapDefinition[1];
+
+            worldMapObject.GetComponent<SpriteRenderer>().sprite = worldMapSprites.FirstOrDefault(wms => wms.name.Contains(worldMapName));
+
+            for(int i = 1; i <= int.Parse(regionsNumber); i++)
             {
                 var regionObject = Instantiate(regionPrefab, regionsObject.transform);
 
                 regionObject.name = string.Concat("Region", i);
 
                 var regionController = regionObject.GetComponent<RegionController>();
-                regionController.regionSprite = RegionNFOWSprites.FirstOrDefault(rnfows => rnfows.name.Contains(regionObject.name));
-                regionController.regionOutlineSprite = RegionNFOWOutlineSprites.FirstOrDefault(rnfowos => rnfowos.name.Contains(regionObject.name));
-                regionController.regionFogOfWarSprite = RegionFOWSprites.FirstOrDefault(rfows => rfows.name.Contains(regionObject.name));
-                regionController.regionFogOfWarOutlineSprite = RegionFOWOutlineSprites.FirstOrDefault(rfowos => rfowos.name.Contains(regionObject.name));
+                regionController.RegionSprite = regionNFOWSprites.FirstOrDefault(rnfows => rnfows.name.Contains(regionObject.name));
+                regionController.RegionOutlineSprite = regionNFOWOutlineSprites.FirstOrDefault(rnfowos => rnfowos.name.Contains(regionObject.name));
+                regionController.RegionFogOfWarSprite = regionFOWSprites.FirstOrDefault(rfows => rfows.name.Contains(regionObject.name));
+                regionController.RegionFogOfWarOutlineSprite = regionFOWOutlineSprites.FirstOrDefault(rfowos => rfowos.name.Contains(regionObject.name));
 
                 regionObject.SetActive(true);
 

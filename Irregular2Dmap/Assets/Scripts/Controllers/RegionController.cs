@@ -12,10 +12,10 @@ namespace Assets.Scripts.Controllers
     {
         private const string UnknownValue = "???";
 
-        public Sprite regionSprite;
-        public Sprite regionOutlineSprite;
-        public Sprite regionFogOfWarSprite;
-        public Sprite regionFogOfWarOutlineSprite;
+        public Sprite RegionSprite { get; set; }
+        public Sprite RegionOutlineSprite { get; set; }
+        public Sprite RegionFogOfWarSprite { get; set; }
+        public Sprite RegionFogOfWarOutlineSprite { get; set; }
 
         private bool regionSelected = false;
         private bool isInitial = false;
@@ -49,7 +49,7 @@ namespace Assets.Scripts.Controllers
 
                 regionSelected = true;
 
-                spriteRenderer.sprite = regionOutlineSprite;
+                spriteRenderer.sprite = RegionOutlineSprite;
                 RegionSummaryPanelManager.Instance.SetupRegionSummaryPanel(regionModel, false);
 
                 SelectedRegionsController.Instance.SelectedRegionObjects.Add(this);
@@ -62,13 +62,13 @@ namespace Assets.Scripts.Controllers
                 {
                     gameObject.SetActive(true);
 
-                    spriteRenderer.sprite = regionFogOfWarSprite;
+                    spriteRenderer.sprite = RegionFogOfWarSprite;
                 }
                 else
                 {
                     gameObject.SetActive(false);
 
-                    spriteRenderer.sprite = regionFogOfWarSprite;
+                    spriteRenderer.sprite = RegionFogOfWarSprite;
                 }
             }
 
@@ -81,11 +81,11 @@ namespace Assets.Scripts.Controllers
             {
                 if (regionModel.Visited)
                 {
-                    spriteRenderer.sprite = regionSprite;
+                    spriteRenderer.sprite = RegionSprite;
                 }
                 else
                 {
-                    spriteRenderer.sprite = regionFogOfWarSprite;
+                    spriteRenderer.sprite = RegionFogOfWarSprite;
                 }
 
                 regionSelected = false;
@@ -123,13 +123,13 @@ namespace Assets.Scripts.Controllers
 
             if (regionModel.Visited)
             {
-                spriteRenderer.sprite = regionOutlineSprite;
+                spriteRenderer.sprite = RegionOutlineSprite;
 
                 RegionSummaryPanelManager.Instance.SetupRegionSummaryPanel(regionModel, false);
             }
             else
             {
-                spriteRenderer.sprite = regionFogOfWarOutlineSprite;
+                spriteRenderer.sprite = RegionFogOfWarOutlineSprite;
                 
                 RegionSummaryPanelManager.Instance.SetupRegionSummaryPanel(regionModel, true);
                 RegionSummaryPanelManager.Instance.AddButtonListener(delegate
@@ -181,11 +181,11 @@ namespace Assets.Scripts.Controllers
         {
             if (regionModel.Visited)
             {
-                spriteRenderer.sprite = regionSprite;
+                spriteRenderer.sprite = RegionSprite;
             }
             else
             {
-                spriteRenderer.sprite = regionFogOfWarSprite;
+                spriteRenderer.sprite = RegionFogOfWarSprite;
             }
 
             regionSelected = false;
@@ -195,7 +195,7 @@ namespace Assets.Scripts.Controllers
         {
             gameObject.SetActive(true);
 
-            GetComponent<SpriteRenderer>().sprite = regionFogOfWarSprite;
+            GetComponent<SpriteRenderer>().sprite = RegionFogOfWarSprite;
         }
 
         public void SetInitial()
@@ -207,7 +207,7 @@ namespace Assets.Scripts.Controllers
         {
             regionModel.Visited = true;
 
-            spriteRenderer.sprite = regionOutlineSprite;
+            spriteRenderer.sprite = RegionOutlineSprite;
 
             if (regionModel.Visited)
             {
