@@ -12,6 +12,8 @@ namespace Assets.Scripts.Managers
     {
         public static RegionSummaryPanelManager Instance = null;
 
+        private const int MaxNumberOfObjectsToDisplay = 6;
+
         [SerializeField]
         private GameObject regionSummaryPanel;
 
@@ -132,7 +134,7 @@ namespace Assets.Scripts.Managers
                 biomeImageObjects.Clear();
             }
 
-            SetupBiomeImages(regionModel.Biomes, exploreButtonInteractable);
+            SetupImages(regionModel.Biomes, biomeImageObjects, exploreButtonInteractable, biomeImageSprites, biomes, biomeImagePrefab);
 
             var resourcesToDisplay = new List<ResourceModel>();
             
@@ -141,7 +143,7 @@ namespace Assets.Scripts.Managers
                 resourcesToDisplay = resourcesToDisplay.Union(biome.Resources).ToList();
             }
 
-            SetupResourceImages(resourcesToDisplay, exploreButtonInteractable);
+            SetupImages(resourcesToDisplay, resourceImageObjects, exploreButtonInteractable, resourceImageSprites, resources, resourceImagePrefab);
 
             if (!exploreButtonInteractable)
             {
@@ -193,23 +195,60 @@ namespace Assets.Scripts.Managers
             biomeTooltip.GetComponentInChildren<Text>().text = text;
         }
 
-        private void SetupResourceImages(List<ResourceModel> resources, bool unchartedRegion)
+        private void SetupImages<T>(List<T> objectsToDisplay, List<GameObject> imageObjects, bool unchartedRegion, List<Sprite> imageSprites, GameObject parentObject, GameObject objectPrefab) where T : IModel
         {
-            for (int i = 0; i < resources.Count; i++)
+            var objectsNumber = objectsToDisplay.Count > MaxNumberOfObjectsToDisplay ? MaxNumberOfObjectsToDisplay : objectsToDisplay.Count;
+
+            for (int i = 0; i < objectsNumber; i++)
             {
                 if (!unchartedRegion)
                 {
                     var rarityXPosition = i * 20 + 53;
-                    var resourceXPosition = i * 20 + 55;
+                    var xPosition = i * 20 + 55;
                     var yPosition = -1;
 
-                    if(i > 6)
-                    {
-                        rarityXPosition = (i-10) * 20 + 60;
-                        resourceXPosition = (i-10) * 20 + 62;
+                    var rarityObject = Instantiate(rarityImagePrefab, parentObject.transform);
 
-                        yPosition = -21;
-                    }
+                    rarityObject.transform.localPosition += new Vector3(rarityXPosition, yPosition);
+
+                    var objectToDisplay = Instantiate(objectPrefab, parentObject.transform);
+
+                    objectToDisplay.transform.localPosition += new Vector3(xPosition, yPosition);
+                    objectToDisplay.name = objectsToDisplay[i].Name;
+                    objectToDisplay.GetComponent<Image>().sprite = imageSprites.FirstOrDefault(bis => bis.name.Contains(objectToDisplay.name));
+
+                    imageObjects.Add(objectToDisplay);
+
+                    rarityObject.GetComponent<Image>().sprite = rarityImageSprites.FirstOrDefault(bis => bis.name.Contains(objectsToDisplay[i].Rarity.ToString()));
+
+                    rarityImageObjects.Add(rarityObject);
+                }
+                else
+                {
+                    var objectToDisplay = Instantiate(objectPrefab, parentObject.transform);
+
+                    objectToDisplay.transform.localPosition += new Vector3(i * 20 + 55, -1);
+                    objectToDisplay.name = "Unknown";
+                    objectToDisplay.GetComponent<Image>().sprite = biomeImageSprites.FirstOrDefault(bis => bis.name == "Unknown");
+
+                    imageObjects.Add(objectToDisplay);
+
+                    break;
+                }
+            }
+        }
+
+        private void SetupResourceImages(List<ResourceModel> resources, bool unchartedRegion)
+        {
+            var resourcesNumber = resources.Count > MaxNumberOfObjectsToDisplay ? MaxNumberOfObjectsToDisplay : resources.Count;
+
+            for (int i = 0; i < resourcesNumber; i++)
+            {
+                if (!unchartedRegion)
+                {
+                    var rarityXPosition = i * 20 + 55;
+                    var resourceXPosition = i * 20 + 57;
+                    var yPosition = -1;
 
                     var rarityObject = Instantiate(rarityImagePrefab, this.resources.transform);
 
@@ -223,7 +262,7 @@ namespace Assets.Scripts.Managers
 
                     resourceImageObjects.Add(resourceObject);
 
-                    rarityObject.GetComponent<Image>().sprite = rarityImageSprites.FirstOrDefault(bis => bis.name.Contains(resources[i].RarityEnum.ToString()));
+                    rarityObject.GetComponent<Image>().sprite = rarityImageSprites.FirstOrDefault(bis => bis.name.Contains(resources[i].Rarity.ToString()));
 
                     rarityImageObjects.Add(rarityObject);
                 }
@@ -231,7 +270,7 @@ namespace Assets.Scripts.Managers
                 {
                     var resourceObject = Instantiate(resourceImagePrefab, this.resources.transform);
 
-                    resourceObject.transform.localPosition += new Vector3(i * 20 + 55, -1);
+                    resourceObject.transform.localPosition += new Vector3(i * 20 + 57, -1);
                     resourceObject.name = "Unknown";
                     resourceObject.GetComponent<Image>().sprite = biomeImageSprites.FirstOrDefault(bis => bis.name == "Unknown");
 
@@ -244,31 +283,33 @@ namespace Assets.Scripts.Managers
 
         private void SetupBiomeImages(List<BiomeModel> biomes, bool unchartedRegion)
         {
-            for (int i = 0; i < biomes.Count; i++)
+            var biomesNumber = biomes.Count > MaxNumberOfObjectsToDisplay ? MaxNumberOfObjectsToDisplay : biomes.Count;
+
+            for (int i = 0; i < biomesNumber; i++)
             {
                 if (!unchartedRegion)
                 {
-                    var biomeRarityObject = Instantiate(rarityImagePrefab, this.biomes.transform);
+                    var rarityObject = Instantiate(rarityImagePrefab, this.biomes.transform);
 
-                    biomeRarityObject.transform.localPosition += new Vector3(i * 20 + 38, -1);
+                    rarityObject.transform.localPosition += new Vector3(i * 20 + 55, -1);
 
                     var biomeObject = Instantiate(biomeImagePrefab, this.biomes.transform);
 
-                    biomeObject.transform.localPosition += new Vector3(i * 20 + 40, -1);
+                    biomeObject.transform.localPosition += new Vector3(i * 20 + 57, -1);
                     biomeObject.name = biomes[i].Name;
                     biomeObject.GetComponent<Image>().sprite = biomeImageSprites.FirstOrDefault(bis => bis.name.Contains(biomeObject.name));
 
                     biomeImageObjects.Add(biomeObject);
 
-                    biomeRarityObject.GetComponent<Image>().sprite = rarityImageSprites.FirstOrDefault(bis => bis.name.Contains(biomes[i].Rarity.ToString()));
+                    rarityObject.GetComponent<Image>().sprite = rarityImageSprites.FirstOrDefault(bis => bis.name.Contains(biomes[i].Rarity.ToString()));
 
-                    rarityImageObjects.Add(biomeRarityObject);
+                    rarityImageObjects.Add(rarityObject);
                 }
                 else
                 {
                     var biomeObject = Instantiate(biomeImagePrefab, this.biomes.transform);
 
-                    biomeObject.transform.localPosition += new Vector3(i * 20 + 40, -1);
+                    biomeObject.transform.localPosition += new Vector3(i * 20 + 57, -1);
                     biomeObject.name = "Unknown";
                     biomeObject.GetComponent<Image>().sprite = biomeImageSprites.FirstOrDefault(bis => bis.name == "Unknown");
 

@@ -69,7 +69,7 @@ namespace Assets.Scripts.Controllers
                 foreach(var resource in resources)
                 {
                     var resourceDefinition = ResourceDefinitions[resource];
-                    var newResourceModel = new ResourceModel(resourceDefinition.Name, resourceDefinition.RarityEnum);
+                    var newResourceModel = new ResourceModel(resourceDefinition.Name, resourceDefinition.Rarity);
 
                     biomeResourceModels.Add(newResourceModel);
                 }

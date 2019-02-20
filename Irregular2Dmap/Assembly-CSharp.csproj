@@ -73,6 +73,7 @@
     <Compile Include="Assets\Scripts\Managers\IPanelManager.cs" />
     <Compile Include="Assets\Scripts\Managers\RegionSummaryPanelManager.cs" />
     <Compile Include="Assets\Scripts\Models\BiomeModel.cs" />
+    <Compile Include="Assets\Scripts\Models\IModel.cs" />
     <Compile Include="Assets\Scripts\Models\OddityModel.cs" />
     <Compile Include="Assets\Scripts\Models\RegionModel.cs" />
     <Compile Include="Assets\Scripts\Models\ResourceModel.cs" />

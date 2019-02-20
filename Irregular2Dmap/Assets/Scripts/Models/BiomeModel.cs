@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Assets.Scripts.Models
 {
-    public class BiomeModel
+    public class BiomeModel : IModel
     {
         //public BiomeEnum Biome { get; set; }
 

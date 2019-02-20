@@ -2,15 +2,15 @@
 
 namespace Assets.Scripts.Models
 {
-    public class ResourceModel
+    public class ResourceModel : IModel
     {
         public string Name { get; set; }
-        public RarityEnum RarityEnum { get; set; }
+        public RarityEnum Rarity { get; set; }
 
         public ResourceModel(string name, RarityEnum rarityEnum)
         {
             Name = name;
-            RarityEnum = rarityEnum;
+            Rarity = rarityEnum;
         }
 
         public override bool Equals(object obj)
@@ -22,7 +22,7 @@ namespace Assets.Scripts.Models
 
         public override int GetHashCode()
         {
-            return Name.GetHashCode() ^ RarityEnum.GetHashCode();
+            return Name.GetHashCode() ^ Rarity.GetHashCode();
         }
 
         private bool Equals(ResourceModel resourceModel)
