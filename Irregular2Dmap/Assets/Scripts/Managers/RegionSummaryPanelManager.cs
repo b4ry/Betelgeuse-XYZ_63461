@@ -195,6 +195,22 @@ namespace Assets.Scripts.Managers
             biomeTooltip.GetComponentInChildren<Text>().text = text;
         }
 
+        public void ShowResourceTooltip(bool show)
+        {
+            resourceTooltip.SetActive(show);
+        }
+
+        public void PositionResourceTooltip(Vector3 cursorPosition)
+        {
+            cursorPosition.z = 0;
+            resourceTooltip.transform.localPosition += cursorPosition;
+        }
+
+        public void SetResourceTooltipText(string text)
+        {
+            resourceTooltip.GetComponentInChildren<Text>().text = text;
+        }
+
         private void SetupImages<T>(List<T> objectsToDisplay, List<GameObject> imageObjects, bool unchartedRegion, List<Sprite> imageSprites, GameObject parentObject, GameObject objectPrefab) where T : IModel
         {
             var objectsNumber = objectsToDisplay.Count > MaxNumberOfObjectsToDisplay ? MaxNumberOfObjectsToDisplay : objectsToDisplay.Count;
@@ -238,86 +254,86 @@ namespace Assets.Scripts.Managers
             }
         }
 
-        private void SetupResourceImages(List<ResourceModel> resources, bool unchartedRegion)
-        {
-            var resourcesNumber = resources.Count > MaxNumberOfObjectsToDisplay ? MaxNumberOfObjectsToDisplay : resources.Count;
+        //private void SetupResourceImages(List<ResourceModel> resources, bool unchartedRegion)
+        //{
+        //    var resourcesNumber = resources.Count > MaxNumberOfObjectsToDisplay ? MaxNumberOfObjectsToDisplay : resources.Count;
 
-            for (int i = 0; i < resourcesNumber; i++)
-            {
-                if (!unchartedRegion)
-                {
-                    var rarityXPosition = i * 20 + 55;
-                    var resourceXPosition = i * 20 + 57;
-                    var yPosition = -1;
+        //    for (int i = 0; i < resourcesNumber; i++)
+        //    {
+        //        if (!unchartedRegion)
+        //        {
+        //            var rarityXPosition = i * 20 + 55;
+        //            var resourceXPosition = i * 20 + 57;
+        //            var yPosition = -1;
 
-                    var rarityObject = Instantiate(rarityImagePrefab, this.resources.transform);
+        //            var rarityObject = Instantiate(rarityImagePrefab, this.resources.transform);
 
-                    rarityObject.transform.localPosition += new Vector3(rarityXPosition, yPosition);
+        //            rarityObject.transform.localPosition += new Vector3(rarityXPosition, yPosition);
 
-                    var resourceObject = Instantiate(resourceImagePrefab, this.resources.transform);
+        //            var resourceObject = Instantiate(resourceImagePrefab, this.resources.transform);
 
-                    resourceObject.transform.localPosition += new Vector3(resourceXPosition, yPosition);
-                    resourceObject.name = resources[i].Name;
-                    resourceObject.GetComponent<Image>().sprite = resourceImageSprites.FirstOrDefault(bis => bis.name.Contains(resourceObject.name));
+        //            resourceObject.transform.localPosition += new Vector3(resourceXPosition, yPosition);
+        //            resourceObject.name = resources[i].Name;
+        //            resourceObject.GetComponent<Image>().sprite = resourceImageSprites.FirstOrDefault(bis => bis.name.Contains(resourceObject.name));
 
-                    resourceImageObjects.Add(resourceObject);
+        //            resourceImageObjects.Add(resourceObject);
 
-                    rarityObject.GetComponent<Image>().sprite = rarityImageSprites.FirstOrDefault(bis => bis.name.Contains(resources[i].Rarity.ToString()));
+        //            rarityObject.GetComponent<Image>().sprite = rarityImageSprites.FirstOrDefault(bis => bis.name.Contains(resources[i].Rarity.ToString()));
 
-                    rarityImageObjects.Add(rarityObject);
-                }
-                else
-                {
-                    var resourceObject = Instantiate(resourceImagePrefab, this.resources.transform);
+        //            rarityImageObjects.Add(rarityObject);
+        //        }
+        //        else
+        //        {
+        //            var resourceObject = Instantiate(resourceImagePrefab, this.resources.transform);
 
-                    resourceObject.transform.localPosition += new Vector3(i * 20 + 57, -1);
-                    resourceObject.name = "Unknown";
-                    resourceObject.GetComponent<Image>().sprite = biomeImageSprites.FirstOrDefault(bis => bis.name == "Unknown");
+        //            resourceObject.transform.localPosition += new Vector3(i * 20 + 57, -1);
+        //            resourceObject.name = "Unknown";
+        //            resourceObject.GetComponent<Image>().sprite = biomeImageSprites.FirstOrDefault(bis => bis.name == "Unknown");
 
-                    resourceImageObjects.Add(resourceObject);
+        //            resourceImageObjects.Add(resourceObject);
 
-                    break;
-                }
-            }
-        }
+        //            break;
+        //        }
+        //    }
+        //}
 
-        private void SetupBiomeImages(List<BiomeModel> biomes, bool unchartedRegion)
-        {
-            var biomesNumber = biomes.Count > MaxNumberOfObjectsToDisplay ? MaxNumberOfObjectsToDisplay : biomes.Count;
+        //private void SetupBiomeImages(List<BiomeModel> biomes, bool unchartedRegion)
+        //{
+        //    var biomesNumber = biomes.Count > MaxNumberOfObjectsToDisplay ? MaxNumberOfObjectsToDisplay : biomes.Count;
 
-            for (int i = 0; i < biomesNumber; i++)
-            {
-                if (!unchartedRegion)
-                {
-                    var rarityObject = Instantiate(rarityImagePrefab, this.biomes.transform);
+        //    for (int i = 0; i < biomesNumber; i++)
+        //    {
+        //        if (!unchartedRegion)
+        //        {
+        //            var rarityObject = Instantiate(rarityImagePrefab, this.biomes.transform);
 
-                    rarityObject.transform.localPosition += new Vector3(i * 20 + 55, -1);
+        //            rarityObject.transform.localPosition += new Vector3(i * 20 + 55, -1);
 
-                    var biomeObject = Instantiate(biomeImagePrefab, this.biomes.transform);
+        //            var biomeObject = Instantiate(biomeImagePrefab, this.biomes.transform);
 
-                    biomeObject.transform.localPosition += new Vector3(i * 20 + 57, -1);
-                    biomeObject.name = biomes[i].Name;
-                    biomeObject.GetComponent<Image>().sprite = biomeImageSprites.FirstOrDefault(bis => bis.name.Contains(biomeObject.name));
+        //            biomeObject.transform.localPosition += new Vector3(i * 20 + 57, -1);
+        //            biomeObject.name = biomes[i].Name;
+        //            biomeObject.GetComponent<Image>().sprite = biomeImageSprites.FirstOrDefault(bis => bis.name.Contains(biomeObject.name));
 
-                    biomeImageObjects.Add(biomeObject);
+        //            biomeImageObjects.Add(biomeObject);
 
-                    rarityObject.GetComponent<Image>().sprite = rarityImageSprites.FirstOrDefault(bis => bis.name.Contains(biomes[i].Rarity.ToString()));
+        //            rarityObject.GetComponent<Image>().sprite = rarityImageSprites.FirstOrDefault(bis => bis.name.Contains(biomes[i].Rarity.ToString()));
 
-                    rarityImageObjects.Add(rarityObject);
-                }
-                else
-                {
-                    var biomeObject = Instantiate(biomeImagePrefab, this.biomes.transform);
+        //            rarityImageObjects.Add(rarityObject);
+        //        }
+        //        else
+        //        {
+        //            var biomeObject = Instantiate(biomeImagePrefab, this.biomes.transform);
 
-                    biomeObject.transform.localPosition += new Vector3(i * 20 + 57, -1);
-                    biomeObject.name = "Unknown";
-                    biomeObject.GetComponent<Image>().sprite = biomeImageSprites.FirstOrDefault(bis => bis.name == "Unknown");
+        //            biomeObject.transform.localPosition += new Vector3(i * 20 + 57, -1);
+        //            biomeObject.name = "Unknown";
+        //            biomeObject.GetComponent<Image>().sprite = biomeImageSprites.FirstOrDefault(bis => bis.name == "Unknown");
 
-                    biomeImageObjects.Add(biomeObject);
+        //            biomeImageObjects.Add(biomeObject);
 
-                    break;
-                }
-            }
-        }
+        //            break;
+        //        }
+        //    }
+        //}
     }
 }

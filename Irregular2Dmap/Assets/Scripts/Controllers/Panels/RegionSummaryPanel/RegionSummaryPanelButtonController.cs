@@ -13,7 +13,6 @@ namespace Assets.Scripts.Controllers.Panels.RegionSummaryPanel
         void Start()
         {
             cameraObject = GameController.Instance.MainCamera;
-
             cameraComponent = cameraObject.GetComponent<Camera>();
         }
 

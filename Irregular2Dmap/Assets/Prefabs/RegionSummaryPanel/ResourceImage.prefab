@@ -11,8 +11,9 @@ GameObject:
   - component: {fileID: 4458757636991999617}
   - component: {fileID: 6442875330497685990}
   - component: {fileID: 1597211588380801256}
+  - component: {fileID: 8043013599103432959}
   m_Layer: 5
-  m_Name: RegionPanelResourceImage
+  m_Name: ResourceImage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -74,3 +75,15 @@ MonoBehaviour:
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
+--- !u!114 &8043013599103432959
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3939943550648946012}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6c624c54f8e1d744389c56f077849087, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
