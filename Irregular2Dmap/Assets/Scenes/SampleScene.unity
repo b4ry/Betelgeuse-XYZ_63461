@@ -571,7 +571,7 @@ GameObject:
   - component: {fileID: 348559082}
   - component: {fileID: 348559081}
   m_Layer: 5
-  m_Name: RegionPanelLabel
+  m_Name: Name
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1018,7 +1018,7 @@ GameObject:
   - component: {fileID: 612525370}
   - component: {fileID: 612525369}
   m_Layer: 5
-  m_Name: RegionPanelSize
+  m_Name: Size
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1252,7 +1252,7 @@ GameObject:
   - component: {fileID: 798798773}
   - component: {fileID: 798798772}
   m_Layer: 5
-  m_Name: RegionPanelBiomes
+  m_Name: Biomes
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1412,7 +1412,7 @@ GameObject:
   - component: {fileID: 819727032}
   - component: {fileID: 819727031}
   m_Layer: 5
-  m_Name: RegionPanelResources
+  m_Name: Resources
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1818,7 +1818,7 @@ GameObject:
   - component: {fileID: 1431901139}
   - component: {fileID: 1431901142}
   m_Layer: 5
-  m_Name: EnterRegionButton
+  m_Name: EnterButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1978,15 +1978,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   regionSummaryPanel: {fileID: 150488032}
-  regionSummaryPanelLabel: {fileID: 348559079}
-  regionSummaryPanelSize: {fileID: 612525367}
-  regionSummaryPanelBiomes: {fileID: 798798770}
-  regionSummaryPanelResources: {fileID: 819727029}
-  regionSummaryPanelExploreButton: {fileID: 2058552237}
+  name: {fileID: 348559079}
+  size: {fileID: 612525367}
+  biomes: {fileID: 798798770}
+  resources: {fileID: 819727029}
+  chartButton: {fileID: 2058552237}
   buttonTooltip: {fileID: 360257833}
   biomeTooltip: {fileID: 138296494}
   resourceTooltip: {fileID: 0}
-  imagePrefab: {fileID: 4352113173194531776, guid: 750b91eb9cc93a049ac1dcb46ec91900,
+  biomeImagePrefab: {fileID: 4352113173194531776, guid: 750b91eb9cc93a049ac1dcb46ec91900,
+    type: 3}
+  resourceImagePrefab: {fileID: 3939943550648946012, guid: a4a5137c978b9984289e88fa6391c8ff,
     type: 3}
   rarityImagePrefab: {fileID: 2819918708018688637, guid: e1314959f386f374d9e08d0ac40f3fce,
     type: 3}

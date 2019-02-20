@@ -16,21 +16,21 @@ namespace Assets.Scripts.Managers
         private GameObject regionSummaryPanel;
 
         [SerializeField]
-        private GameObject regionSummaryPanelLabel;
+        private GameObject name;
         [SerializeField]
-        private GameObject regionSummaryPanelSize;
+        private GameObject size;
         [SerializeField]
-        private GameObject regionSummaryPanelBiomes;
+        private GameObject biomes;
         [SerializeField]
-        private GameObject regionSummaryPanelResources;
+        private GameObject resources;
 
-        private TextMeshProUGUI regionSummaryPanelLabelTextMesh;
-        private TextMeshProUGUI regionSummaryPanelSizeTextMesh;
-        private TextMeshProUGUI regionSummaryPanelBiomesTextMesh;
-        private TextMeshProUGUI regionSummaryPanelResourcesTextMesh;
+        private TextMeshProUGUI nameTextMesh;
+        private TextMeshProUGUI sizeTextMesh;
+        private TextMeshProUGUI biomesTextMesh;
+        private TextMeshProUGUI resourcesTextMesh;
 
         [SerializeField]
-        private Button regionSummaryPanelExploreButton;
+        private Button chartButton;
 
         [SerializeField]
         private GameObject buttonTooltip;
@@ -40,7 +40,9 @@ namespace Assets.Scripts.Managers
         private GameObject resourceTooltip;
 
         [SerializeField]
-        private GameObject imagePrefab;
+        private GameObject biomeImagePrefab;
+        [SerializeField]
+        private GameObject resourceImagePrefab;
         [SerializeField]
         private GameObject rarityImagePrefab;
 
@@ -69,10 +71,10 @@ namespace Assets.Scripts.Managers
 
             DontDestroyOnLoad(gameObject);
 
-            regionSummaryPanelLabelTextMesh = regionSummaryPanelLabel.GetComponent<TextMeshProUGUI>();
-            regionSummaryPanelSizeTextMesh = regionSummaryPanelSize.GetComponent<TextMeshProUGUI>();
-            regionSummaryPanelBiomesTextMesh = regionSummaryPanelBiomes.GetComponent<TextMeshProUGUI>();
-            regionSummaryPanelResourcesTextMesh = regionSummaryPanelResources.GetComponent<TextMeshProUGUI>();
+            nameTextMesh = name.GetComponent<TextMeshProUGUI>();
+            sizeTextMesh = size.GetComponent<TextMeshProUGUI>();
+            biomesTextMesh = biomes.GetComponent<TextMeshProUGUI>();
+            resourcesTextMesh = resources.GetComponent<TextMeshProUGUI>();
 
             //TODO: MOVE TO ASSET BUNDLES
             biomeImageSprites = Resources.LoadAll<Sprite>("UI/RegionSummaryPanel/BiomeSprites").ToList();
@@ -95,10 +97,10 @@ namespace Assets.Scripts.Managers
                 regionName = "Uncharted Land";
             }
 
-            regionSummaryPanelLabelTextMesh.SetText(regionName);
-            regionSummaryPanelSizeTextMesh.SetText("Size: " + regionModel.Size);
-            regionSummaryPanelBiomesTextMesh.SetText("Biomes: ");
-            regionSummaryPanelResourcesTextMesh.SetText("Resources: ");
+            nameTextMesh.SetText(regionName);
+            sizeTextMesh.SetText("Size: " + regionModel.Size);
+            biomesTextMesh.SetText("Biomes: ");
+            resourcesTextMesh.SetText("Resources: ");
 
             if (resourceImageObjects.Count > 0)
             {
@@ -150,7 +152,7 @@ namespace Assets.Scripts.Managers
                 oddityImage.GetComponent<Image>().sprite = oddityImageSprites.FirstOrDefault(ois => ois.name.Equals("UnknownOddity"));
             }
 
-            regionSummaryPanelExploreButton.interactable = exploreButtonInteractable;
+            chartButton.interactable = exploreButtonInteractable;
 
             if (!regionSummaryPanel.activeSelf)
             {
@@ -160,8 +162,8 @@ namespace Assets.Scripts.Managers
 
         public void AddButtonListener(UnityAction action)
         {
-            regionSummaryPanelExploreButton.onClick.RemoveAllListeners();
-            regionSummaryPanelExploreButton.onClick.AddListener(action);
+            chartButton.onClick.RemoveAllListeners();
+            chartButton.onClick.AddListener(action);
         }
 
         public void ShowButtonTooltip(bool show)
@@ -209,11 +211,11 @@ namespace Assets.Scripts.Managers
                         yPosition = -21;
                     }
 
-                    var rarityObject = Instantiate(rarityImagePrefab, regionSummaryPanelResources.transform);
+                    var rarityObject = Instantiate(rarityImagePrefab, this.resources.transform);
 
                     rarityObject.transform.localPosition += new Vector3(rarityXPosition, yPosition);
 
-                    var resourceObject = Instantiate(imagePrefab, regionSummaryPanelResources.transform);
+                    var resourceObject = Instantiate(resourceImagePrefab, this.resources.transform);
 
                     resourceObject.transform.localPosition += new Vector3(resourceXPosition, yPosition);
                     resourceObject.name = resources[i].Name;
@@ -227,7 +229,7 @@ namespace Assets.Scripts.Managers
                 }
                 else
                 {
-                    var resourceObject = Instantiate(imagePrefab, regionSummaryPanelResources.transform);
+                    var resourceObject = Instantiate(resourceImagePrefab, this.resources.transform);
 
                     resourceObject.transform.localPosition += new Vector3(i * 20 + 55, -1);
                     resourceObject.name = "Unknown";
@@ -246,11 +248,11 @@ namespace Assets.Scripts.Managers
             {
                 if (!unchartedRegion)
                 {
-                    var biomeRarityObject = Instantiate(rarityImagePrefab, regionSummaryPanelBiomes.transform);
+                    var biomeRarityObject = Instantiate(rarityImagePrefab, this.biomes.transform);
 
                     biomeRarityObject.transform.localPosition += new Vector3(i * 20 + 38, -1);
 
-                    var biomeObject = Instantiate(imagePrefab, regionSummaryPanelBiomes.transform);
+                    var biomeObject = Instantiate(biomeImagePrefab, this.biomes.transform);
 
                     biomeObject.transform.localPosition += new Vector3(i * 20 + 40, -1);
                     biomeObject.name = biomes[i].Name;
@@ -264,7 +266,7 @@ namespace Assets.Scripts.Managers
                 }
                 else
                 {
-                    var biomeObject = Instantiate(imagePrefab, regionSummaryPanelBiomes.transform);
+                    var biomeObject = Instantiate(biomeImagePrefab, this.biomes.transform);
 
                     biomeObject.transform.localPosition += new Vector3(i * 20 + 40, -1);
                     biomeObject.name = "Unknown";
