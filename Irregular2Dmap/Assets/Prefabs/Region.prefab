@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7406234492291713760}
   - component: {fileID: 7406234492291713765}
   - component: {fileID: 7406234492291713762}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Region
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -92,7 +92,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f6f08c804d38a464da67786335841be4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  regionSprite: {fileID: 0}
-  regionOutlineSprite: {fileID: 0}
-  regionFogOfWarSprite: {fileID: 0}
-  regionFogOfWarOutlineSprite: {fileID: 0}

@@ -4,6 +4,12 @@ namespace Assets.Scripts.Controllers.Panels.RegionSummaryPanel
 {
     public class RegionSummaryPanelController : MonoBehaviour
     {
+        [SerializeField]
+        private GameObject moreBiomesPanel;
+
+        [SerializeField]
+        private GameObject moreResourcesPanel;
+
         private float currentPositionX = 0;
         private float currentPositionY = 0;
 
@@ -45,6 +51,20 @@ namespace Assets.Scripts.Controllers.Panels.RegionSummaryPanel
 
             currentPositionX += newPosition.x;
             currentPositionY += newPosition.y;
+        }
+
+        public void MoreBiomesButtonClick()
+        {
+            var panelActivity = moreBiomesPanel.activeSelf;
+
+            moreBiomesPanel.SetActive(!panelActivity);
+        }
+
+        public void MoreResourcesButtonClick()
+        {
+            var panelActivity = moreResourcesPanel.activeSelf;
+
+            moreResourcesPanel.SetActive(!panelActivity);
         }
     }
 }

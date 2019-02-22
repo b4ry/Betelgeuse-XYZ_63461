@@ -51,6 +51,16 @@ namespace Assets.Scripts.Managers
         [SerializeField]
         private GameObject oddityImage;
 
+        #region MoreImagesPanel
+
+        [SerializeField]
+        private GameObject label;
+
+        [SerializeField]
+        private GameObject moreImagePrefab;
+
+        #endregion
+
         private List<GameObject> biomeImageObjects = new List<GameObject>();
         private List<GameObject> resourceImageObjects = new List<GameObject>();
         private List<GameObject> rarityImageObjects = new List<GameObject>();

@@ -9,7 +9,7 @@ using UnityEngine.EventSystems;
 
 namespace Assets.Scripts.Controllers
 {
-    public class RegionController : MonoBehaviour, IPointerClickHandler
+    public class RegionController : MonoBehaviour
     {
         private const string UnknownValue = "???";
 
@@ -76,45 +76,51 @@ namespace Assets.Scripts.Controllers
             gameObject.AddComponent<PolygonCollider2D>();
         }
 
-        public void OnPointerClick(PointerEventData eventData)
+        public void OnMouseDown()
         {
-            if (regionSelected) // DESELECT region
+            if (!EventSystem.current.IsPointerOverGameObject())
             {
-                if (regionModel.Visited)
+                if (regionSelected) // DESELECT region
                 {
-                    spriteRenderer.sprite = RegionSprite;
-                }
-                else
-                {
-                    spriteRenderer.sprite = RegionFogOfWarSprite;
-                }
-
-                regionSelected = false;
-
-                RegionSummaryPanelManager.Instance.SetActive(false);
-
-                SelectedRegionsController.Instance.SelectedRegionObjects.Remove(this);
-
-                if (regionModel.Visited)
-                {
-                    foreach (var neighbourRegion in regionModel.NeighbourRegions)
+                    if (regionModel.Visited)
                     {
-                        var neighbourRegionController = neighbourRegion.GetComponent<RegionController>();
+                        spriteRenderer.sprite = RegionSprite;
+                    }
+                    else
+                    {
+                        spriteRenderer.sprite = RegionFogOfWarSprite;
+                    }
 
-                        if (neighbourRegionController.regionModel.Visited)
+                    regionSelected = false;
+
+                    RegionSummaryPanelManager.Instance.SetActive(false);
+
+                    SelectedRegionsController.Instance.SelectedRegionObjects.Remove(this);
+
+                    if (regionModel.Visited)
+                    {
+                        foreach (var neighbourRegion in regionModel.NeighbourRegions)
                         {
-                            neighbourRegion.SetActive(true);
-                        }
-                        else
-                        {
-                            neighbourRegion.SetActive(false);
+                            var neighbourRegionController = neighbourRegion.GetComponent<RegionController>();
+
+                            if (neighbourRegionController.regionModel.Visited)
+                            {
+                                neighbourRegion.SetActive(true);
+                            }
+                            else
+                            {
+                                neighbourRegion.SetActive(false);
+                            }
                         }
                     }
                 }
-            }
-            else
+                else
+                {
+                    SelectRegion();
+                }
+            } else
             {
-                SelectRegion();
+                Debug.Log("UI");
             }
         }
 
