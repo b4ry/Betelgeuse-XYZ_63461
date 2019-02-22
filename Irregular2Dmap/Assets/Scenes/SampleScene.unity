@@ -2146,12 +2146,12 @@ GameObject:
   - component: {fileID: 1414909366}
   - component: {fileID: 1414909365}
   m_Layer: 5
-  m_Name: MoreResourcesPanel
+  m_Name: AllResourcesPanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1414909364
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2558,7 +2558,7 @@ MonoBehaviour:
   rarityImagePrefab: {fileID: 2819918708018688637, guid: e1314959f386f374d9e08d0ac40f3fce,
     type: 3}
   oddityImage: {fileID: 444393545}
-  label: {fileID: 1962871769}
+  allBiomesPanel: {fileID: 2094769411}
   moreImagePrefab: {fileID: 2176819540613067098, guid: 8f28548efd403bd4d94ce93b1866bed7,
     type: 3}
 --- !u!1 &1697854776
@@ -3070,12 +3070,12 @@ GameObject:
   - component: {fileID: 2094769414}
   - component: {fileID: 2094769413}
   m_Layer: 5
-  m_Name: MoreBiomesPanel
+  m_Name: AllBiomesPanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &2094769412
 RectTransform:
   m_ObjectHideFlags: 0

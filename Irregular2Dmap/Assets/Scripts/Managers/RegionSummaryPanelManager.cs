@@ -54,7 +54,7 @@ namespace Assets.Scripts.Managers
         #region MoreImagesPanel
 
         [SerializeField]
-        private GameObject label;
+        private GameObject allBiomesPanel;
 
         [SerializeField]
         private GameObject moreImagePrefab;
@@ -144,7 +144,8 @@ namespace Assets.Scripts.Managers
                 biomeImageObjects.Clear();
             }
 
-            SetupImages(regionModel.Biomes, biomeImageObjects, exploreButtonInteractable, biomeImageSprites, biomes, biomeImagePrefab);
+            SetupImages(regionModel.Biomes, biomeImageObjects, exploreButtonInteractable, biomeImageSprites, biomes, biomeImagePrefab, false);
+            SetupImages(regionModel.Biomes, biomeImageObjects, exploreButtonInteractable, biomeImageSprites, allBiomesPanel, moreImagePrefab, true);
 
             var resourcesToDisplay = new List<ResourceModel>();
             
@@ -153,7 +154,7 @@ namespace Assets.Scripts.Managers
                 resourcesToDisplay = resourcesToDisplay.Union(biome.Resources).ToList();
             }
 
-            SetupImages(resourcesToDisplay, resourceImageObjects, exploreButtonInteractable, resourceImageSprites, resources, resourceImagePrefab);
+            SetupImages(resourcesToDisplay, resourceImageObjects, exploreButtonInteractable, resourceImageSprites, resources, resourceImagePrefab, false);
 
             if (!exploreButtonInteractable)
             {
@@ -221,9 +222,19 @@ namespace Assets.Scripts.Managers
             resourceTooltip.GetComponentInChildren<Text>().text = text;
         }
 
-        private void SetupImages<T>(List<T> objectsToDisplay, List<GameObject> imageObjects, bool unchartedRegion, List<Sprite> imageSprites, GameObject parentObject, GameObject objectPrefab) where T : IModel
+        private void SetupImages<T>(
+            List<T> objectsToDisplay, 
+            List<GameObject> imageObjects, 
+            bool unchartedRegion, 
+            List<Sprite> imageSprites, 
+            GameObject parentObject, 
+            GameObject objectPrefab,
+            bool displayAll) where T : IModel
         {
-            var objectsNumber = objectsToDisplay.Count > MaxNumberOfObjectsToDisplay ? MaxNumberOfObjectsToDisplay : objectsToDisplay.Count;
+            var objectsNumber = 
+                displayAll 
+                ? objectsToDisplay.Count : objectsToDisplay.Count > MaxNumberOfObjectsToDisplay 
+                ? MaxNumberOfObjectsToDisplay : objectsToDisplay.Count;
 
             for (int i = 0; i < objectsNumber; i++)
             {
@@ -232,10 +243,19 @@ namespace Assets.Scripts.Managers
                     var rarityXPosition = i * 20 + 53;
                     var xPosition = i * 20 + 55;
                     var yPosition = -1;
+                    var rarityYPosition = -1.0;
+
+                    if(displayAll)
+                    {
+                        rarityXPosition = i * 20 + 10;
+                        xPosition = i * 20;
+                        yPosition = 0;
+                        rarityYPosition = -4.5;
+                    }
 
                     var rarityObject = Instantiate(rarityImagePrefab, parentObject.transform);
 
-                    rarityObject.transform.localPosition += new Vector3(rarityXPosition, yPosition);
+                    rarityObject.transform.localPosition += new Vector3(rarityXPosition, (float)rarityYPosition);
 
                     var objectToDisplay = Instantiate(objectPrefab, parentObject.transform);
 
