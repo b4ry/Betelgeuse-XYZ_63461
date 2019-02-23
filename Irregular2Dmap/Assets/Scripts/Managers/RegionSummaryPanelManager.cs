@@ -18,7 +18,7 @@ namespace Assets.Scripts.Managers
         private GameObject regionSummaryPanel;
 
         [SerializeField]
-        private GameObject name;
+        private GameObject regionName;
         [SerializeField]
         private GameObject size;
         [SerializeField]
@@ -57,6 +57,9 @@ namespace Assets.Scripts.Managers
         private GameObject allBiomesPanel;
 
         [SerializeField]
+        private GameObject allResourcesPanel;
+
+        [SerializeField]
         private GameObject moreImagePrefab;
 
         #endregion
@@ -83,7 +86,7 @@ namespace Assets.Scripts.Managers
 
             DontDestroyOnLoad(gameObject);
 
-            nameTextMesh = name.GetComponent<TextMeshProUGUI>();
+            nameTextMesh = regionName.GetComponent<TextMeshProUGUI>();
             sizeTextMesh = size.GetComponent<TextMeshProUGUI>();
             biomesTextMesh = biomes.GetComponent<TextMeshProUGUI>();
             resourcesTextMesh = resources.GetComponent<TextMeshProUGUI>();
@@ -155,6 +158,7 @@ namespace Assets.Scripts.Managers
             }
 
             SetupImages(resourcesToDisplay, resourceImageObjects, exploreButtonInteractable, resourceImageSprites, resources, resourceImagePrefab, false);
+            SetupImages(resourcesToDisplay, resourceImageObjects, exploreButtonInteractable, resourceImageSprites, allResourcesPanel, moreImagePrefab, true);
 
             if (!exploreButtonInteractable)
             {
@@ -247,8 +251,8 @@ namespace Assets.Scripts.Managers
 
                     if(displayAll)
                     {
-                        rarityXPosition = i * 20 + 10;
-                        xPosition = i * 20;
+                        rarityXPosition = i * 20 + 20;
+                        xPosition = i * 20 + 10;
                         yPosition = 0;
                         rarityYPosition = -4.5;
                     }

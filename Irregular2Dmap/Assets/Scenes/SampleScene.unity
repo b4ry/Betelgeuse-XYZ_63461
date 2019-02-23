@@ -2543,7 +2543,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   regionSummaryPanel: {fileID: 150488032}
-  name: {fileID: 348559079}
+  regionName: {fileID: 348559079}
   size: {fileID: 612525367}
   biomes: {fileID: 798798770}
   resources: {fileID: 819727029}
@@ -2559,6 +2559,7 @@ MonoBehaviour:
     type: 3}
   oddityImage: {fileID: 444393545}
   allBiomesPanel: {fileID: 2094769411}
+  allResourcesPanel: {fileID: 1414909363}
   moreImagePrefab: {fileID: 2176819540613067098, guid: 8f28548efd403bd4d94ce93b1866bed7,
     type: 3}
 --- !u!1 &1697854776
