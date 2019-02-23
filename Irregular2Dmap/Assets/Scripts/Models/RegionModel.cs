@@ -1,15 +1,25 @@
 ﻿using Assets.Scripts.Controllers;
 using Assets.Scripts.Enums;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace Assets.Scripts.Models
 {
     public class RegionModel
     {
+        private readonly Dictionary<RarityEnum, int> rarityOccurenceThresholds = new Dictionary<RarityEnum, int>()
+        {
+            { RarityEnum.Common, 0 },
+            { RarityEnum.Uncommon, 20 },
+            { RarityEnum.Rare, 40 },
+            { RarityEnum.Legendary, 60 }
+        };
+
         public string Name { get; set; }
         public RegionSizeEnum Size { get; set; }
         public List<BiomeModel> Biomes { get; set; }
+        public List<ResourceModel> Resources { get; set; }
         public List<GameObject> NeighbourRegions { get; set; }
         public bool Visited { get; set; }
         public OddityModel Oddity { get; set; }
@@ -23,6 +33,7 @@ namespace Assets.Scripts.Models
 
             RandomizeOddityRating();
             CreateBiomes(biomeNames);
+            CalculateResourcesAvailability();
         }
 
         private void CreateBiomes(string[] biomeNames)
@@ -38,6 +49,33 @@ namespace Assets.Scripts.Models
             }
 
             DistributeAreaAmongBiomes();
+        }
+
+        private void CalculateResourcesAvailability()
+        {
+            Resources = new List<ResourceModel>();
+
+            foreach (var biomeModel in Biomes)
+            {
+                foreach (var resourceModel in biomeModel.Resources)
+                {
+                    var isResourceAvailable = IsResourceAvailable(biomeModel, resourceModel);
+
+                    if (isResourceAvailable && !Resources.Any(rtd => rtd.Name == resourceModel.Name))
+                    {
+                        var newResourceModel = new ResourceModel(resourceModel.Name, resourceModel.Rarity);
+
+                        Resources.Add(newResourceModel);
+                    }
+                }
+            }
+        }
+
+        private bool IsResourceAvailable(BiomeModel biomeModel, ResourceModel resourceModel)
+        {
+            var occurenceRating = biomeModel.Area * 2 * (int)biomeModel.Rarity * (GameController.Instance.RNG.NextDouble() + 0.2) * Oddity.Rating / (int)resourceModel.Rarity;
+
+            return occurenceRating >= rarityOccurenceThresholds[resourceModel.Rarity];
         }
 
         private void DistributeAreaAmongBiomes()

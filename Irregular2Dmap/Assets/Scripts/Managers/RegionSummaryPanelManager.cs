@@ -8,11 +8,12 @@ using UnityEngine.UI;
 
 namespace Assets.Scripts.Managers
 {
-    public class RegionSummaryPanelManager : MonoBehaviour, IPanelManager
+    public class RegionSummaryPanelManager : MonoBehaviour
     {
         public static RegionSummaryPanelManager Instance = null;
 
         private const int MaxNumberOfObjectsToDisplay = 6;
+        private const string UnknownString = "Unknown";
 
         [SerializeField]
         private GameObject regionSummaryPanel;
@@ -55,7 +56,6 @@ namespace Assets.Scripts.Managers
 
         [SerializeField]
         private GameObject allBiomesPanel;
-
         [SerializeField]
         private GameObject allResourcesPanel;
 
@@ -117,48 +117,13 @@ namespace Assets.Scripts.Managers
             biomesTextMesh.SetText("Biomes: ");
             resourcesTextMesh.SetText("Resources: ");
 
-            if (resourceImageObjects.Count > 0)
-            {
-                foreach (var resourceImage in resourceImageObjects)
-                {
-                    Destroy(resourceImage);
-                }
-
-                resourceImageObjects.Clear();
-            }
-
-            if(rarityImageObjects.Count > 0)
-            {
-                foreach (var rarityImageObject in rarityImageObjects)
-                {
-                    Destroy(rarityImageObject);
-                }
-
-                rarityImageObjects.Clear();
-            }
-
-            if (biomeImageObjects.Count > 0)
-            {
-                foreach (var biomeImage in biomeImageObjects)
-                {
-                    Destroy(biomeImage);
-                }
-
-                biomeImageObjects.Clear();
-            }
+            ClearPanel();
 
             SetupImages(regionModel.Biomes, biomeImageObjects, exploreButtonInteractable, biomeImageSprites, biomes, biomeImagePrefab, false);
             SetupImages(regionModel.Biomes, biomeImageObjects, exploreButtonInteractable, biomeImageSprites, allBiomesPanel, moreImagePrefab, true);
 
-            var resourcesToDisplay = new List<ResourceModel>();
-            
-            foreach (var biome in regionModel.Biomes)
-            {
-                resourcesToDisplay = resourcesToDisplay.Union(biome.Resources).ToList();
-            }
-
-            SetupImages(resourcesToDisplay, resourceImageObjects, exploreButtonInteractable, resourceImageSprites, resources, resourceImagePrefab, false);
-            SetupImages(resourcesToDisplay, resourceImageObjects, exploreButtonInteractable, resourceImageSprites, allResourcesPanel, moreImagePrefab, true);
+            SetupImages(regionModel.Resources, resourceImageObjects, exploreButtonInteractable, resourceImageSprites, resources, resourceImagePrefab, false);
+            SetupImages(regionModel.Resources, resourceImageObjects, exploreButtonInteractable, resourceImageSprites, allResourcesPanel, moreImagePrefab, true);
 
             if (!exploreButtonInteractable)
             {
@@ -166,7 +131,7 @@ namespace Assets.Scripts.Managers
             }
             else
             {
-                oddityImage.GetComponent<Image>().sprite = oddityImageSprites.FirstOrDefault(ois => ois.name.Equals("UnknownOddity"));
+                oddityImage.GetComponent<Image>().sprite = oddityImageSprites.FirstOrDefault(ois => ois.name.Equals(UnknownString));
             }
 
             chartButton.interactable = exploreButtonInteractable;
@@ -240,21 +205,27 @@ namespace Assets.Scripts.Managers
                 ? objectsToDisplay.Count : objectsToDisplay.Count > MaxNumberOfObjectsToDisplay 
                 ? MaxNumberOfObjectsToDisplay : objectsToDisplay.Count;
 
+            int rarityXPosition;
+            double rarityYPosition;
+            int xPosition;
+            int yPosition;
+
             for (int i = 0; i < objectsNumber; i++)
             {
                 if (!unchartedRegion)
                 {
-                    var rarityXPosition = i * 20 + 53;
-                    var xPosition = i * 20 + 55;
-                    var yPosition = -1;
-                    var rarityYPosition = -1.0;
-
                     if(displayAll)
                     {
                         rarityXPosition = i * 20 + 20;
                         xPosition = i * 20 + 10;
                         yPosition = 0;
                         rarityYPosition = -4.5;
+                    } else
+                    {
+                        rarityXPosition = i * 20 + 53;
+                        xPosition = i * 20 + 55;
+                        yPosition = -1;
+                        rarityYPosition = -1.0;
                     }
 
                     var rarityObject = Instantiate(rarityImagePrefab, parentObject.transform);
@@ -278,13 +249,46 @@ namespace Assets.Scripts.Managers
                     var objectToDisplay = Instantiate(objectPrefab, parentObject.transform);
 
                     objectToDisplay.transform.localPosition += new Vector3(i * 20 + 55, -1);
-                    objectToDisplay.name = "Unknown";
-                    objectToDisplay.GetComponent<Image>().sprite = biomeImageSprites.FirstOrDefault(bis => bis.name == "Unknown");
+                    objectToDisplay.name = UnknownString;
+                    objectToDisplay.GetComponent<Image>().sprite = biomeImageSprites.FirstOrDefault(bis => bis.name == UnknownString);
 
                     imageObjects.Add(objectToDisplay);
 
                     break;
                 }
+            }
+        }
+
+        private void ClearPanel()
+        {
+            if (resourceImageObjects.Count > 0)
+            {
+                foreach (var resourceImage in resourceImageObjects)
+                {
+                    Destroy(resourceImage);
+                }
+
+                resourceImageObjects.Clear();
+            }
+
+            if (rarityImageObjects.Count > 0)
+            {
+                foreach (var rarityImageObject in rarityImageObjects)
+                {
+                    Destroy(rarityImageObject);
+                }
+
+                rarityImageObjects.Clear();
+            }
+
+            if (biomeImageObjects.Count > 0)
+            {
+                foreach (var biomeImage in biomeImageObjects)
+                {
+                    Destroy(biomeImage);
+                }
+
+                biomeImageObjects.Clear();
             }
         }
 
