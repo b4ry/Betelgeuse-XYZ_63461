@@ -6,6 +6,7 @@ using System;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.SceneManagement;
 
 namespace Assets.Scripts.Controllers
 {
@@ -51,9 +52,13 @@ namespace Assets.Scripts.Controllers
                 regionSelected = true;
 
                 spriteRenderer.sprite = RegionOutlineSprite;
-                RegionSummaryPanelManager.Instance.SetupRegionSummaryPanel(regionModel, false);
 
+                RegionSummaryPanelManager.Instance.SetupRegionSummaryPanel(regionModel, false);
                 SelectedRegionsController.Instance.SelectedRegionObjects.Add(this);
+                RegionSummaryPanelManager.Instance.SetupEnterButton(delegate
+                {
+                    EnterRegion();
+                });
             }
             else
             {
@@ -138,6 +143,10 @@ namespace Assets.Scripts.Controllers
                 spriteRenderer.sprite = RegionOutlineSprite;
 
                 RegionSummaryPanelManager.Instance.SetupRegionSummaryPanel(regionModel, false);
+                RegionSummaryPanelManager.Instance.SetupEnterButton(delegate
+                {
+                    EnterRegion();
+                });
             }
             else
             {
@@ -208,6 +217,11 @@ namespace Assets.Scripts.Controllers
             gameObject.SetActive(true);
 
             GetComponent<SpriteRenderer>().sprite = RegionFogOfWarSprite;
+        }
+
+        private void EnterRegion()
+        {
+            GameController.Instance.LoadRegionView();
         }
 
         private void ChartRegion()

@@ -8,4 +8,7 @@ EditorBuildSettings:
   - enabled: 0
     path: 
     guid: 00000000000000000000000000000000
+  - enabled: 1
+    path: Assets/Scenes/WorldMapScene.unity
+    guid: 77ffc7c7c6d422847a0bc5eaa700c9fa
   m_configObjects: {}

@@ -34,6 +34,8 @@ namespace Assets.Scripts.Managers
 
         [SerializeField]
         private Button chartButton;
+        [SerializeField]
+        private Button enterButton;
 
         [SerializeField]
         private GameObject buttonTooltip;
@@ -146,6 +148,12 @@ namespace Assets.Scripts.Managers
             {
                 regionSummaryPanel.SetActive(true);
             }
+        }
+
+        public void SetupEnterButton(UnityAction action)
+        {
+            enterButton.onClick.RemoveAllListeners();
+            enterButton.onClick.AddListener(action);
         }
 
         public void SetupChartButton(UnityAction action)

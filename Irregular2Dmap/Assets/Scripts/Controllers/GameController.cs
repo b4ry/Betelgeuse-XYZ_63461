@@ -22,6 +22,8 @@ namespace Assets.Scripts.Controllers
         private GameObject regionPrefab;
         [SerializeField]
         private GameObject regionsObject;
+        [SerializeField]
+        private GameObject worldMapUiCanvas;
 
         private List<Sprite> worldMapSprites = new List<Sprite>();
         private List<Sprite> regionNFOWSprites = new List<Sprite>();
@@ -89,6 +91,13 @@ namespace Assets.Scripts.Controllers
 
                 RegionObjects.Add(regionObject);
             }
+        }
+
+        public void LoadRegionView()
+        {
+            worldMapObject.SetActive(false);
+            regionsObject.SetActive(false);
+            worldMapUiCanvas.SetActive(false);
         }
 
         private void Start()
