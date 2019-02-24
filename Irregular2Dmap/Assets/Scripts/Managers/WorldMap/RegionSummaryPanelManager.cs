@@ -36,6 +36,10 @@ namespace Assets.Scripts.Managers.WorldMap
         private Button chartButton;
         [SerializeField]
         private Button enterButton;
+        [SerializeField]
+        private Button moreBiomesButton;
+        [SerializeField]
+        private Button moreResourcesButton;
 
         [SerializeField]
         private GameObject biomeTooltip;
@@ -67,6 +71,11 @@ namespace Assets.Scripts.Managers.WorldMap
         private GameObject allBiomesImagePrefab;
         [SerializeField]
         private GameObject allResourcesImagePrefab;
+
+        [SerializeField]
+        private GameObject allBiomesPanel;
+        [SerializeField]
+        private GameObject allResourcesPanel;
 
         #endregion
 
@@ -126,10 +135,38 @@ namespace Assets.Scripts.Managers.WorldMap
             ClearPanel();
 
             SetupImages(regionModel.Biomes, biomeImageObjects, isLandUncharted, biomeImageSprites, biomes, biomeImagePrefab, false);
-            SetupImages(regionModel.Biomes, biomeImageObjects, isLandUncharted, biomeImageSprites, allBiomes, allBiomesImagePrefab, true);
+
+            if(regionModel.Biomes.Count > MaxNumberOfObjectsToDisplay && !isLandUncharted)
+            {
+                SetupImages(regionModel.Biomes, biomeImageObjects, isLandUncharted, biomeImageSprites, allBiomes, allBiomesImagePrefab, true);
+                moreBiomesButton.gameObject.SetActive(true);
+            }
+            else
+            {
+                moreBiomesButton.gameObject.SetActive(false);
+
+                if (allBiomesPanel.activeSelf)
+                {
+                    allBiomesPanel.SetActive(false);
+                }
+            }
 
             SetupImages(regionModel.Resources, resourceImageObjects, isLandUncharted, resourceImageSprites, resources, resourceImagePrefab, false);
-            SetupImages(regionModel.Resources, resourceImageObjects, isLandUncharted, resourceImageSprites, allResources, allResourcesImagePrefab, true);
+
+            if (regionModel.Resources.Count > MaxNumberOfObjectsToDisplay && !isLandUncharted)
+            {
+                SetupImages(regionModel.Resources, resourceImageObjects, isLandUncharted, resourceImageSprites, allResources, allResourcesImagePrefab, true);
+                moreResourcesButton.gameObject.SetActive(true);
+            }
+            else
+            {
+                moreResourcesButton.gameObject.SetActive(false);
+
+                if(allResourcesPanel.activeSelf)
+                {
+                    allResourcesPanel.SetActive(false);
+                }
+            }
 
             if (!isLandUncharted)
             {

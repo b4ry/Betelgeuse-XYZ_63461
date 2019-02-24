@@ -2491,7 +2491,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1414909364
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2879,6 +2879,8 @@ MonoBehaviour:
   resources: {fileID: 819727029}
   chartButton: {fileID: 2058552237}
   enterButton: {fileID: 1431901139}
+  moreBiomesButton: {fileID: 849972835}
+  moreResourcesButton: {fileID: 2051872782}
   biomeTooltip: {fileID: 138296494}
   resourceTooltip: {fileID: 1339829735}
   allBiomesTooltip: {fileID: 2136786340}
@@ -3684,7 +3686,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2094769412
 RectTransform:
   m_ObjectHideFlags: 0
