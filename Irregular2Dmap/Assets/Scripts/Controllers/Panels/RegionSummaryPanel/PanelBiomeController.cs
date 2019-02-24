@@ -1,11 +1,10 @@
 ﻿using Assets.Scripts.Managers;
-using System.Linq;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
 namespace Assets.Scripts.Controllers.Panels.RegionSummaryPanel
 {
-    public class RegionSummaryPanelBiomeController : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
+    public class PanelBiomeController : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     {
         private GameObject cameraObject;
         private Camera cameraComponent;
@@ -23,7 +22,7 @@ namespace Assets.Scripts.Controllers.Panels.RegionSummaryPanel
             var rectTransform = transform.GetComponent<RectTransform>();
 
             localMousePosition.x += rectTransform.anchoredPosition.x;
-            localMousePosition.y = localMousePosition.y -20;
+            localMousePosition.y = localMousePosition.y - 20;
 
             RegionSummaryPanelManager.Instance.PositionBiomeTooltip(localMousePosition);
             RegionSummaryPanelManager.Instance.SetBiomeTooltipText(gameObject.name);

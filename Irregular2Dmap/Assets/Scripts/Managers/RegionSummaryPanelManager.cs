@@ -41,6 +41,10 @@ namespace Assets.Scripts.Managers
         private GameObject biomeTooltip;
         [SerializeField]
         private GameObject resourceTooltip;
+        [SerializeField]
+        private GameObject allBiomesTooltip;
+        [SerializeField]
+        private GameObject allResourcesTooltip;
 
         [SerializeField]
         private GameObject biomeImagePrefab;
@@ -55,12 +59,14 @@ namespace Assets.Scripts.Managers
         #region MoreImagesPanel
 
         [SerializeField]
-        private GameObject allBiomesPanel;
+        private GameObject allBiomes;
         [SerializeField]
-        private GameObject allResourcesPanel;
+        private GameObject allResources;
 
         [SerializeField]
-        private GameObject moreImagePrefab;
+        private GameObject allBiomesImagePrefab;
+        [SerializeField]
+        private GameObject allResourcesImagePrefab;
 
         #endregion
 
@@ -120,10 +126,10 @@ namespace Assets.Scripts.Managers
             ClearPanel();
 
             SetupImages(regionModel.Biomes, biomeImageObjects, isLandUncharted, biomeImageSprites, biomes, biomeImagePrefab, false);
-            SetupImages(regionModel.Biomes, biomeImageObjects, isLandUncharted, biomeImageSprites, allBiomesPanel, moreImagePrefab, true);
+            SetupImages(regionModel.Biomes, biomeImageObjects, isLandUncharted, biomeImageSprites, allBiomes, allBiomesImagePrefab, true);
 
             SetupImages(regionModel.Resources, resourceImageObjects, isLandUncharted, resourceImageSprites, resources, resourceImagePrefab, false);
-            SetupImages(regionModel.Resources, resourceImageObjects, isLandUncharted, resourceImageSprites, allResourcesPanel, moreImagePrefab, true);
+            SetupImages(regionModel.Resources, resourceImageObjects, isLandUncharted, resourceImageSprites, allResources, allResourcesImagePrefab, true);
 
             if (!isLandUncharted)
             {
@@ -164,15 +170,47 @@ namespace Assets.Scripts.Managers
             biomeTooltip.SetActive(show);
         }
 
+        public void SetBiomeTooltipText(string text)
+        {
+            biomeTooltip.GetComponentInChildren<Text>().text = text;
+        }
+
         public void PositionBiomeTooltip(Vector3 cursorPosition)
         {
             cursorPosition.z = 0;
             biomeTooltip.transform.localPosition += cursorPosition;
         }
 
-        public void SetBiomeTooltipText(string text)
+        public void ShowAllBiomesTooltip(bool show)
         {
-            biomeTooltip.GetComponentInChildren<Text>().text = text;
+            allBiomesTooltip.SetActive(show);
+        }
+
+        public void PositionAllBiomesTooltip(Vector3 cursorPosition)
+        {
+            cursorPosition.z = 0;
+            allBiomesTooltip.transform.localPosition += cursorPosition;
+        }
+
+        public void SetAllBiomesTooltipText(string text)
+        {
+            allBiomesTooltip.GetComponentInChildren<Text>().text = text;
+        }
+
+        public void ShowAllResourcesTooltip(bool show)
+        {
+            allResourcesTooltip.SetActive(show);
+        }
+
+        public void PositionAllResourcesTooltip(Vector3 cursorPosition)
+        {
+            cursorPosition.z = 0;
+            allResourcesTooltip.transform.localPosition += cursorPosition;
+        }
+
+        public void SetAllResourcesTooltipText(string text)
+        {
+            allResourcesTooltip.GetComponentInChildren<Text>().text = text;
         }
 
         public void ShowResourceTooltip(bool show)
@@ -216,10 +254,10 @@ namespace Assets.Scripts.Managers
                 {
                     if(displayAll)
                     {
-                        rarityXPosition = i * 20 + 20;
+                        rarityXPosition = i * 20 + 18;
                         xPosition = i * 20 + 10;
                         yPosition = 0;
-                        rarityYPosition = -4.5;
+                        rarityYPosition = 0;
                     } else
                     {
                         rarityXPosition = i * 20 + 53;

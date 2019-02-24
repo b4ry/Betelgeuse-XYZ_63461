@@ -62,10 +62,12 @@
   <ItemGroup>
     <Compile Include="Assets\Scripts\Controllers\DefinitionsController.cs" />
     <Compile Include="Assets\Scripts\Controllers\GameController.cs" />
-    <Compile Include="Assets\Scripts\Controllers\Panels\RegionSummaryPanel\RegionSummaryPanelBiomeController.cs" />
-    <Compile Include="Assets\Scripts\Controllers\Panels\RegionSummaryPanel\RegionSummaryPanelButtonController.cs" />
-    <Compile Include="Assets\Scripts\Controllers\Panels\RegionSummaryPanel\RegionSummaryPanelController.cs" />
-    <Compile Include="Assets\Scripts\Controllers\Panels\RegionSummaryPanel\RegionSummaryPanelResourceController.cs" />
+    <Compile Include="Assets\Scripts\Controllers\Panels\RegionSummaryPanel\PanelAllBiomesController.cs" />
+    <Compile Include="Assets\Scripts\Controllers\Panels\RegionSummaryPanel\PanelAllResourcesController.cs" />
+    <Compile Include="Assets\Scripts\Controllers\Panels\RegionSummaryPanel\PanelBiomeController.cs" />
+    <Compile Include="Assets\Scripts\Controllers\Panels\RegionSummaryPanel\PanelButtonController.cs" />
+    <Compile Include="Assets\Scripts\Controllers\Panels\RegionSummaryPanel\PanelController.cs" />
+    <Compile Include="Assets\Scripts\Controllers\Panels\RegionSummaryPanel\PanelResourceController.cs" />
     <Compile Include="Assets\Scripts\Controllers\RegionController.cs" />
     <Compile Include="Assets\Scripts\Controllers\SelectedRegionsController.cs" />
     <Compile Include="Assets\Scripts\Enums\BiomeEnum.cs" />

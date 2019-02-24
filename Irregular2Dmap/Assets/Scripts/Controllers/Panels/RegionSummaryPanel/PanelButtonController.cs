@@ -4,7 +4,7 @@ using UnityEngine.EventSystems;
 
 namespace Assets.Scripts.Controllers.Panels.RegionSummaryPanel
 {
-    public class RegionSummaryPanelResourceController : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
+    public class PanelButtonController : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     {
         private GameObject cameraObject;
         private Camera cameraComponent;
@@ -22,17 +22,16 @@ namespace Assets.Scripts.Controllers.Panels.RegionSummaryPanel
             var rectTransform = transform.GetComponent<RectTransform>();
 
             localMousePosition.x += rectTransform.anchoredPosition.x;
-            localMousePosition.y = localMousePosition.y - 20;
+            localMousePosition.y = -10;
 
-            RegionSummaryPanelManager.Instance.PositionResourceTooltip(localMousePosition);
-            RegionSummaryPanelManager.Instance.SetResourceTooltipText(gameObject.name);
-            RegionSummaryPanelManager.Instance.ShowResourceTooltip(true);
+            RegionSummaryPanelManager.Instance.PositionButtonTooltip(localMousePosition);
+            RegionSummaryPanelManager.Instance.ShowButtonTooltip(true);
         }
 
         public void OnPointerExit(PointerEventData eventData)
         {
-            RegionSummaryPanelManager.Instance.ShowResourceTooltip(false);
-            RegionSummaryPanelManager.Instance.PositionResourceTooltip(localMousePosition * -1);
+            RegionSummaryPanelManager.Instance.ShowButtonTooltip(false);
+            RegionSummaryPanelManager.Instance.PositionButtonTooltip(localMousePosition * -1);
         }
     }
 }

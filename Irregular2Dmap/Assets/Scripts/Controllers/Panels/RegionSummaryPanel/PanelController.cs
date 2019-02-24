@@ -2,7 +2,7 @@
 
 namespace Assets.Scripts.Controllers.Panels.RegionSummaryPanel
 {
-    public class RegionSummaryPanelController : MonoBehaviour
+    public class PanelController : MonoBehaviour
     {
         [SerializeField]
         private GameObject moreBiomesPanel;
