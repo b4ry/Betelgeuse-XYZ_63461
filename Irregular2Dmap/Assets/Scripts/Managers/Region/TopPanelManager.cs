@@ -30,6 +30,11 @@ namespace Assets.Scripts.Managers.Region
             nameTextMesh = regionName.GetComponent<TextMeshProUGUI>();
         }
 
+        public  void GoBackToWorldMap()
+        {
+            GameController.Instance.LoadWorldMapView();
+        }
+
         public void SetupTopPanel()
         {
             nameTextMesh.SetText(SelectedRegionsController.Instance.SelectedRegionObjects.FirstOrDefault().RegionModel.Name);

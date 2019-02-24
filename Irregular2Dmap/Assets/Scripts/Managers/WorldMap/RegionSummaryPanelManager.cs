@@ -38,8 +38,6 @@ namespace Assets.Scripts.Managers.WorldMap
         private Button enterButton;
 
         [SerializeField]
-        private GameObject buttonTooltip;
-        [SerializeField]
         private GameObject biomeTooltip;
         [SerializeField]
         private GameObject resourceTooltip;
@@ -100,10 +98,10 @@ namespace Assets.Scripts.Managers.WorldMap
             resourcesTextMesh = resources.GetComponent<TextMeshProUGUI>();
 
             //TODO: MOVE TO ASSET BUNDLES
-            biomeImageSprites = Resources.LoadAll<Sprite>("UI/RegionSummaryPanel/BiomeSprites").ToList();
-            resourceImageSprites = Resources.LoadAll<Sprite>("UI/RegionSummaryPanel/ResourceSprites").ToList();
-            rarityImageSprites = Resources.LoadAll<Sprite>("UI/RegionSummaryPanel/RaritySprites").ToList();
-            oddityImageSprites = Resources.LoadAll<Sprite>("UI/RegionSummaryPanel/OdditySprites").ToList();
+            biomeImageSprites = Resources.LoadAll<Sprite>("UI/WorldMapUICanvas/RegionSummaryPanel/BiomeSprites").ToList();
+            resourceImageSprites = Resources.LoadAll<Sprite>("UI/WorldMapUICanvas/RegionSummaryPanel/ResourceSprites").ToList();
+            rarityImageSprites = Resources.LoadAll<Sprite>("UI/WorldMapUICanvas/RegionSummaryPanel/RaritySprites").ToList();
+            oddityImageSprites = Resources.LoadAll<Sprite>("UI/WorldMapUICanvas/RegionSummaryPanel/OdditySprites").ToList();
         }
 
         public void SetActive(bool active)
@@ -161,17 +159,6 @@ namespace Assets.Scripts.Managers.WorldMap
         {
             chartButton.onClick.RemoveAllListeners();
             chartButton.onClick.AddListener(action);
-        }
-
-        public void ShowButtonTooltip(bool show)
-        {
-            buttonTooltip.SetActive(show);
-        }
-
-        public void PositionButtonTooltip(Vector3 cursorPosition)
-        {
-            cursorPosition.z = 0;
-            buttonTooltip.transform.localPosition += cursorPosition;
         }
 
         public void ShowBiomeTooltip(bool show)

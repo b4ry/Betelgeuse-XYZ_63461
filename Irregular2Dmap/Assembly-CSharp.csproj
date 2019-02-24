@@ -65,7 +65,6 @@
     <Compile Include="Assets\Scripts\Controllers\Panels\RegionSummaryPanel\PanelAllBiomesController.cs" />
     <Compile Include="Assets\Scripts\Controllers\Panels\RegionSummaryPanel\PanelAllResourcesController.cs" />
     <Compile Include="Assets\Scripts\Controllers\Panels\RegionSummaryPanel\PanelBiomeController.cs" />
-    <Compile Include="Assets\Scripts\Controllers\Panels\RegionSummaryPanel\PanelButtonController.cs" />
     <Compile Include="Assets\Scripts\Controllers\Panels\RegionSummaryPanel\PanelController.cs" />
     <Compile Include="Assets\Scripts\Controllers\Panels\RegionSummaryPanel\PanelResourceController.cs" />
     <Compile Include="Assets\Scripts\Controllers\RegionController.cs" />

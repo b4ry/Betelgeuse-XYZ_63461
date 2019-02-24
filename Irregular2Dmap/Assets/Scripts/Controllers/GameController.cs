@@ -108,6 +108,15 @@ namespace Assets.Scripts.Controllers
             UIManager.GetComponent<TopPanelManager>().SetupTopPanel();
         }
 
+        public void LoadWorldMapView()
+        {
+            worldMapObject.SetActive(true);
+            regionsObject.SetActive(true);
+            worldMapUICanvas.SetActive(true);
+
+            regionUICanvas.SetActive(false);
+        }
+
         private void Start()
         {
         }
