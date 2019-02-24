@@ -1,4 +1,4 @@
-﻿using Assets.Scripts.Managers;
+﻿using Assets.Scripts.Managers.WorldMap;
 using UnityEngine;
 using UnityEngine.EventSystems;
 

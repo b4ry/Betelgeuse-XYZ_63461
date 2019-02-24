@@ -1,18 +1,19 @@
 ﻿using Assets.Scripts.Enums;
-using Assets.Scripts.Managers;
+using Assets.Scripts.Managers.WorldMap;
 using Assets.Scripts.Models;
 using Assets.Scripts.Readers;
 using System;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using UnityEngine.SceneManagement;
 
 namespace Assets.Scripts.Controllers
 {
     public class RegionController : MonoBehaviour
     {
         private const string UnknownValue = "???";
+
+        public RegionModel RegionModel { get; set; }
 
         public Sprite RegionSprite { get; set; }
         public Sprite RegionOutlineSprite { get; set; }
@@ -23,7 +24,6 @@ namespace Assets.Scripts.Controllers
         private bool isInitial = false;
 
         private SpriteRenderer spriteRenderer;
-        private RegionModel regionModel;
 
         void Awake()
         {
@@ -42,18 +42,18 @@ namespace Assets.Scripts.Controllers
 
             Enum.TryParse(regionDefinition[1], out RegionSizeEnum regionSizeEnum);
 
-            regionModel = new RegionModel(regionDefinition[0], regionSizeEnum, biomeNames, neighbourRegions);
+            RegionModel = new RegionModel(regionDefinition[0], regionSizeEnum, biomeNames, neighbourRegions);
 
             if (isInitial)
             {
                 gameObject.SetActive(true);
-                regionModel.Visited = true;
+                RegionModel.Visited = true;
 
                 regionSelected = true;
 
                 spriteRenderer.sprite = RegionOutlineSprite;
 
-                RegionSummaryPanelManager.Instance.SetupRegionSummaryPanel(regionModel, false);
+                RegionSummaryPanelManager.Instance.SetupRegionSummaryPanel(RegionModel, false);
                 SelectedRegionsController.Instance.SelectedRegionObjects.Add(this);
                 RegionSummaryPanelManager.Instance.SetupEnterButton(delegate
                 {
@@ -62,7 +62,7 @@ namespace Assets.Scripts.Controllers
             }
             else
             {
-                var isInitialTileNeighbour = regionModel.NeighbourRegions.FirstOrDefault(nr => nr.GetComponent<RegionController>().isInitial);
+                var isInitialTileNeighbour = RegionModel.NeighbourRegions.FirstOrDefault(nr => nr.GetComponent<RegionController>().isInitial);
 
                 if (isInitialTileNeighbour != null)
                 {
@@ -92,7 +92,7 @@ namespace Assets.Scripts.Controllers
             {
                 if (regionSelected) // DESELECT region
                 {
-                    if (regionModel.Visited)
+                    if (RegionModel.Visited)
                     {
                         spriteRenderer.sprite = RegionSprite;
                     }
@@ -107,13 +107,13 @@ namespace Assets.Scripts.Controllers
 
                     SelectedRegionsController.Instance.SelectedRegionObjects.Remove(this);
 
-                    if (regionModel.Visited)
+                    if (RegionModel.Visited)
                     {
-                        foreach (var neighbourRegion in regionModel.NeighbourRegions)
+                        foreach (var neighbourRegion in RegionModel.NeighbourRegions)
                         {
                             var neighbourRegionController = neighbourRegion.GetComponent<RegionController>();
 
-                            if (neighbourRegionController.regionModel.Visited)
+                            if (neighbourRegionController.RegionModel.Visited)
                             {
                                 neighbourRegion.SetActive(true);
                             }
@@ -138,11 +138,11 @@ namespace Assets.Scripts.Controllers
         {
             regionSelected = true;
 
-            if (regionModel.Visited)
+            if (RegionModel.Visited)
             {
                 spriteRenderer.sprite = RegionOutlineSprite;
 
-                RegionSummaryPanelManager.Instance.SetupRegionSummaryPanel(regionModel, false);
+                RegionSummaryPanelManager.Instance.SetupRegionSummaryPanel(RegionModel, false);
                 RegionSummaryPanelManager.Instance.SetupEnterButton(delegate
                 {
                     EnterRegion();
@@ -152,7 +152,7 @@ namespace Assets.Scripts.Controllers
             {
                 spriteRenderer.sprite = RegionFogOfWarOutlineSprite;
                 
-                RegionSummaryPanelManager.Instance.SetupRegionSummaryPanel(regionModel, true);
+                RegionSummaryPanelManager.Instance.SetupRegionSummaryPanel(RegionModel, true);
                 RegionSummaryPanelManager.Instance.SetupChartButton(delegate
                 {
                     ChartRegion();
@@ -164,13 +164,13 @@ namespace Assets.Scripts.Controllers
                 selectedRegion.DeselectRegion();
             }
 
-            if (regionModel.Visited)
+            if (RegionModel.Visited)
             {
-                foreach (var neighbourRegion in regionModel.NeighbourRegions)
+                foreach (var neighbourRegion in RegionModel.NeighbourRegions)
                 {
                     var neighbourRegionController = neighbourRegion.GetComponent<RegionController>();
 
-                    if (!neighbourRegionController.regionModel.Visited)
+                    if (!neighbourRegionController.RegionModel.Visited)
                     {
                         neighbourRegionController.PlaceFogOfWar();
                     }
@@ -181,9 +181,9 @@ namespace Assets.Scripts.Controllers
             {
                 var regionController = region.GetComponent<RegionController>();
 
-                if (!regionController.regionModel.Visited && !regionController.regionSelected)
+                if (!regionController.RegionModel.Visited && !regionController.regionSelected)
                 {
-                    if (regionModel.Visited && regionModel.NeighbourRegions.Contains(region))
+                    if (RegionModel.Visited && RegionModel.NeighbourRegions.Contains(region))
                     {
                         continue;
                     }
@@ -200,7 +200,7 @@ namespace Assets.Scripts.Controllers
 
         private void DeselectRegion()
         {
-            if (regionModel.Visited)
+            if (RegionModel.Visited)
             {
                 spriteRenderer.sprite = RegionSprite;
             }
@@ -226,23 +226,23 @@ namespace Assets.Scripts.Controllers
 
         private void ChartRegion()
         {
-            regionModel.Visited = true;
+            RegionModel.Visited = true;
             spriteRenderer.sprite = RegionOutlineSprite;
 
-            if (regionModel.Visited)
+            if (RegionModel.Visited)
             {
-                foreach (var neighbourRegion in regionModel.NeighbourRegions)
+                foreach (var neighbourRegion in RegionModel.NeighbourRegions)
                 {
                     var neighbourRegionController = neighbourRegion.GetComponent<RegionController>();
 
-                    if (!neighbourRegionController.regionModel.Visited)
+                    if (!neighbourRegionController.RegionModel.Visited)
                     {
                         neighbourRegionController.PlaceFogOfWar();
                     }
                 }
             }
 
-            RegionSummaryPanelManager.Instance.SetupRegionSummaryPanel(regionModel, false);
+            RegionSummaryPanelManager.Instance.SetupRegionSummaryPanel(RegionModel, false);
         }
     }
 }

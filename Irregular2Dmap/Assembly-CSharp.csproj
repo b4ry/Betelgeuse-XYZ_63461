@@ -74,7 +74,8 @@
     <Compile Include="Assets\Scripts\Enums\DepositTypeEnum.cs" />
     <Compile Include="Assets\Scripts\Enums\RarityEnum.cs" />
     <Compile Include="Assets\Scripts\Enums\RegionSizeEnum.cs" />
-    <Compile Include="Assets\Scripts\Managers\RegionSummaryPanelManager.cs" />
+    <Compile Include="Assets\Scripts\Managers\Region\TopPanelManager.cs" />
+    <Compile Include="Assets\Scripts\Managers\WorldMap\RegionSummaryPanelManager.cs" />
     <Compile Include="Assets\Scripts\Models\BiomeModel.cs" />
     <Compile Include="Assets\Scripts\Models\IModel.cs" />
     <Compile Include="Assets\Scripts\Models\OddityModel.cs" />

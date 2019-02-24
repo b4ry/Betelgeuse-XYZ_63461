@@ -6,7 +6,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
 
-namespace Assets.Scripts.Managers
+namespace Assets.Scripts.Managers.WorldMap
 {
     public class RegionSummaryPanelManager : MonoBehaviour
     {
@@ -143,6 +143,7 @@ namespace Assets.Scripts.Managers
             }
 
             chartButton.interactable = isLandUncharted;
+            enterButton.interactable = !isLandUncharted;
 
             if (!regionSummaryPanel.activeSelf)
             {
