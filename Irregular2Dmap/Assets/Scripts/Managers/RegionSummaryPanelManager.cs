@@ -103,11 +103,11 @@ namespace Assets.Scripts.Managers
             regionSummaryPanel.SetActive(active);
         }
 
-        public void SetupRegionSummaryPanel(RegionModel regionModel, bool exploreButtonInteractable)
+        public void SetupRegionSummaryPanel(RegionModel regionModel, bool isLandUncharted)
         {
             var regionName = regionModel.Name;
 
-            if (exploreButtonInteractable)
+            if (isLandUncharted)
             {
                 regionName = "Uncharted Land";
             }
@@ -119,13 +119,13 @@ namespace Assets.Scripts.Managers
 
             ClearPanel();
 
-            SetupImages(regionModel.Biomes, biomeImageObjects, exploreButtonInteractable, biomeImageSprites, biomes, biomeImagePrefab, false);
-            SetupImages(regionModel.Biomes, biomeImageObjects, exploreButtonInteractable, biomeImageSprites, allBiomesPanel, moreImagePrefab, true);
+            SetupImages(regionModel.Biomes, biomeImageObjects, isLandUncharted, biomeImageSprites, biomes, biomeImagePrefab, false);
+            SetupImages(regionModel.Biomes, biomeImageObjects, isLandUncharted, biomeImageSprites, allBiomesPanel, moreImagePrefab, true);
 
-            SetupImages(regionModel.Resources, resourceImageObjects, exploreButtonInteractable, resourceImageSprites, resources, resourceImagePrefab, false);
-            SetupImages(regionModel.Resources, resourceImageObjects, exploreButtonInteractable, resourceImageSprites, allResourcesPanel, moreImagePrefab, true);
+            SetupImages(regionModel.Resources, resourceImageObjects, isLandUncharted, resourceImageSprites, resources, resourceImagePrefab, false);
+            SetupImages(regionModel.Resources, resourceImageObjects, isLandUncharted, resourceImageSprites, allResourcesPanel, moreImagePrefab, true);
 
-            if (!exploreButtonInteractable)
+            if (!isLandUncharted)
             {
                 oddityImage.GetComponent<Image>().sprite = oddityImageSprites.FirstOrDefault(ois => ois.name.Equals(regionModel.Oddity.Name));
             }
@@ -134,7 +134,7 @@ namespace Assets.Scripts.Managers
                 oddityImage.GetComponent<Image>().sprite = oddityImageSprites.FirstOrDefault(ois => ois.name.Equals(UnknownString));
             }
 
-            chartButton.interactable = exploreButtonInteractable;
+            chartButton.interactable = isLandUncharted;
 
             if (!regionSummaryPanel.activeSelf)
             {
@@ -142,7 +142,7 @@ namespace Assets.Scripts.Managers
             }
         }
 
-        public void AddButtonListener(UnityAction action)
+        public void SetupChartButton(UnityAction action)
         {
             chartButton.onClick.RemoveAllListeners();
             chartButton.onClick.AddListener(action);

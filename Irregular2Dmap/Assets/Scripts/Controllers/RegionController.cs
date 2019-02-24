@@ -76,6 +76,11 @@ namespace Assets.Scripts.Controllers
             gameObject.AddComponent<PolygonCollider2D>();
         }
 
+        public void SetInitial()
+        {
+            isInitial = true;
+        }
+
         public void OnMouseDown()
         {
             if (!EventSystem.current.IsPointerOverGameObject())
@@ -139,7 +144,7 @@ namespace Assets.Scripts.Controllers
                 spriteRenderer.sprite = RegionFogOfWarOutlineSprite;
                 
                 RegionSummaryPanelManager.Instance.SetupRegionSummaryPanel(regionModel, true);
-                RegionSummaryPanelManager.Instance.AddButtonListener(delegate
+                RegionSummaryPanelManager.Instance.SetupChartButton(delegate
                 {
                     ChartRegion();
                 });
@@ -205,15 +210,9 @@ namespace Assets.Scripts.Controllers
             GetComponent<SpriteRenderer>().sprite = RegionFogOfWarSprite;
         }
 
-        public void SetInitial()
-        {
-            isInitial = true;
-        }
-
-        public void ChartRegion()
+        private void ChartRegion()
         {
             regionModel.Visited = true;
-
             spriteRenderer.sprite = RegionOutlineSprite;
 
             if (regionModel.Visited)
