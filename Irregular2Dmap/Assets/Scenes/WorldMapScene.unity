@@ -2898,6 +2898,8 @@ MonoBehaviour:
     type: 3}
   allResourcesImagePrefab: {fileID: 5878482826285400835, guid: ffc2e194dd1a0b844a757ec30dff5f17,
     type: 3}
+  allBiomesPanel: {fileID: 2094769411}
+  allResourcesPanel: {fileID: 1414909363}
 --- !u!114 &1690352914
 MonoBehaviour:
   m_ObjectHideFlags: 0
