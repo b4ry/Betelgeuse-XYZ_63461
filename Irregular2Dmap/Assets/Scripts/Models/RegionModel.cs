@@ -60,12 +60,27 @@ namespace Assets.Scripts.Models
                 foreach (var resourceModel in biomeModel.Resources)
                 {
                     var isResourceAvailable = IsResourceAvailable(biomeModel, resourceModel);
+                    resourceModel.DetermineDeposits(this, biomeModel);
 
-                    if (isResourceAvailable && !Resources.Any(rtd => rtd.Name == resourceModel.Name))
+                    var isResourceAlreadyAvailalbe = Resources.Any(rtd => rtd.Name == resourceModel.Name);
+
+                    if (isResourceAvailable && !isResourceAlreadyAvailalbe)
                     {
-                        var newResourceModel = new ResourceModel(resourceModel.Name, resourceModel.Rarity);
+                        var newResourceModel = new ResourceModel(resourceModel.Name, resourceModel.Rarity, resourceModel.DepositType, resourceModel.DepositAmount);
 
                         Resources.Add(newResourceModel);
+                    }
+                    else if(isResourceAlreadyAvailalbe)
+                    {
+                        Debug.Log($"Merging deposits for: {resourceModel.Name}; Adding {resourceModel.DepositAmount}");
+
+                        var resourceToMerge = Resources.FirstOrDefault(res => res.Name == resourceModel.Name);
+
+                        Debug.Log($"Before: {resourceToMerge.DepositAmount}");
+
+                        resourceToMerge.MergeDeposits(resourceModel);
+
+                        Debug.Log($"After: {resourceToMerge.DepositAmount}");
                     }
                 }
             }
@@ -109,8 +124,6 @@ namespace Assets.Scripts.Models
             Oddity = new OddityModel();
 
             var randomizedOddityValue = GameController.Instance.RNG.Next(0, 101);
-
-            Debug.Log(randomizedOddityValue);
 
             Oddity.Rating = (float)(randomizedOddityValue <= 25 ? 0.5 :
                 randomizedOddityValue <= 70 ? 1 :

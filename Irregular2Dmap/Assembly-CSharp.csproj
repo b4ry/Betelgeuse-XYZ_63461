@@ -69,6 +69,7 @@
     <Compile Include="Assets\Scripts\Controllers\RegionController.cs" />
     <Compile Include="Assets\Scripts\Controllers\SelectedRegionsController.cs" />
     <Compile Include="Assets\Scripts\Enums\BiomeEnum.cs" />
+    <Compile Include="Assets\Scripts\Enums\DepositTypeEnum.cs" />
     <Compile Include="Assets\Scripts\Enums\RarityEnum.cs" />
     <Compile Include="Assets\Scripts\Enums\RegionSizeEnum.cs" />
     <Compile Include="Assets\Scripts\Managers\RegionSummaryPanelManager.cs" />
