@@ -67,13 +67,13 @@
     <Compile Include="Assets\Scripts\Controllers\Panels\RegionSummaryPanel\PanelBiomeController.cs" />
     <Compile Include="Assets\Scripts\Controllers\Panels\RegionSummaryPanel\PanelController.cs" />
     <Compile Include="Assets\Scripts\Controllers\Panels\RegionSummaryPanel\PanelResourceController.cs" />
+    <Compile Include="Assets\Scripts\Controllers\Panels\TopPanelController.cs" />
     <Compile Include="Assets\Scripts\Controllers\RegionController.cs" />
     <Compile Include="Assets\Scripts\Controllers\SelectedRegionsController.cs" />
     <Compile Include="Assets\Scripts\Enums\BiomeEnum.cs" />
     <Compile Include="Assets\Scripts\Enums\DepositTypeEnum.cs" />
     <Compile Include="Assets\Scripts\Enums\RarityEnum.cs" />
     <Compile Include="Assets\Scripts\Enums\RegionSizeEnum.cs" />
-    <Compile Include="Assets\Scripts\Managers\Region\TopPanelManager.cs" />
     <Compile Include="Assets\Scripts\Managers\WorldMap\RegionSummaryPanelManager.cs" />
     <Compile Include="Assets\Scripts\Models\BiomeModel.cs" />
     <Compile Include="Assets\Scripts\Models\IModel.cs" />
@@ -81,6 +81,7 @@
     <Compile Include="Assets\Scripts\Models\RegionModel.cs" />
     <Compile Include="Assets\Scripts\Models\ResourceModel.cs" />
     <Compile Include="Assets\Scripts\Readers\FileReader.cs" />
+    <Compile Include="Assets\Scripts\Readers\SpritesReader.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark01.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark01_UGUI.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark02.cs" />

@@ -1,4 +1,4 @@
-﻿using Assets.Scripts.Managers.Region;
+﻿using Assets.Scripts.Controllers.Panels;
 using Assets.Scripts.Readers;
 using System.Collections.Generic;
 using System.Linq;
@@ -28,7 +28,7 @@ namespace Assets.Scripts.Controllers
         [SerializeField]
         private GameObject regionUICanvas;
         [SerializeField]
-        private GameObject UIManager;
+        private GameObject regionTopPanel;
 
         private List<Sprite> worldMapSprites = new List<Sprite>();
         private List<Sprite> regionNFOWSprites = new List<Sprite>();
@@ -105,7 +105,7 @@ namespace Assets.Scripts.Controllers
             worldMapUICanvas.SetActive(false);
 
             regionUICanvas.SetActive(true);
-            UIManager.GetComponent<TopPanelManager>().SetupTopPanel();
+            regionTopPanel.GetComponent<TopPanelController>().SetupTopPanel();
         }
 
         public void LoadWorldMapView()

@@ -1,4 +1,5 @@
 ﻿using Assets.Scripts.Models;
+using Assets.Scripts.Readers;
 using System.Collections.Generic;
 using System.Linq;
 using TMPro;
@@ -15,6 +16,8 @@ namespace Assets.Scripts.Managers.WorldMap
         private const int MaxNumberOfObjectsToDisplay = 6;
         private const string UnknownString = "Unknown";
 
+        [SerializeField]
+        private GameObject sprites;
         [SerializeField]
         private GameObject regionSummaryPanel;
 
@@ -83,10 +86,7 @@ namespace Assets.Scripts.Managers.WorldMap
         private List<GameObject> resourceImageObjects = new List<GameObject>();
         private List<GameObject> rarityImageObjects = new List<GameObject>();
 
-        private List<Sprite> biomeImageSprites = new List<Sprite>();
-        private List<Sprite> resourceImageSprites = new List<Sprite>();
-        private List<Sprite> rarityImageSprites = new List<Sprite>();
-        private List<Sprite> oddityImageSprites = new List<Sprite>();
+        private SpritesReader spritesReader;
 
         void Awake()
         {
@@ -106,11 +106,7 @@ namespace Assets.Scripts.Managers.WorldMap
             biomesTextMesh = biomes.GetComponent<TextMeshProUGUI>();
             resourcesTextMesh = resources.GetComponent<TextMeshProUGUI>();
 
-            //TODO: MOVE TO ASSET BUNDLES
-            biomeImageSprites = Resources.LoadAll<Sprite>("UI/WorldMapUICanvas/RegionSummaryPanel/BiomeSprites").ToList();
-            resourceImageSprites = Resources.LoadAll<Sprite>("UI/WorldMapUICanvas/RegionSummaryPanel/ResourceSprites").ToList();
-            rarityImageSprites = Resources.LoadAll<Sprite>("UI/WorldMapUICanvas/RegionSummaryPanel/RaritySprites").ToList();
-            oddityImageSprites = Resources.LoadAll<Sprite>("UI/WorldMapUICanvas/RegionSummaryPanel/OdditySprites").ToList();
+            spritesReader = sprites.GetComponent<SpritesReader>();
         }
 
         public void SetActive(bool active)
@@ -134,11 +130,11 @@ namespace Assets.Scripts.Managers.WorldMap
 
             ClearPanel();
 
-            SetupImages(regionModel.Biomes, biomeImageObjects, isLandUncharted, biomeImageSprites, biomes, biomeImagePrefab, false);
+            SetupImages(regionModel.Biomes, biomeImageObjects, isLandUncharted, spritesReader.BiomeImageSprites, biomes, biomeImagePrefab, false);
 
             if(regionModel.Biomes.Count > MaxNumberOfObjectsToDisplay && !isLandUncharted)
             {
-                SetupImages(regionModel.Biomes, biomeImageObjects, isLandUncharted, biomeImageSprites, allBiomes, allBiomesImagePrefab, true);
+                SetupImages(regionModel.Biomes, biomeImageObjects, isLandUncharted, spritesReader.BiomeImageSprites, allBiomes, allBiomesImagePrefab, true);
                 moreBiomesButton.gameObject.SetActive(true);
             }
             else
@@ -151,11 +147,11 @@ namespace Assets.Scripts.Managers.WorldMap
                 }
             }
 
-            SetupImages(regionModel.Resources, resourceImageObjects, isLandUncharted, resourceImageSprites, resources, resourceImagePrefab, false);
+            SetupImages(regionModel.Resources, resourceImageObjects, isLandUncharted, spritesReader.ResourceImageSprites, resources, resourceImagePrefab, false);
 
             if (regionModel.Resources.Count > MaxNumberOfObjectsToDisplay && !isLandUncharted)
             {
-                SetupImages(regionModel.Resources, resourceImageObjects, isLandUncharted, resourceImageSprites, allResources, allResourcesImagePrefab, true);
+                SetupImages(regionModel.Resources, resourceImageObjects, isLandUncharted, spritesReader.ResourceImageSprites, allResources, allResourcesImagePrefab, true);
                 moreResourcesButton.gameObject.SetActive(true);
             }
             else
@@ -170,11 +166,11 @@ namespace Assets.Scripts.Managers.WorldMap
 
             if (!isLandUncharted)
             {
-                oddityImage.GetComponent<Image>().sprite = oddityImageSprites.FirstOrDefault(ois => ois.name.Equals(regionModel.Oddity.Name));
+                oddityImage.GetComponent<Image>().sprite = spritesReader.OddityImageSprites.FirstOrDefault(ois => ois.name.Equals(regionModel.Oddity.Name));
             }
             else
             {
-                oddityImage.GetComponent<Image>().sprite = oddityImageSprites.FirstOrDefault(ois => ois.name.Equals(UnknownString));
+                oddityImage.GetComponent<Image>().sprite = spritesReader.OddityImageSprites.FirstOrDefault(ois => ois.name.Equals(UnknownString));
             }
 
             chartButton.interactable = isLandUncharted;
@@ -311,7 +307,7 @@ namespace Assets.Scripts.Managers.WorldMap
 
                     imageObjects.Add(objectToDisplay);
 
-                    rarityObject.GetComponent<Image>().sprite = rarityImageSprites.FirstOrDefault(bis => bis.name.Contains(objectsToDisplay[i].Rarity.ToString()));
+                    rarityObject.GetComponent<Image>().sprite = spritesReader.RarityImageSprites.FirstOrDefault(bis => bis.name.Contains(objectsToDisplay[i].Rarity.ToString()));
 
                     rarityImageObjects.Add(rarityObject);
                 }
@@ -321,7 +317,7 @@ namespace Assets.Scripts.Managers.WorldMap
 
                     objectToDisplay.transform.localPosition += new Vector3(i * 20 + 55, -1);
                     objectToDisplay.name = UnknownString;
-                    objectToDisplay.GetComponent<Image>().sprite = biomeImageSprites.FirstOrDefault(bis => bis.name == UnknownString);
+                    objectToDisplay.GetComponent<Image>().sprite = spritesReader.BiomeImageSprites.FirstOrDefault(bis => bis.name == UnknownString);
 
                     imageObjects.Add(objectToDisplay);
 
