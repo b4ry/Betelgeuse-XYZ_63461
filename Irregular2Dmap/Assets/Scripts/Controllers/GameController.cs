@@ -1,4 +1,4 @@
-﻿using Assets.Scripts.Controllers.Panels;
+﻿using Assets.Scripts.Controllers.Panels.RegionUIPanels;
 using Assets.Scripts.Readers;
 using System.Collections.Generic;
 using System.Linq;
