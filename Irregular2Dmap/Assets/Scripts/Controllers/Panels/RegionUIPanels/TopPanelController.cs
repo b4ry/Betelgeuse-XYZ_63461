@@ -21,8 +21,6 @@ namespace Assets.Scripts.Controllers.Panels.RegionUIPanels
         private TextMeshProUGUI nameTextMesh;
         private SpritesReader spritesReader;
 
-        private RegionModel regionModel;
-
         void Awake()
         {
             if (Instance == null)
@@ -40,15 +38,8 @@ namespace Assets.Scripts.Controllers.Panels.RegionUIPanels
             spritesReader = sprites.GetComponent<SpritesReader>();
         }
 
-        public  void GoBackToWorldMap()
+        public void SetupPanel(RegionModel regionModel)
         {
-            GameController.Instance.LoadWorldMapView();
-        }
-
-        public void SetupTopPanel()
-        {
-            regionModel = SelectedRegionsController.Instance.SelectedRegionObjects.FirstOrDefault().RegionModel;
-
             nameTextMesh.SetText(regionModel.Name);
             oddityImage.GetComponent<Image>().sprite = spritesReader.OddityImageSprites.FirstOrDefault(ois => ois.name.Equals(regionModel.Oddity.Name));
         }

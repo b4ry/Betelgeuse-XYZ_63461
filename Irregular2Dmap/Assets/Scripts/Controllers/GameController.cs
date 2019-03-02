@@ -105,7 +105,7 @@ namespace Assets.Scripts.Controllers
             worldMapUICanvas.SetActive(false);
 
             regionUICanvas.SetActive(true);
-            regionTopPanel.GetComponent<TopPanelController>().SetupTopPanel();
+            regionUICanvas.GetComponent<RegionUIController>().SetupView();
         }
 
         public void LoadWorldMapView()
