@@ -14,13 +14,19 @@ namespace Assets.Scripts.Models
         public RarityEnum Rarity { get; set; }
         public List<ResourceModel> Resources { get; set; }
 
-        public BiomeModel(string name, RarityEnum rarity, List<ResourceModel> resources)
+        public BiomeModel(string name, RarityEnum rarity, List<ResourceDefinitionModel> resources)
         {
             Name = name;
             Rarity = rarity;
             Area = 0;
             AreaPercentage = 0;
-            Resources = resources;
+
+            Resources = new List<ResourceModel>();
+
+            foreach(var resource in resources)
+            {
+                var newResourceModel = new ResourceModel
+            }
         }
     }
 }

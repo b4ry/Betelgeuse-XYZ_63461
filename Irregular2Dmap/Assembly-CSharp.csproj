@@ -78,10 +78,12 @@
     <Compile Include="Assets\Scripts\Enums\RarityEnum.cs" />
     <Compile Include="Assets\Scripts\Enums\RegionSizeEnum.cs" />
     <Compile Include="Assets\Scripts\Managers\WorldMap\RegionSummaryPanelManager.cs" />
+    <Compile Include="Assets\Scripts\Models\BiomeDefinitionModel.cs" />
     <Compile Include="Assets\Scripts\Models\BiomeModel.cs" />
     <Compile Include="Assets\Scripts\Models\IModel.cs" />
     <Compile Include="Assets\Scripts\Models\OddityModel.cs" />
     <Compile Include="Assets\Scripts\Models\RegionModel.cs" />
+    <Compile Include="Assets\Scripts\Models\ResourceDefinitionModel.cs" />
     <Compile Include="Assets\Scripts\Models\ResourceModel.cs" />
     <Compile Include="Assets\Scripts\Readers\FileReader.cs" />
     <Compile Include="Assets\Scripts\Readers\SpritesReader.cs" />

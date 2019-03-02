@@ -11,8 +11,8 @@ namespace Assets.Scripts.Controllers
     {
         public static DefinitionsController Instance = null;
 
-        public Dictionary<string, BiomeModel> BiomeDefinitions = new Dictionary<string, BiomeModel>();
-        public Dictionary<string, ResourceModel> ResourceDefinitions = new Dictionary<string, ResourceModel>();
+        public Dictionary<string, BiomeDefinitionModel> BiomeDefinitions = new Dictionary<string, BiomeDefinitionModel>();
+        public Dictionary<string, ResourceDefinitionModel> ResourceDefinitions = new Dictionary<string, ResourceDefinitionModel>();
 
         private void Awake()
         {
@@ -44,7 +44,7 @@ namespace Assets.Scripts.Controllers
 
                 Enum.TryParse(resourceDefinition[1], out RarityEnum resourceRarity);
 
-                var newResourceModel = new ResourceModel(resourceDefinition[0], resourceRarity);
+                var newResourceModel = new ResourceDefinitionModel(resourceDefinition[0], resourceRarity);
 
                 ResourceDefinitions.Add(resourceDefinition[0], newResourceModel);
             }
@@ -63,18 +63,18 @@ namespace Assets.Scripts.Controllers
 
                 Enum.TryParse(biomeDefinition[1], out RarityEnum biomeRarity);
 
-                var biomeResourceModels = new List<ResourceModel>();
+                var biomeResourceDefinitionModels = new List<ResourceDefinitionModel>();
                 var resources = biomeDefinition[2].Split(';');
                 
                 foreach(var resource in resources)
                 {
                     var resourceDefinition = ResourceDefinitions[resource];
-                    var newResourceModel = new ResourceModel(resourceDefinition.Name, resourceDefinition.Rarity);
+                    var newResourceDefinitionModel = new ResourceDefinitionModel(resourceDefinition.Name, resourceDefinition.RarityEnum);
 
-                    biomeResourceModels.Add(newResourceModel);
+                    biomeResourceDefinitionModels.Add(newResourceDefinitionModel);
                 }
 
-                var newBiomeModel = new BiomeModel(biomeDefinition[0], biomeRarity, biomeResourceModels);
+                var newBiomeModel = new BiomeDefinitionModel(biomeDefinition[0], biomeRarity, biomeResourceDefinitionModels);
 
                 BiomeDefinitions.Add(biomeDefinition[0], newBiomeModel);
             }
