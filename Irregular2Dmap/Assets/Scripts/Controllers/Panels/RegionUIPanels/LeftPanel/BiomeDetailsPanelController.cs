@@ -41,16 +41,23 @@ namespace Assets.Scripts.Controllers.Panels.RegionUIPanels.LeftPanel
             biomeNameTextMesh.text = biomeModel.Name;
             biomeRarityTextMesh.text = biomeModel.Rarity.ToString();
 
-            for(int i = 0; i < biomeModel.Resources.Count; i++)
+            int drawnResourcesNumber = 0;
+
+            foreach(var resourceModel in biomeModel.Resources)
             {
-                var resourceImage = Instantiate(ResourceImagePrefab, ResourceCollection.transform);
-                var resourceArea = Instantiate(ResourceAreaPrefab, ResourceCollection.transform);
+                if (resourceModel.IsAvailable)
+                {
+                    var resourceImage = Instantiate(ResourceImagePrefab, ResourceCollection.transform);
+                    var resourceArea = Instantiate(ResourceAreaPrefab, ResourceCollection.transform);
 
-                resourceImage.transform.localPosition += new Vector3(0, i * PrefabOffset);
-                resourceArea.transform.localPosition += new Vector3(0, i * PrefabOffset);
+                    resourceImage.transform.localPosition += new Vector3(0, drawnResourcesNumber * PrefabOffset);
+                    resourceArea.transform.localPosition += new Vector3(0, drawnResourcesNumber * PrefabOffset);
 
-                resourceImage.GetComponent<Image>().sprite = spritesReader.ResourceImageSprites.FirstOrDefault(ris => ris.name == biomeModel.Resources[i].Name);
-                resourceArea.GetComponent<TextMeshProUGUI>().text = biomeModel.Resources[i].DepositAmount.ToString(FloatFormat);
+                    resourceImage.GetComponent<Image>().sprite = spritesReader.ResourceImageSprites.FirstOrDefault(ris => ris.name == resourceModel.Name);
+                    resourceArea.GetComponent<TextMeshProUGUI>().text = resourceModel.DepositAmount.ToString(FloatFormat);
+
+                    ++drawnResourcesNumber;
+                }
             }
         }
     }
