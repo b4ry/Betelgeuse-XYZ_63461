@@ -13,6 +13,10 @@ namespace Assets.Scripts.Controllers.Panels.RegionUIPanels.LeftPanel
         public GameObject BiomeArea;
         public GameObject BiomeName;
         public GameObject BiomeRarity;
+        public GameObject ResourceCollection;
+
+        public GameObject ResourceImagePrefab;
+        public GameObject ResourceAreaPrefab;
 
         private TextMeshProUGUI biomeAreaTextMesh;
         private TextMeshProUGUI biomeNameTextMesh;
@@ -32,6 +36,18 @@ namespace Assets.Scripts.Controllers.Panels.RegionUIPanels.LeftPanel
             biomeAreaTextMesh.text = biomeModel.AreaPercentage.ToString("F") + "%";
             biomeNameTextMesh.text = biomeModel.Name;
             biomeRarityTextMesh.text = biomeModel.Rarity.ToString();
+
+            for(int i = 0; i < biomeModel.Resources.Count; i++)
+            {
+                var resourceImage = Instantiate(ResourceImagePrefab, ResourceCollection.transform);
+                var resourceArea = Instantiate(ResourceAreaPrefab, ResourceCollection.transform);
+
+                resourceImage.transform.localPosition += new Vector3(0, i * -20);
+                resourceArea.transform.localPosition += new Vector3(0, i * -20);
+
+                resourceImage.GetComponent<Image>().sprite = spritesReader.ResourceImageSprites.FirstOrDefault(ris => ris.name == biomeModel.Resources[i].Name);
+                resourceArea.GetComponent<TextMeshProUGUI>().text = biomeModel.Resources[i].DepositAmount.ToString("F");
+            }
         }
     }
 }

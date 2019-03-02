@@ -70,18 +70,18 @@ namespace Assets.Scripts.Models
 
                         Resources.Add(newResourceModel);
                     }
-                    else if(isResourceAlreadyAvailalbe)
-                    {
-                        Debug.Log($"Merging deposits for: {resourceModel.Name}; Adding {resourceModel.DepositAmount}");
+                    //else if(isResourceAlreadyAvailalbe)
+                    //{
+                    //    Debug.Log($"Merging deposits for: {resourceModel.Name}; Adding {resourceModel.DepositAmount}");
 
-                        var resourceToMerge = Resources.FirstOrDefault(res => res.Name == resourceModel.Name);
+                    //    var resourceToMerge = Resources.FirstOrDefault(res => res.Name == resourceModel.Name);
 
-                        Debug.Log($"Before: {resourceToMerge.DepositAmount}");
+                    //    Debug.Log($"Before: {resourceToMerge.DepositAmount}");
 
-                        resourceToMerge.MergeDeposits(resourceModel);
+                    //    resourceToMerge.MergeDeposits(resourceModel);
 
-                        Debug.Log($"After: {resourceToMerge.DepositAmount}");
-                    }
+                    //    Debug.Log($"After: {resourceToMerge.DepositAmount}");
+                    //}
                 }
             }
         }
