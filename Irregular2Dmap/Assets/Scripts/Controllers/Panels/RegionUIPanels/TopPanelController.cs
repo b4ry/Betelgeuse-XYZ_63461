@@ -18,8 +18,7 @@ namespace Assets.Scripts.Controllers.Panels.RegionUIPanels
         [SerializeField]
         private GameObject oddityImage;
 
-        private TextMeshProUGUI nameTextMesh;
-        private SpritesReader spritesReader;
+        private TextMeshProUGUI regionNameTextMesh;
 
         void Awake()
         {
@@ -34,13 +33,12 @@ namespace Assets.Scripts.Controllers.Panels.RegionUIPanels
 
             DontDestroyOnLoad(gameObject);
 
-            nameTextMesh = regionName.GetComponent<TextMeshProUGUI>();
-            spritesReader = sprites.GetComponent<SpritesReader>();
+            regionNameTextMesh = regionName.GetComponent<TextMeshProUGUI>();
         }
 
-        public void SetupPanel(RegionModel regionModel)
+        public void SetupPanel(RegionModel regionModel, SpritesReader spritesReader)
         {
-            nameTextMesh.SetText(regionModel.Name);
+            regionNameTextMesh.SetText(regionModel.Name);
             oddityImage.GetComponent<Image>().sprite = spritesReader.OddityImageSprites.FirstOrDefault(ois => ois.name.Equals(regionModel.Oddity.Name));
         }
     }

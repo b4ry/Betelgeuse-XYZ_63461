@@ -8,6 +8,7 @@ namespace Assets.Scripts.Models
         //public BiomeEnum Biome { get; set; }
 
         public int Area { get; set; }
+        public float AreaPercentage { get; set; }
         public string Name { get; set; }
 
         public RarityEnum Rarity { get; set; }
@@ -18,6 +19,7 @@ namespace Assets.Scripts.Models
             Name = name;
             Rarity = rarity;
             Area = 0;
+            AreaPercentage = 0;
             Resources = resources;
         }
     }

@@ -117,6 +117,11 @@ namespace Assets.Scripts.Models
             int roundLeftover = maxSize - totalBiomesSize;
 
             Biomes[GameController.Instance.RNG.Next(0, Biomes.Count)].Area += roundLeftover;
+
+            foreach(var biome in Biomes)
+            {
+                biome.AreaPercentage = (float)biome.Area / (int)Size * 100;
+            }
         }
 
         private void RandomizeOddityRating()
