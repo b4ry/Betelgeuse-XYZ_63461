@@ -25,7 +25,9 @@ namespace Assets.Scripts.Models
 
             foreach(var resource in resources)
             {
-                var newResourceModel = new ResourceModel
+                var newResourceModel = new ResourceModel(resource.Name, resource.RarityEnum);
+
+                Resources.Add(newResourceModel);
             }
         }
     }

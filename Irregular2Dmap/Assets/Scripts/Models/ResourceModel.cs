@@ -78,6 +78,7 @@ namespace Assets.Scripts.Models
         private void CalculateDepositAmount(BiomeModel biomeModel)
         {
             DepositAmount = (int)DepositType * biomeModel.Area * (float)(GameController.Instance.RNG.NextDouble() * (1.1 - 0.9) + 0.9) / (int)Rarity;
+            DepositAmount /= 10;
         }
 
         private bool Equals(ResourceModel resourceModel)
