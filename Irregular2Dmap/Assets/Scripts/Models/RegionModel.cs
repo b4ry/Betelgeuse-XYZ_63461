@@ -8,14 +8,6 @@ namespace Assets.Scripts.Models
 {
     public class RegionModel
     {
-        private readonly Dictionary<RarityEnum, int> rarityOccurenceThresholds = new Dictionary<RarityEnum, int>()
-        {
-            { RarityEnum.Common, 0 },
-            { RarityEnum.Uncommon, 20 },
-            { RarityEnum.Rare, 40 },
-            { RarityEnum.Legendary, 60 }
-        };
-
         public string Name { get; set; }
         public RegionSizeEnum Size { get; set; }
         public List<BiomeModel> Biomes { get; set; }
@@ -59,12 +51,12 @@ namespace Assets.Scripts.Models
             {
                 foreach (var resourceModel in biomeModel.Resources)
                 {
-                    var isResourceAvailable = IsResourceAvailable(biomeModel, resourceModel);
+                    resourceModel.DetermineAvailability(biomeModel, this);
                     resourceModel.DetermineDeposits(this, biomeModel);
 
-                    var isResourceAlreadyAvailalbe = Resources.Any(rtd => rtd.Name == resourceModel.Name);
+                    var wasResourceAlreadyCountedIn = Resources.Any(rtd => rtd.Name == resourceModel.Name);
 
-                    if (isResourceAvailable && !isResourceAlreadyAvailalbe)
+                    if (resourceModel.IsAvailable && !wasResourceAlreadyCountedIn)
                     {
                         var newResourceModel = new ResourceModel(resourceModel.Name, resourceModel.Rarity, resourceModel.DepositType, resourceModel.DepositAmount);
 
@@ -84,13 +76,6 @@ namespace Assets.Scripts.Models
                     //}
                 }
             }
-        }
-
-        private bool IsResourceAvailable(BiomeModel biomeModel, ResourceModel resourceModel)
-        {
-            var occurenceRating = biomeModel.Area * 2 * (int)biomeModel.Rarity * (GameController.Instance.RNG.NextDouble() + 0.2) * Oddity.Rating / (int)resourceModel.Rarity;
-
-            return occurenceRating >= rarityOccurenceThresholds[resourceModel.Rarity];
         }
 
         private void DistributeAreaAmongBiomes()

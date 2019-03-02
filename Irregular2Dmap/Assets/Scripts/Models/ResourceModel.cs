@@ -1,15 +1,25 @@
 ﻿using Assets.Scripts.Controllers;
 using Assets.Scripts.Enums;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Assets.Scripts.Models
 {
     public class ResourceModel : IModel
     {
+        private readonly Dictionary<RarityEnum, int> rarityOccurenceThresholds = new Dictionary<RarityEnum, int>()
+        {
+            { RarityEnum.Common, 0 },
+            { RarityEnum.Uncommon, 20 },
+            { RarityEnum.Rare, 40 },
+            { RarityEnum.Legendary, 60 }
+        };
+
         public string Name { get; set; }
         public RarityEnum Rarity { get; set; }
         public DepositTypeEnum DepositType { get; set; }
         public float DepositAmount { get; set; }
+        public bool IsAvailable { get; set; }
 
         public ResourceModel(string name, RarityEnum rarityEnum, DepositTypeEnum depositTypeEnum = DepositTypeEnum.Tiny, float depositAmount = 0)
         {
@@ -17,6 +27,7 @@ namespace Assets.Scripts.Models
             Rarity = rarityEnum;
             DepositType = depositTypeEnum;
             DepositAmount = depositAmount;
+            IsAvailable = false;
         }
 
         public override bool Equals(object obj)
@@ -29,6 +40,12 @@ namespace Assets.Scripts.Models
         public override int GetHashCode()
         {
             return Name.GetHashCode() ^ Rarity.GetHashCode();
+        }
+
+        public void DetermineAvailability(BiomeModel biomeModel, RegionModel regionModel)
+        {
+            var occurenceRating = biomeModel.Area * 2 * (int)biomeModel.Rarity * (GameController.Instance.RNG.NextDouble() + 0.2) * regionModel.Oddity.Rating / (int)Rarity;
+            IsAvailable = occurenceRating >= rarityOccurenceThresholds[Rarity];
         }
 
         public void DetermineDeposits(RegionModel regionModel, BiomeModel biomeModel)

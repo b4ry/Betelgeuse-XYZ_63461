@@ -14,7 +14,19 @@ namespace Assets.Scripts.Managers.WorldMap
         public static RegionSummaryPanelManager Instance = null;
 
         private const int MaxNumberOfObjectsToDisplay = 6;
+        private const int ImageOffset = 20;
+        private const int UnknownImageOffset = 55;
+        private const int RarityDisplayAllXOffset = 18;
+        private const int ImageDisplayAllXOffset = 10;
+        private const int RarityXOffset = 53;
+        private const int ImageXOffset = 55;
+
         private const string UnknownString = "Unknown";
+        private const string UnchartedLandString = "Uncharted Land";
+        private const string SizeString = "Size";
+        private const string BiomesString = "Biomes";
+        private const string ResourcesString = "Resources";
+        private const string ColonDelimiterString = ": ";
 
         [SerializeField]
         private GameObject sprites;
@@ -120,13 +132,13 @@ namespace Assets.Scripts.Managers.WorldMap
 
             if (isLandUncharted)
             {
-                regionName = "Uncharted Land";
+                regionName = UnchartedLandString;
             }
 
             nameTextMesh.SetText(regionName);
-            sizeTextMesh.SetText("Size: " + regionModel.Size);
-            biomesTextMesh.SetText("Biomes: ");
-            resourcesTextMesh.SetText("Resources: ");
+            sizeTextMesh.SetText(SizeString + ColonDelimiterString + regionModel.Size);
+            biomesTextMesh.SetText(BiomesString + ColonDelimiterString);
+            resourcesTextMesh.SetText(ResourcesString + ColonDelimiterString);
 
             ClearPanel();
 
@@ -283,14 +295,15 @@ namespace Assets.Scripts.Managers.WorldMap
                 {
                     if(displayAll)
                     {
-                        rarityXPosition = i * 20 + 18;
-                        xPosition = i * 20 + 10;
+                        rarityXPosition = i * ImageOffset + RarityDisplayAllXOffset;
+                        xPosition = i * ImageOffset + ImageDisplayAllXOffset;
                         yPosition = 0;
                         rarityYPosition = 0;
-                    } else
+                    }
+                    else
                     {
-                        rarityXPosition = i * 20 + 53;
-                        xPosition = i * 20 + 55;
+                        rarityXPosition = i * ImageOffset + RarityXOffset;
+                        xPosition = i * ImageOffset + ImageXOffset;
                         yPosition = -1;
                         rarityYPosition = -1.0;
                     }
@@ -315,7 +328,7 @@ namespace Assets.Scripts.Managers.WorldMap
                 {
                     var objectToDisplay = Instantiate(objectPrefab, parentObject.transform);
 
-                    objectToDisplay.transform.localPosition += new Vector3(i * 20 + 55, -1);
+                    objectToDisplay.transform.localPosition += new Vector3(i * ImageOffset + UnknownImageOffset, -1);
                     objectToDisplay.name = UnknownString;
                     objectToDisplay.GetComponent<Image>().sprite = spritesReader.BiomeImageSprites.FirstOrDefault(bis => bis.name == UnknownString);
 
