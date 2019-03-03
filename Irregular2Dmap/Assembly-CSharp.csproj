@@ -69,6 +69,7 @@
     <Compile Include="Assets\Scripts\Controllers\Panels\RegionSummaryPanel\PanelResourceController.cs" />
     <Compile Include="Assets\Scripts\Controllers\Panels\RegionUIPanels\ButtonsPanelController.cs" />
     <Compile Include="Assets\Scripts\Controllers\Panels\RegionUIPanels\ExplorationPanel\BiomeButtonController.cs" />
+    <Compile Include="Assets\Scripts\Controllers\Panels\RegionUIPanels\ExplorationPanel\ExplorationGameAreaPanelController.cs" />
     <Compile Include="Assets\Scripts\Controllers\Panels\RegionUIPanels\ExplorationPanel\ExplorationPanelController.cs" />
     <Compile Include="Assets\Scripts\Controllers\Panels\RegionUIPanels\LeftPanel\BiomeDetailsPanelController.cs" />
     <Compile Include="Assets\Scripts\Controllers\Panels\RegionUIPanels\LeftPanel\LeftPanelController.cs" />
