@@ -12,7 +12,7 @@ namespace Assets.Scripts.Controllers
 
         private SpritesReader spritesReader;
 
-        public void Awake()
+        void Awake()
         {
             spritesReader = Sprites.GetComponent<SpritesReader>();
         }
