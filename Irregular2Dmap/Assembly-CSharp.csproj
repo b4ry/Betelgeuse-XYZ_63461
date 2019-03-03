@@ -69,6 +69,8 @@
     <Compile Include="Assets\Scripts\Controllers\Panels\RegionSummaryPanel\PanelResourceController.cs" />
     <Compile Include="Assets\Scripts\Controllers\Panels\RegionUIPanels\LeftPanel\BiomeDetailsPanelController.cs" />
     <Compile Include="Assets\Scripts\Controllers\Panels\RegionUIPanels\LeftPanel\LeftPanelController.cs" />
+    <Compile Include="Assets\Scripts\Controllers\Panels\RegionUIPanels\LeftPanel\ResourceDetailsPanelController.cs" />
+    <Compile Include="Assets\Scripts\Controllers\Panels\RegionUIPanels\LeftPanel\ResourcesSlidebarController.cs" />
     <Compile Include="Assets\Scripts\Controllers\Panels\RegionUIPanels\TopPanelController.cs" />
     <Compile Include="Assets\Scripts\Controllers\RegionController.cs" />
     <Compile Include="Assets\Scripts\Controllers\RegionUIController.cs" />

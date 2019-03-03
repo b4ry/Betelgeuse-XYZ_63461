@@ -9,8 +9,6 @@ namespace Assets.Scripts.Controllers.Panels.RegionUIPanels
 {
     public class TopPanelController : MonoBehaviour
     {
-        public static TopPanelController Instance = null;
-
         [SerializeField]
         private GameObject sprites;
         [SerializeField]
@@ -22,17 +20,6 @@ namespace Assets.Scripts.Controllers.Panels.RegionUIPanels
 
         void Awake()
         {
-            if (Instance == null)
-            {
-                Instance = this;
-            }
-            else if (Instance != this)
-            {
-                Destroy(gameObject);
-            }
-
-            DontDestroyOnLoad(gameObject);
-
             regionNameTextMesh = regionName.GetComponent<TextMeshProUGUI>();
         }
 

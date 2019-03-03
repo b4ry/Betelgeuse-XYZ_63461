@@ -9,7 +9,7 @@ namespace Assets.Scripts.Controllers.Panels.RegionUIPanels.LeftPanel
 {
     public class BiomeDetailsPanelController : MonoBehaviour
     {
-        private const int PrefabOffset = -20;
+        private const int PrefabOffset = -100;
         private const string FloatFormat = "F";
         private const string PercentageSymbol = "%";
 
@@ -19,8 +19,7 @@ namespace Assets.Scripts.Controllers.Panels.RegionUIPanels.LeftPanel
         public GameObject BiomeRarity;
         public GameObject ResourceCollection;
 
-        public GameObject ResourceImagePrefab;
-        public GameObject ResourceAreaPrefab;
+        public GameObject ResourcePrefab;
 
         private TextMeshProUGUI biomeAreaTextMesh;
         private TextMeshProUGUI biomeNameTextMesh;
@@ -47,16 +46,15 @@ namespace Assets.Scripts.Controllers.Panels.RegionUIPanels.LeftPanel
             {
                 if (resourceModel.IsAvailable)
                 {
-                    var resourceImage = Instantiate(ResourceImagePrefab, ResourceCollection.transform);
-                    var resourceArea = Instantiate(ResourceAreaPrefab, ResourceCollection.transform);
+                    var resource = Instantiate(ResourcePrefab, ResourceCollection.transform);
+                    var resourceDetailsPanelController = resource.GetComponent<ResourceDetailsPanelController>();
 
-                    resourceImage.transform.localPosition += new Vector3(0, drawnResourcesNumber * PrefabOffset);
-                    resourceArea.transform.localPosition += new Vector3(0, drawnResourcesNumber * PrefabOffset);
-
-                    resourceImage.GetComponent<Image>().sprite = spritesReader.ResourceImageSprites.FirstOrDefault(ris => ris.name == resourceModel.Name);
-                    resourceArea.GetComponent<TextMeshProUGUI>().text = resourceModel.DepositAmount.ToString(FloatFormat);
+                    resourceDetailsPanelController.SetupPanel(resourceModel, spritesReader);
+                    resource.transform.localPosition += new Vector3(0, drawnResourcesNumber * PrefabOffset);
 
                     ++drawnResourcesNumber;
+
+                    ResourceCollection.GetComponent<RectTransform>().sizeDelta = new Vector2(0, drawnResourcesNumber * 100);
                 }
             }
         }

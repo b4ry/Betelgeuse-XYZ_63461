@@ -12,9 +12,6 @@ namespace Assets.Scripts.Controllers.Panels.RegionUIPanels.LeftPanel
 
         private List<GameObject> biomeDetailsObjects = new List<GameObject>();
 
-        //[SerializeField]
-        //private GameObject resourcesCollection;
-
         public void SetupPanel(RegionModel regionModel, SpritesReader spritesReader)
         {
             if (biomeDetailsObjects.Count > 0)
@@ -44,13 +41,5 @@ namespace Assets.Scripts.Controllers.Panels.RegionUIPanels.LeftPanel
 
             Biomes.GetComponent<RectTransform>().sizeDelta = biomesPanelSize;
         }
-
-        //public void HandleResourcesScrollbar(float newValue)
-        //{
-        //    var position = resourcesCollection.transform.localPosition;
-
-        //    position.y = newValue;
-        //    resourcesCollection.transform.localPosition = position;
-        //}
     }
 }
