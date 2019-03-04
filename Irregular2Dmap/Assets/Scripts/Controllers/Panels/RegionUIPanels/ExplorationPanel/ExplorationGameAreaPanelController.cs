@@ -45,18 +45,20 @@ namespace Assets.Scripts.Controllers.Panels.RegionUIPanels.ExplorationPanel
 
             while(drawnTilesNumber < tilesToDrawNumber)
             {
-                var xPosition = drawnTilesNumber % tilesNumber * TileSideSize;
+                var residual = drawnTilesNumber % tilesNumber;
+                var xPosition = residual * TileSideSize;
 
-                if(drawnTilesNumber % tilesNumber != 0)
+                if(residual != 0)
                 {
-                    xPosition += drawnTilesNumber % tilesNumber * TileOffset;
+                    xPosition += residual * TileOffset;
                 }
 
+                var fullResidual = drawnTilesNumber / tilesNumber;
                 var yPosition = 0;
 
-                if(drawnTilesNumber / tilesNumber > 0)
+                if(fullResidual > 0)
                 {
-                    yPosition = drawnTilesNumber / tilesNumber * TileSideSize + drawnTilesNumber / tilesNumber * TileOffset;
+                    yPosition = fullResidual * TileSideSize + fullResidual * TileOffset;
                 }
 
                 var explorationGameAreaTile = Instantiate(ExplorationGameAreaTilePrefab, gameObject.transform);
