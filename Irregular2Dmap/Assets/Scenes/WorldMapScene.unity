@@ -1676,6 +1676,7 @@ MonoBehaviour:
   BiomesPanel: {fileID: 873184459}
   BiomeButtonPrefab: {fileID: 7937695472416373857, guid: a1084b2f0de5e554195ffc713b8e5491,
     type: 3}
+  ExplorationGameAreaPanel: {fileID: 2116586860}
 --- !u!1 &679892719
 GameObject:
   m_ObjectHideFlags: 0
@@ -5166,7 +5167,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2116586861
 RectTransform:
   m_ObjectHideFlags: 0

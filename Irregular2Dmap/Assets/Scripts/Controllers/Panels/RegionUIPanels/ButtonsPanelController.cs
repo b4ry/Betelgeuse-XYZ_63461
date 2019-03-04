@@ -8,21 +8,27 @@ namespace Assets.Scripts.Controllers.Panels.RegionUIPanels
         public GameObject SeparationPanel;
         public GameObject ExplorationPanel;
 
+        private ExplorationPanelController explorationPanelController;
+
+        void Awake()
+        {
+            explorationPanelController = ExplorationPanel.GetComponent<ExplorationPanelController>();
+        }
+
         public void DisplayExplorationPanel()
         {
             SeparationPanel.SetActive(true);
             ExplorationPanel.SetActive(true);
 
-            if(ExplorationPanel.activeSelf)
-            {
-                ExplorationPanel.GetComponent<ExplorationPanelController>().SetupPanel();
-            }
+            explorationPanelController.SetupPanel();
         }
 
         public void CloseExplorationPanel()
         {
             SeparationPanel.SetActive(false);
             ExplorationPanel.SetActive(false);
+
+            explorationPanelController.ClearPanel();
         }
     }
 }

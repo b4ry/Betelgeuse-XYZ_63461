@@ -25,15 +25,10 @@ namespace Assets.Scripts.Controllers.Panels.RegionUIPanels.ExplorationPanel
             }
         }
 
-        void Start()
-        {
-            var regionModel = SelectedRegionsController.Instance.SelectedRegionObjects.FirstOrDefault().RegionModel;
-
-            SetupPanel(regionModel.Biomes[0]);
-        }
-
         public void SetupPanel(BiomeModel biomeModel)
         {
+            gameObject.SetActive(true);
+
             var tilesNumber = ranges.FirstOrDefault(r => r.Key >= biomeModel.Area).Value;
 
             var width = (tilesNumber * TileSideSize + (tilesNumber - 1) * TileOffset + TileXPadding);
