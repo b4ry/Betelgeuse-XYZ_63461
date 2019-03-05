@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Assets.Scripts.Models
 {
-    public class ResourceModel : IModel
+    public class ResourceModel : IFoundableObjectModel
     {
         private readonly Dictionary<RarityEnum, int> rarityOccurenceThresholds = new Dictionary<RarityEnum, int>()
         {

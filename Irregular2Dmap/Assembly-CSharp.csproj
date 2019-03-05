@@ -8,7 +8,8 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <RootNamespace></RootNamespace>
+    <RootNamespace>
+    </RootNamespace>
     <ProjectGuid>{4763622C-E56F-0FF8-AA5F-97676D00AFE2}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
@@ -81,12 +82,16 @@
     <Compile Include="Assets\Scripts\Controllers\SelectedRegionsController.cs" />
     <Compile Include="Assets\Scripts\Enums\BiomeEnum.cs" />
     <Compile Include="Assets\Scripts\Enums\DepositTypeEnum.cs" />
+    <Compile Include="Assets\Scripts\Enums\ProcessingDifficultyEnum.cs" />
     <Compile Include="Assets\Scripts\Enums\RarityEnum.cs" />
     <Compile Include="Assets\Scripts\Enums\RegionSizeEnum.cs" />
+    <Compile Include="Assets\Scripts\Enums\ThicknessEnum.cs" />
+    <Compile Include="Assets\Scripts\Enums\TileLayerTypeEnum.cs" />
     <Compile Include="Assets\Scripts\Managers\WorldMap\RegionSummaryPanelManager.cs" />
     <Compile Include="Assets\Scripts\Models\BiomeDefinitionModel.cs" />
     <Compile Include="Assets\Scripts\Models\BiomeModel.cs" />
-    <Compile Include="Assets\Scripts\Models\IModel.cs" />
+    <Compile Include="Assets\Scripts\Models\ExplorationGameTileModel.cs" />
+    <Compile Include="Assets\Scripts\Models\IFoundableObjectModel.cs" />
     <Compile Include="Assets\Scripts\Models\OddityModel.cs" />
     <Compile Include="Assets\Scripts\Models\RegionModel.cs" />
     <Compile Include="Assets\Scripts\Models\ResourceDefinitionModel.cs" />

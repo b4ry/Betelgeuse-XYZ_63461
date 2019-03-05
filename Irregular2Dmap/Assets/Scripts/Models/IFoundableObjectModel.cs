@@ -2,7 +2,7 @@
 
 namespace Assets.Scripts.Models
 {
-    public interface IModel
+    public interface IFoundableObjectModel
     {
         string Name { get; set; }
         RarityEnum Rarity { get; set; }

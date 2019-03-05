@@ -277,7 +277,7 @@ namespace Assets.Scripts.Managers.WorldMap
             List<Sprite> imageSprites, 
             GameObject parentObject, 
             GameObject objectPrefab,
-            bool displayAll) where T : IModel
+            bool displayAll) where T : IFoundableObjectModel
         {
             var objectsNumber = 
                 displayAll 
