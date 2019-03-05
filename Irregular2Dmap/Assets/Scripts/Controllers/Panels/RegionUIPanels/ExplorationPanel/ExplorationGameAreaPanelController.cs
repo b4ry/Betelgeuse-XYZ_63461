@@ -65,6 +65,13 @@ namespace Assets.Scripts.Controllers.Panels.RegionUIPanels.ExplorationPanel
                 explorationGameAreaTile.transform.localPosition += new Vector3(xPosition, yPosition * (-1));
                 tiles.Add(explorationGameAreaTile);
 
+                //TODO: DUMMY!
+                var tilesGeneratedNumber = GameController.Instance.RNG.Next(1, 11);
+
+                biomeModel.Tiles.Add(new List<ExplorationGameTileModel>(tilesGeneratedNumber));
+
+                explorationGameAreaTile.GetComponent<ExplorationGameTileController>().SetupTile(biomeModel.Tiles[drawnTilesNumber]);
+
                 drawnTilesNumber++;
             }
         }

@@ -32,6 +32,8 @@ namespace Assets.Scripts.Models
 
                 Resources.Add(newResourceModel);
             }
+
+            Tiles = new List<List<ExplorationGameTileModel>>();
         }
     }
 }
