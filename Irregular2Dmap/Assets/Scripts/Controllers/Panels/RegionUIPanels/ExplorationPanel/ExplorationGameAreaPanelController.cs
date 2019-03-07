@@ -89,17 +89,14 @@ namespace Assets.Scripts.Controllers.Panels.RegionUIPanels.ExplorationPanel
                     BuildLayers(biomeModel, drawnTilesNumber);
                 }
 
-                explorationGameAreaTile.GetComponent<ExplorationGameTileController>().SetupTile(biomeModel.Tiles[drawnTilesNumber], SelectedTile, drawnTilesNumber, Dig);
+                var holeSprite = spritesReader.LayersImageSprites.FirstOrDefault(lis => lis.name.Contains("Hole"));
+                explorationGameAreaTile.GetComponent<ExplorationGameTileController>().SetupTile(biomeModel.Tiles[drawnTilesNumber], SelectedTile, Dig, holeSprite);
                 drawnTilesNumber++;
             }
             
             biomeModel.TilesInitialized = true;
 
             SelectedTile.transform.SetAsLastSibling();
-        }
-
-        public void DigTile()
-        {
         }
 
         private void BuildLayers(BiomeModel biomeModel, int currentTileNumber)

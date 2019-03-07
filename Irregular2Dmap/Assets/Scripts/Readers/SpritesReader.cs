@@ -16,17 +16,6 @@ namespace Assets.Scripts.Readers
 
         void Awake()
         {
-            //if (Instance == null)
-            //{
-            //    Instance = this;
-            //}
-            //else if (Instance != this)
-            //{
-            //    Destroy(gameObject);
-            //}
-
-            //DontDestroyOnLoad(gameObject);
-
             //TODO: MOVE TO ASSET BUNDLES
             BiomeImageSprites = Resources.LoadAll<Sprite>("UI/WorldMapUICanvas/RegionSummaryPanel/BiomeSprites").ToList();
             ResourceImageSprites = Resources.LoadAll<Sprite>("UI/WorldMapUICanvas/RegionSummaryPanel/ResourceSprites").ToList();

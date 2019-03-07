@@ -10,28 +10,32 @@ namespace Assets.Scripts.Controllers.Panels.RegionUIPanels.ExplorationPanel
     {
         private List<ExplorationGameLayerModel> layers;
         private GameObject selectImage;
-        private int index;
         private GameObject dig;
+        private Image image;
+        private Sprite holeSprite;
 
-        public void SetupTile(List<ExplorationGameLayerModel> tileLayers, GameObject select, int tileNumber, GameObject dig)
+        public void SetupTile(List<ExplorationGameLayerModel> tileLayers, GameObject select, GameObject dig, Sprite holeSprite)
         {
             layers = tileLayers;
             selectImage = select;
-            index = tileNumber;
             this.dig = dig;
+            this.holeSprite = holeSprite;
 
-            gameObject.GetComponent<Image>().sprite = layers.FirstOrDefault().LayerSprite;
+            image = gameObject.GetComponent<Image>();
+
+            if (layers.Count > 0)
+            {
+                image.sprite = layers.FirstOrDefault().LayerSprite;
+            }
+            else
+            {
+                image.sprite = holeSprite;
+            }
+            
         }
 
         public void OnMouseDown()
         {
-            Debug.Log("---------------------------------------------------------------------");
-            Debug.Log("Index: " + index);
-            Debug.Log("Layer type: " + layers.FirstOrDefault().TileLayerModel.Name);
-            Debug.Log("Layers number: " + layers.Count);
-
-            gameObject.name += index;
-
             DetermineSelection();
         }
 
@@ -48,7 +52,11 @@ namespace Assets.Scripts.Controllers.Panels.RegionUIPanels.ExplorationPanel
             if (selectXPosition != newSelectXPosition || selectYPosition != newSelectYPosition)
             {
                 selectImage.SetActive(true);
-                button.interactable = true;
+
+                if (layers.Count > 0)
+                {
+                    SetupDigButton(button);
+                }
             }
             else if(selectXPosition == newSelectXPosition && selectYPosition == newSelectYPosition)
             {
@@ -57,7 +65,11 @@ namespace Assets.Scripts.Controllers.Panels.RegionUIPanels.ExplorationPanel
                 if (!isActive)
                 {
                     selectImage.SetActive(true);
-                    button.interactable = true;
+
+                    if (layers.Count > 0)
+                    {
+                        SetupDigButton(button);
+                    }
                 }
                 else
                 {
@@ -66,7 +78,47 @@ namespace Assets.Scripts.Controllers.Panels.RegionUIPanels.ExplorationPanel
                 }
             }
 
+            if(layers.Count == 0)
+            {
+                button.interactable = false;
+            }
+
             selectImage.transform.localPosition = gameObject.transform.localPosition;
+        }
+
+        private void SetupDigButton(Button button)
+        {
+            button.interactable = true;
+
+            button.onClick.RemoveAllListeners();
+            button.onClick.AddListener(delegate
+            {
+                DigTile();
+            });
+        }
+
+        private void DigTile()
+        {
+            Debug.Log("DIGGING");
+
+            if (layers.Count > 0)
+            {
+                layers.RemoveAt(0);
+            }
+            else
+            {
+                Debug.Log("THERE IS NOTHING LEFT, SIRE!");
+            }
+
+            if(layers.Count > 0)
+            {
+                image.sprite = layers.FirstOrDefault().LayerSprite;
+            }
+            else
+            {
+                dig.GetComponent<Button>().interactable = false;
+                image.sprite = holeSprite;
+            }
         }
     }
 }
