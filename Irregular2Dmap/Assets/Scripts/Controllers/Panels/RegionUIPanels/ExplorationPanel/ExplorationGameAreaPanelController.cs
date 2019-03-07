@@ -4,6 +4,7 @@ using Assets.Scripts.Readers;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Assets.Scripts.Controllers.Panels.RegionUIPanels.ExplorationPanel
 {
@@ -13,6 +14,9 @@ namespace Assets.Scripts.Controllers.Panels.RegionUIPanels.ExplorationPanel
         private const int TileOffset = 2;
         private const int TileXPadding = 20;
         private const int TileYPadding = 10;
+        private const string GrassLayer = "Grass";
+        private const string RocksLayer = "Rocks";
+        private const string IgneousLayer = "Igneous";
 
         public GameObject ExplorationGamePanel;
         public GameObject Sprites;
@@ -84,25 +88,28 @@ namespace Assets.Scripts.Controllers.Panels.RegionUIPanels.ExplorationPanel
 
                         if (i >= 5)
                         {
-                            tileLayerDefinitionModel = DefinitionsController.Instance.TileLayerDefinitions["Grass"];
+                            tileLayerDefinitionModel = DefinitionsController.Instance.TileLayerDefinitions[GrassLayer];
                         }
                         else if (i >= 1)
                         {
-                            tileLayerDefinitionModel = DefinitionsController.Instance.TileLayerDefinitions["Rocks"];
+                            tileLayerDefinitionModel = DefinitionsController.Instance.TileLayerDefinitions[RocksLayer];
                         }
                         else
                         {
-                            tileLayerDefinitionModel = DefinitionsController.Instance.TileLayerDefinitions["Igneous"];
+                            tileLayerDefinitionModel = DefinitionsController.Instance.TileLayerDefinitions[IgneousLayer];
                         }
 
                         var tileLayerModel = new TileLayerModel(tileLayerDefinitionModel.Name, tileLayerDefinitionModel.MaterialHardness);
-                        var explorationGameLayerModel = new ExplorationGameLayerModel(tileLayerModel);
+                        var sprite = spritesReader.LayersImageSprites.OrderBy(x => GameController.Instance.RNG.Next())
+                                              .FirstOrDefault(s => s.name.Contains(tileLayerModel.Name));
+
+                        var explorationGameLayerModel = new ExplorationGameLayerModel(tileLayerModel, sprite);
 
                         biomeModel.Tiles[drawnTilesNumber].Add(explorationGameLayerModel);
                     }
                 }
                 
-                explorationGameAreaTile.GetComponent<ExplorationGameTileController>().SetupTile(biomeModel.Tiles[drawnTilesNumber], spritesReader);
+                explorationGameAreaTile.GetComponent<ExplorationGameTileController>().SetupTile(biomeModel.Tiles[drawnTilesNumber]);
                 drawnTilesNumber++;
             }
             
