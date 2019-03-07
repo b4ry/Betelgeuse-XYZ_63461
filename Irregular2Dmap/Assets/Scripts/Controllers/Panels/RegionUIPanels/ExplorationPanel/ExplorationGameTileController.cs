@@ -10,11 +10,15 @@ namespace Assets.Scripts.Controllers.Panels.RegionUIPanels.ExplorationPanel
     {
         private List<ExplorationGameLayerModel> layers;
         private GameObject selectImage;
+        private int index;
+        private GameObject dig;
 
-        public void SetupTile(List<ExplorationGameLayerModel> tileLayers, GameObject select)
+        public void SetupTile(List<ExplorationGameLayerModel> tileLayers, GameObject select, int tileNumber, GameObject dig)
         {
             layers = tileLayers;
             selectImage = select;
+            index = tileNumber;
+            this.dig = dig;
 
             gameObject.GetComponent<Image>().sprite = layers.FirstOrDefault().LayerSprite;
         }
@@ -22,8 +26,11 @@ namespace Assets.Scripts.Controllers.Panels.RegionUIPanels.ExplorationPanel
         public void OnMouseDown()
         {
             Debug.Log("---------------------------------------------------------------------");
+            Debug.Log("Index: " + index);
             Debug.Log("Layer type: " + layers.FirstOrDefault().TileLayerModel.Name);
             Debug.Log("Layers number: " + layers.Count);
+
+            gameObject.name += index;
 
             DetermineSelection();
         }
@@ -36,9 +43,27 @@ namespace Assets.Scripts.Controllers.Panels.RegionUIPanels.ExplorationPanel
             var newSelectXPosition = gameObject.transform.localPosition.x;
             var newSelectYPosition = gameObject.transform.localPosition.y;
 
-            if (!(selectXPosition != newSelectXPosition || selectYPosition != newSelectYPosition))
+            var button = dig.GetComponent<Button>();
+
+            if (selectXPosition != newSelectXPosition || selectYPosition != newSelectYPosition)
             {
-                selectImage.SetActive(!selectImage.activeSelf);
+                selectImage.SetActive(true);
+                button.interactable = true;
+            }
+            else if(selectXPosition == newSelectXPosition && selectYPosition == newSelectYPosition)
+            {
+                var isActive = selectImage.activeSelf;
+
+                if (!isActive)
+                {
+                    selectImage.SetActive(true);
+                    button.interactable = true;
+                }
+                else
+                {
+                    selectImage.SetActive(false);
+                    button.interactable = false;
+                }
             }
 
             selectImage.transform.localPosition = gameObject.transform.localPosition;

@@ -4,6 +4,7 @@ using Assets.Scripts.Readers;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Assets.Scripts.Controllers.Panels.RegionUIPanels.ExplorationPanel
 {
@@ -17,9 +18,9 @@ namespace Assets.Scripts.Controllers.Panels.RegionUIPanels.ExplorationPanel
         private const string RocksLayer = "Rocks";
         private const string IgneousLayer = "Igneous";
 
-        public GameObject ExplorationGamePanel;
-        public GameObject SelectImage;
+        public GameObject SelectedTile;
         public GameObject Sprites;
+        public GameObject Dig;
 
         public GameObject ExplorationGameAreaTilePrefab;
 
@@ -37,11 +38,19 @@ namespace Assets.Scripts.Controllers.Panels.RegionUIPanels.ExplorationPanel
             spritesReader = Sprites.GetComponent<SpritesReader>();
         }
 
+        void OnDisable()
+        {
+            Dig.SetActive(false);
+        }
+
         public void SetupPanel(BiomeModel biomeModel)
         {
             ClearPanel();
 
             gameObject.SetActive(true);
+            Dig.SetActive(true);
+            Dig.GetComponent<Button>().interactable = false;
+            SelectedTile.SetActive(false);
 
             var tilesNumber = ranges.FirstOrDefault(r => r.Key >= biomeModel.Area).Value;
 
@@ -80,13 +89,17 @@ namespace Assets.Scripts.Controllers.Panels.RegionUIPanels.ExplorationPanel
                     BuildLayers(biomeModel, drawnTilesNumber);
                 }
 
-                explorationGameAreaTile.GetComponent<ExplorationGameTileController>().SetupTile(biomeModel.Tiles[drawnTilesNumber], SelectImage);
+                explorationGameAreaTile.GetComponent<ExplorationGameTileController>().SetupTile(biomeModel.Tiles[drawnTilesNumber], SelectedTile, drawnTilesNumber, Dig);
                 drawnTilesNumber++;
             }
             
             biomeModel.TilesInitialized = true;
 
-            SelectImage.transform.SetAsLastSibling();
+            SelectedTile.transform.SetAsLastSibling();
+        }
+
+        public void DigTile()
+        {
         }
 
         private void BuildLayers(BiomeModel biomeModel, int currentTileNumber)

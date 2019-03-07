@@ -1695,7 +1695,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &655698367
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3442,7 +3442,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1132925848
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4941,7 +4941,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2025972518
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4997,11 +4997,22 @@ MonoBehaviour:
     m_HighlightedTrigger: Highlighted
     m_PressedTrigger: Pressed
     m_DisabledTrigger: Disabled
-  m_Interactable: 1
+  m_Interactable: 0
   m_TargetGraphic: {fileID: 2025972520}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2116586864}
+        m_MethodName: DigTile
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &2025972520
@@ -5530,9 +5541,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e30f4a223f1da714780852f64518c0a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ExplorationGamePanel: {fileID: 833540442}
-  SelectImage: {fileID: 277006249}
+  SelectedTile: {fileID: 277006249}
   Sprites: {fileID: 125897807}
+  Dig: {fileID: 2025972517}
   ExplorationGameAreaTilePrefab: {fileID: 3436036335195150169, guid: ab8739c86b966f8449103570e221a9a0,
     type: 3}
 --- !u!1 &2136786340
