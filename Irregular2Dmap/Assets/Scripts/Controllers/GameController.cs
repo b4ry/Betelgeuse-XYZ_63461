@@ -117,9 +117,5 @@ namespace Assets.Scripts.Controllers
 
             regionUICanvas.SetActive(false);
         }
-
-        private void Start()
-        {
-        }
     }
 }

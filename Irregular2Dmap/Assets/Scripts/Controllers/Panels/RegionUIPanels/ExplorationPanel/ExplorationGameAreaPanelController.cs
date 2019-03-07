@@ -18,6 +18,7 @@ namespace Assets.Scripts.Controllers.Panels.RegionUIPanels.ExplorationPanel
         private const string IgneousLayer = "Igneous";
 
         public GameObject ExplorationGamePanel;
+        public GameObject SelectImage;
         public GameObject Sprites;
 
         public GameObject ExplorationGameAreaTilePrefab;
@@ -79,11 +80,13 @@ namespace Assets.Scripts.Controllers.Panels.RegionUIPanels.ExplorationPanel
                     BuildLayers(biomeModel, drawnTilesNumber);
                 }
 
-                explorationGameAreaTile.GetComponent<ExplorationGameTileController>().SetupTile(biomeModel.Tiles[drawnTilesNumber]);
+                explorationGameAreaTile.GetComponent<ExplorationGameTileController>().SetupTile(biomeModel.Tiles[drawnTilesNumber], SelectImage);
                 drawnTilesNumber++;
             }
             
             biomeModel.TilesInitialized = true;
+
+            SelectImage.transform.SetAsLastSibling();
         }
 
         private void BuildLayers(BiomeModel biomeModel, int currentTileNumber)
