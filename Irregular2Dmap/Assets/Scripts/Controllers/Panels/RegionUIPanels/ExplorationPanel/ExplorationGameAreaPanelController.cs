@@ -4,7 +4,6 @@ using Assets.Scripts.Readers;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-using UnityEngine.UI;
 
 namespace Assets.Scripts.Controllers.Panels.RegionUIPanels.ExplorationPanel
 {
@@ -77,43 +76,48 @@ namespace Assets.Scripts.Controllers.Panels.RegionUIPanels.ExplorationPanel
 
                 if (!biomeModel.TilesInitialized)
                 {
-                    //TODO: THIS ALGORITHM SHOULD BE CHANGED
-                    var tilesGeneratedNumber = GameController.Instance.RNG.Next(1, 11);
-
-                    biomeModel.Tiles.Add(new List<ExplorationGameLayerModel>());
-
-                    for (int i = tilesGeneratedNumber; i >= 0; i--)
-                    {
-                        TileLayerDefinitionModel tileLayerDefinitionModel;
-
-                        if (i >= 5)
-                        {
-                            tileLayerDefinitionModel = DefinitionsController.Instance.TileLayerDefinitions[GrassLayer];
-                        }
-                        else if (i >= 1)
-                        {
-                            tileLayerDefinitionModel = DefinitionsController.Instance.TileLayerDefinitions[RocksLayer];
-                        }
-                        else
-                        {
-                            tileLayerDefinitionModel = DefinitionsController.Instance.TileLayerDefinitions[IgneousLayer];
-                        }
-
-                        var tileLayerModel = new TileLayerModel(tileLayerDefinitionModel.Name, tileLayerDefinitionModel.MaterialHardness);
-                        var sprite = spritesReader.LayersImageSprites.OrderBy(x => GameController.Instance.RNG.Next())
-                                              .FirstOrDefault(s => s.name.Contains(tileLayerModel.Name));
-
-                        var explorationGameLayerModel = new ExplorationGameLayerModel(tileLayerModel, sprite);
-
-                        biomeModel.Tiles[drawnTilesNumber].Add(explorationGameLayerModel);
-                    }
+                    BuildLayers(biomeModel, drawnTilesNumber);
                 }
-                
+
                 explorationGameAreaTile.GetComponent<ExplorationGameTileController>().SetupTile(biomeModel.Tiles[drawnTilesNumber]);
                 drawnTilesNumber++;
             }
             
             biomeModel.TilesInitialized = true;
+        }
+
+        private void BuildLayers(BiomeModel biomeModel, int currentTileNumber)
+        {
+            //TODO: THIS ALGORITHM SHOULD BE CHANGED
+            var tilesGeneratedNumber = GameController.Instance.RNG.Next(1, 11);
+
+            biomeModel.Tiles.Add(new List<ExplorationGameLayerModel>());
+
+            for (int i = tilesGeneratedNumber; i >= 0; i--)
+            {
+                TileLayerDefinitionModel tileLayerDefinitionModel;
+
+                if (i >= 5)
+                {
+                    tileLayerDefinitionModel = DefinitionsController.Instance.TileLayerDefinitions[GrassLayer];
+                }
+                else if (i >= 1)
+                {
+                    tileLayerDefinitionModel = DefinitionsController.Instance.TileLayerDefinitions[RocksLayer];
+                }
+                else
+                {
+                    tileLayerDefinitionModel = DefinitionsController.Instance.TileLayerDefinitions[IgneousLayer];
+                }
+
+                var tileLayerModel = new TileLayerModel(tileLayerDefinitionModel.Name, tileLayerDefinitionModel.MaterialHardness);
+                var sprite = spritesReader.LayersImageSprites.OrderBy(x => GameController.Instance.RNG.Next())
+                                      .FirstOrDefault(s => s.name.Contains(tileLayerModel.Name));
+
+                var explorationGameLayerModel = new ExplorationGameLayerModel(tileLayerModel, sprite);
+
+                biomeModel.Tiles[currentTileNumber].Add(explorationGameLayerModel);
+            }
         }
 
         private void ClearPanel()
