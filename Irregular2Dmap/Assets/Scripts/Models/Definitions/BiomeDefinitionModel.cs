@@ -1,7 +1,7 @@
 ﻿using Assets.Scripts.Enums;
 using System.Collections.Generic;
 
-namespace Assets.Scripts.Models
+namespace Assets.Scripts.Models.Definitions
 {
     public class BiomeDefinitionModel
     {

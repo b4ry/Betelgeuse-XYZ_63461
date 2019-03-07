@@ -1,6 +1,6 @@
 ﻿using Assets.Scripts.Enums;
 
-namespace Assets.Scripts.Models
+namespace Assets.Scripts.Models.Definitions
 {
     public class ResourceDefinitionModel
     {

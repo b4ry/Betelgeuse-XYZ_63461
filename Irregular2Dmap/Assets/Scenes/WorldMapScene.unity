@@ -539,6 +539,7 @@ MonoBehaviour:
   ResourceImageSprites: []
   RarityImageSprites: []
   OddityImageSprites: []
+  LayersImageSprites: []
 --- !u!1 &138296494
 GameObject:
   m_ObjectHideFlags: 0
@@ -5237,6 +5238,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ExplorationGamePanel: {fileID: 833540442}
+  Sprites: {fileID: 125897807}
   ExplorationGameAreaTilePrefab: {fileID: 3436036335195150169, guid: ab8739c86b966f8449103570e221a9a0,
     type: 3}
 --- !u!1 &2136786340

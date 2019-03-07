@@ -70,7 +70,8 @@ namespace Assets.Scripts.Controllers
 
         private void BuildMapFromItsDefinition()
         {
-            var path = $"/Assets/Definitions/MapsDefinition/{MapName}.txt";
+            //TODO: READING FROM MAP CHOICE MENU PANEL
+            var path = $"/Assets/Definitions/Maps/{MapName}.txt";
 
             string[] mapDefinition = FileReader.ReadFile(path);
 

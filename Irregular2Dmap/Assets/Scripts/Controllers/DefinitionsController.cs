@@ -1,5 +1,5 @@
 ﻿using Assets.Scripts.Enums;
-using Assets.Scripts.Models;
+using Assets.Scripts.Models.Definitions;
 using Assets.Scripts.Readers;
 using System;
 using System.Collections.Generic;
@@ -13,8 +13,9 @@ namespace Assets.Scripts.Controllers
 
         public Dictionary<string, BiomeDefinitionModel> BiomeDefinitions = new Dictionary<string, BiomeDefinitionModel>();
         public Dictionary<string, ResourceDefinitionModel> ResourceDefinitions = new Dictionary<string, ResourceDefinitionModel>();
+        public Dictionary<string, TileLayerDefinitionModel> TileLayerDefinitions = new Dictionary<string, TileLayerDefinitionModel>();
 
-        private void Awake()
+        void Awake()
         {
             if (Instance == null)
             {
@@ -27,37 +28,38 @@ namespace Assets.Scripts.Controllers
 
             ReadResourceDefinitions();
             ReadBiomeDefinitions();
+            ReadTileLayerDefinitions();
 
             DontDestroyOnLoad(gameObject);
         }
 
         private void ReadResourceDefinitions()
         {
-            var path = $"/Assets/Definitions/ResourcesDefinition/AvailableResources.txt";
+            var path = $"/Assets/Definitions/Resources/AvailableResources.txt";
             string[] availableResources = FileReader.ReadFile(path);
 
             foreach (var availableResource in availableResources)
             {
-                path = $"/Assets/Definitions/ResourcesDefinition/{availableResource}.txt";
+                path = $"/Assets/Definitions/Resources/{availableResource}.txt";
 
                 string[] resourceDefinition = FileReader.ReadFile(path);
 
                 Enum.TryParse(resourceDefinition[1], out RarityEnum resourceRarity);
 
-                var newResourceModel = new ResourceDefinitionModel(resourceDefinition[0], resourceRarity);
+                var newResourceDefinitionModel = new ResourceDefinitionModel(resourceDefinition[0], resourceRarity);
 
-                ResourceDefinitions.Add(resourceDefinition[0], newResourceModel);
+                ResourceDefinitions.Add(resourceDefinition[0], newResourceDefinitionModel);
             }
         }
 
         private void ReadBiomeDefinitions()
         {
-            var path = $"/Assets/Definitions/BiomesDefinition/AvailableBiomes.txt";
+            var path = $"/Assets/Definitions/Biomes/AvailableBiomes.txt";
             string[] availableBiomes = FileReader.ReadFile(path);
 
             foreach (var availableBiome in availableBiomes)
             {
-                path = $"/Assets/Definitions/BiomesDefinition/{availableBiome}.txt";
+                path = $"/Assets/Definitions/Biomes/{availableBiome}.txt";
 
                 string[] biomeDefinition = FileReader.ReadFile(path);
 
@@ -74,9 +76,28 @@ namespace Assets.Scripts.Controllers
                     biomeResourceDefinitionModels.Add(newResourceDefinitionModel);
                 }
 
-                var newBiomeModel = new BiomeDefinitionModel(biomeDefinition[0], biomeRarity, biomeResourceDefinitionModels);
+                var newBiomeDefinitionModel = new BiomeDefinitionModel(biomeDefinition[0], biomeRarity, biomeResourceDefinitionModels);
 
-                BiomeDefinitions.Add(biomeDefinition[0], newBiomeModel);
+                BiomeDefinitions.Add(biomeDefinition[0], newBiomeDefinitionModel);
+            }
+        }
+
+        private void ReadTileLayerDefinitions()
+        {
+            var path = $"/Assets/Definitions/TileLayers/AvailableTileLayers.txt";
+            string[] availableTileLayers = FileReader.ReadFile(path);
+
+            foreach (var availableTileLayer in availableTileLayers)
+            {
+                path = $"/Assets/Definitions/TileLayers/{availableTileLayer}.txt";
+
+                string[] tileLayerDefinition = FileReader.ReadFile(path);
+
+                Enum.TryParse(tileLayerDefinition[1], out MaterialHardnessEnum materialHardness);
+
+                var newTileLayerDefinitionModel = new TileLayerDefinitionModel(tileLayerDefinition[0], materialHardness);
+
+                TileLayerDefinitions.Add(tileLayerDefinition[0], newTileLayerDefinitionModel);
             }
         }
     }
