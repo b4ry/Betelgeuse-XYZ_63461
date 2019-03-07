@@ -36,7 +36,18 @@ namespace Assets.Scripts.Controllers.Panels.RegionUIPanels.ExplorationPanel
 
         public void OnMouseDown()
         {
+            var button = dig.GetComponent<Button>();
+
             DetermineSelection();
+
+            if (selectImage.activeSelf && layers.Count > 0)
+            {
+                SetupDigButton(button, true);
+            }
+            else
+            {
+                SetupDigButton(button, false);
+            }
         }
 
         private void DetermineSelection()
@@ -52,11 +63,6 @@ namespace Assets.Scripts.Controllers.Panels.RegionUIPanels.ExplorationPanel
             if (selectXPosition != newSelectXPosition || selectYPosition != newSelectYPosition)
             {
                 selectImage.SetActive(true);
-
-                if (layers.Count > 0)
-                {
-                    SetupDigButton(button);
-                }
             }
             else if(selectXPosition == newSelectXPosition && selectYPosition == newSelectYPosition)
             {
@@ -65,30 +71,19 @@ namespace Assets.Scripts.Controllers.Panels.RegionUIPanels.ExplorationPanel
                 if (!isActive)
                 {
                     selectImage.SetActive(true);
-
-                    if (layers.Count > 0)
-                    {
-                        SetupDigButton(button);
-                    }
                 }
                 else
                 {
                     selectImage.SetActive(false);
-                    button.interactable = false;
                 }
-            }
-
-            if(layers.Count == 0)
-            {
-                button.interactable = false;
             }
 
             selectImage.transform.localPosition = gameObject.transform.localPosition;
         }
 
-        private void SetupDigButton(Button button)
+        private void SetupDigButton(Button button, bool isInteractable)
         {
-            button.interactable = true;
+            button.interactable = isInteractable;
 
             button.onClick.RemoveAllListeners();
             button.onClick.AddListener(delegate
