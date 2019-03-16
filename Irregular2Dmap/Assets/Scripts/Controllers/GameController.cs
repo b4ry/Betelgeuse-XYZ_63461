@@ -85,7 +85,7 @@ namespace Assets.Scripts.Controllers
             //TODO: READING FROM MAP CHOICE MENU PANEL
             var path = $"/Assets/Definitions/Maps/{MapName}.txt";
 
-            string[] mapDefinition = FileReader.ReadFile(path);
+            string[] mapDefinition = FileReader.ReadFile(path, true);
 
             var worldMapName = mapDefinition[0];
             var regionsNumber = mapDefinition[1];

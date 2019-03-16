@@ -1,4 +1,5 @@
 ﻿using Assets.Scripts.Enums;
+using Assets.Scripts.Models;
 using Assets.Scripts.Models.Definitions;
 using Assets.Scripts.Readers;
 using System;
@@ -42,24 +43,42 @@ namespace Assets.Scripts.Controllers
         private void ReadBuildingsDefinitions(RaceEnum race)
         {
             var path = $"{Directory.GetCurrentDirectory()}/Assets/Definitions/Buildings/{race.ToString()}";
-            var buildingDefinitions = Directory.GetFiles(path, "*.txt");
+            var buildingDefinitionPaths = Directory.GetFiles(path, "*.txt");
 
-            foreach(var buildingDefinition in buildingDefinitions)
+            foreach(var buildingDefinitionPath in buildingDefinitionPaths)
             {
-                Debug.Log(buildingDefinition);
+                string[] buildingDefinition = FileReader.ReadFile(buildingDefinitionPath, false);
+
+                Enum.TryParse(buildingDefinition[1], out BuildingTypeEnum buildingType);
+                int.TryParse(buildingDefinition[3], out int isAvailable);
+
+                var costs = buildingDefinition[2].Split(';');
+                var costModel = new CostModel
+                {
+                    Resources = new Dictionary<string, float>()
+                };
+
+                foreach (var cost in costs)
+                {
+                    var splitCost = cost.Split('-');
+
+                    costModel.Resources.Add(splitCost[0], float.Parse(splitCost[1]));
+                }
+
+                var buildingModel = new BuildingModel(buildingDefinition[0], buildingType, costModel, Convert.ToBoolean(isAvailable));
             }
         }
 
         private void ReadResourceDefinitions()
         {
             var path = $"/Assets/Definitions/Resources/AvailableResources.txt";
-            string[] availableResources = FileReader.ReadFile(path);
+            string[] availableResources = FileReader.ReadFile(path, true);
 
             foreach (var availableResource in availableResources)
             {
                 path = $"/Assets/Definitions/Resources/{availableResource}.txt";
 
-                string[] resourceDefinition = FileReader.ReadFile(path);
+                string[] resourceDefinition = FileReader.ReadFile(path, true);
 
                 Enum.TryParse(resourceDefinition[1], out RarityEnum resourceRarity);
 
@@ -72,13 +91,13 @@ namespace Assets.Scripts.Controllers
         private void ReadBiomeDefinitions()
         {
             var path = $"/Assets/Definitions/Biomes/AvailableBiomes.txt";
-            string[] availableBiomes = FileReader.ReadFile(path);
+            string[] availableBiomes = FileReader.ReadFile(path, true);
 
             foreach (var availableBiome in availableBiomes)
             {
                 path = $"/Assets/Definitions/Biomes/{availableBiome}.txt";
 
-                string[] biomeDefinition = FileReader.ReadFile(path);
+                string[] biomeDefinition = FileReader.ReadFile(path, true);
 
                 Enum.TryParse(biomeDefinition[1], out RarityEnum biomeRarity);
 
@@ -102,13 +121,13 @@ namespace Assets.Scripts.Controllers
         private void ReadTileLayerDefinitions()
         {
             var path = $"/Assets/Definitions/TileLayers/AvailableTileLayers.txt";
-            string[] availableTileLayers = FileReader.ReadFile(path);
+            string[] availableTileLayers = FileReader.ReadFile(path, true);
 
             foreach (var availableTileLayer in availableTileLayers)
             {
                 path = $"/Assets/Definitions/TileLayers/{availableTileLayer}.txt";
 
-                string[] tileLayerDefinition = FileReader.ReadFile(path);
+                string[] tileLayerDefinition = FileReader.ReadFile(path, true);
 
                 Enum.TryParse(tileLayerDefinition[1], out MaterialHardnessEnum materialHardness);
 

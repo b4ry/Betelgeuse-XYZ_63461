@@ -1,5 +1,4 @@
 Quarry
 Economic
 Wood-6.7;Marble-3
-False
-True
+1

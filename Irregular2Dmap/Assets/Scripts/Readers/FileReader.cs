@@ -6,10 +6,10 @@ namespace Assets.Scripts.Readers
     {
         private static readonly string directory = Directory.GetCurrentDirectory();
 
-        public static string[] ReadFile(string filePath)
+        public static string[] ReadFile(string filePath, bool addDirectoryPath)
         {
             var path = filePath;
-            var fullPath = string.Concat(directory, path);
+            var fullPath = addDirectoryPath ? string.Concat(directory, path) : path;
             var fileContent = File.ReadAllLines(fullPath);
 
             return fileContent;

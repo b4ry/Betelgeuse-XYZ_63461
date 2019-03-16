@@ -1,5 +1,4 @@
 Fuel Generator
 Economic
 Wood-100;Gold-50
-True
-False
+0

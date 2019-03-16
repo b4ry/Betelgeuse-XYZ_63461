@@ -34,7 +34,7 @@ namespace Assets.Scripts.Controllers
         {
             var path = $"/Assets/Definitions/Regions/{GameController.Instance.MapName}/{gameObject.name}.txt";
 
-            string[] regionDefinition = FileReader.ReadFile(path);
+            string[] regionDefinition = FileReader.ReadFile(path, true);
             string[] biomeNames = regionDefinition[2].Split(';');
             string[] neighbourNames = regionDefinition[3].Split(';');
 

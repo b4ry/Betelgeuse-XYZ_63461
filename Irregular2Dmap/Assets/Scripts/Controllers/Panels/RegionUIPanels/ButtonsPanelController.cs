@@ -7,6 +7,7 @@ namespace Assets.Scripts.Controllers.Panels.RegionUIPanels
     {
         public GameObject SeparationPanel;
         public GameObject ExplorationPanel;
+        public GameObject BuildingPanel;
 
         private ExplorationPanelController explorationPanelController;
 
@@ -29,6 +30,12 @@ namespace Assets.Scripts.Controllers.Panels.RegionUIPanels
             ExplorationPanel.SetActive(false);
 
             explorationPanelController.ClearPanel();
+        }
+
+        public void DisplayBuildPanel()
+        {
+            SeparationPanel.SetActive(true);
+            BuildingPanel.SetActive(true);
         }
     }
 }
