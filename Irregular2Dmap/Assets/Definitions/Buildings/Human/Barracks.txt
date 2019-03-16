@@ -1,0 +1,5 @@
+Barracks
+Military
+Wood-10;Marble-10
+False
+True

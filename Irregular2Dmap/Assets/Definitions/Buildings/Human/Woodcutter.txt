@@ -1,0 +1,5 @@
+Woodcutter
+Economic
+Wood-10.3;Marble-3
+False
+True

@@ -3,6 +3,7 @@ using Assets.Scripts.Models.Definitions;
 using Assets.Scripts.Readers;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
 
 namespace Assets.Scripts.Controllers
@@ -31,6 +32,22 @@ namespace Assets.Scripts.Controllers
             ReadTileLayerDefinitions();
 
             DontDestroyOnLoad(gameObject);
+        }
+
+        void Start()
+        {
+            ReadBuildingsDefinitions(GameController.Instance.PlayerManager.Race);
+        }
+
+        private void ReadBuildingsDefinitions(RaceEnum race)
+        {
+            var path = $"{Directory.GetCurrentDirectory()}/Assets/Definitions/Buildings/{race.ToString()}";
+            var buildingDefinitions = Directory.GetFiles(path, "*.txt");
+
+            foreach(var buildingDefinition in buildingDefinitions)
+            {
+                Debug.Log(buildingDefinition);
+            }
         }
 
         private void ReadResourceDefinitions()

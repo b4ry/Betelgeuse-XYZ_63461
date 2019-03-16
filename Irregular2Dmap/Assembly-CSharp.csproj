@@ -86,7 +86,6 @@
     <Compile Include="Assets\Scripts\Enums\RaceEnum.cs" />
     <Compile Include="Assets\Scripts\Enums\RarityEnum.cs" />
     <Compile Include="Assets\Scripts\Enums\RegionSizeEnum.cs" />
-    <Compile Include="Assets\Scripts\Enums\TileLayerTypeEnum.cs" />
     <Compile Include="Assets\Scripts\Factories\IFactory.cs" />
     <Compile Include="Assets\Scripts\Factories\PlayerFactory.cs" />
     <Compile Include="Assets\Scripts\Managers\Player\HumanPlayerManager.cs" />
@@ -152,8 +151,11 @@
     <None Include="Assets\Definitions\Biomes\Desert.txt" />
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMPro_Properties.cginc" />
     <None Include="Assets\Definitions\Resources\Sand.txt" />
+    <None Include="Assets\Definitions\Buildings\Human\Barracks.txt" />
     <None Include="Assets\Definitions\Resources\Water.txt" />
     <None Include="Assets\Definitions\TileLayers\Grass.txt" />
+    <None Include="Assets\Definitions\Buildings\Human\Quarry.txt" />
+    <None Include="Assets\Definitions\Buildings\Human\Woodcutter.txt" />
     <None Include="Assets\Definitions\Resources\Silver.txt" />
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_Bitmap-Custom-Atlas.shader" />
     <None Include="Assets\Definitions\Biomes\River.txt" />
@@ -162,6 +164,7 @@
     <None Include="Assets\Definitions\Regions\Map1\Kazak Karam Dum.txt" />
     <None Include="Assets\Definitions\Biomes\Plateau.txt" />
     <None Include="Assets\Definitions\TileLayers\Rocks.txt" />
+    <None Include="Assets\Definitions\Buildings\Human\Academy.txt" />
     <None Include="Assets\Definitions\Regions\Map1\The Great Desert.txt" />
     <None Include="Assets\Definitions\Biomes\Lake.txt" />
     <None Include="Assets\Definitions\Resources\Iron.txt" />
@@ -174,7 +177,9 @@
     <None Include="Assets\Definitions\Resources\Gold.txt" />
     <None Include="Assets\Definitions\Regions\Map1\Dohr'andor.txt" />
     <None Include="Assets\TextMesh Pro\Examples &amp; Extras\Fonts\Bangers - OFL.txt" />
+    <None Include="Assets\Definitions\Buildings\TechHuman\Wood Extractor.txt" />
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_Bitmap-Mobile.shader" />
+    <None Include="Assets\Definitions\Buildings\TechHuman\Fuel Generator.txt" />
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF Overlay.shader" />
     <None Include="Assets\TextMesh Pro\Examples &amp; Extras\Fonts\LiberationSans - OFL.txt" />
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMPro_Surface.cginc" />

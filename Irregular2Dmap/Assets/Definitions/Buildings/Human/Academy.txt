@@ -1,0 +1,5 @@
+Academy
+Science
+Wood-20;Marble-10
+False
+False
