@@ -1,7 +1,6 @@
 ﻿using Assets.Scripts.Enums;
 using Assets.Scripts.Factories;
 using Assets.Scripts.Managers.Player;
-using Assets.Scripts.Models;
 using Assets.Scripts.Readers;
 using System.Collections.Generic;
 using System.Linq;
@@ -65,7 +64,7 @@ namespace Assets.Scripts.Controllers
             regionFOWOutlineSprites = Resources.LoadAll<Sprite>($"Maps/Regions/{MapName}/FOWOutlines").ToList();
 
             // TODO: WILL BE READ FROM STARTING MENU
-            Race = RaceEnum.Human;
+            Race = RaceEnum.TechHuman;
 
             BuildMapFromItsDefinition();
 

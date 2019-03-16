@@ -28,12 +28,13 @@ namespace Assets.Scripts.Models
             RandomizeOddityRating();
             CreateBiomes(biomeNames);
             CalculateResourcesAvailability();
-            PopulatePlayerBuildings();
+
+            PlayerBuildings = new List<BuildingModel>();
         }
 
-        private void PopulatePlayerBuildings()
+        public void PopulatePlayerBuildings()
         {
-            foreach(var buildingDefinition in DefinitionsController.Instance.BuildingDefinitions.Values)
+            foreach (var buildingDefinition in DefinitionsController.Instance.BuildingDefinitions.Values)
             {
                 var buildingModel = new BuildingModel(buildingDefinition.Name, buildingDefinition.BuildingType, buildingDefinition.Cost, buildingDefinition.Available);
 

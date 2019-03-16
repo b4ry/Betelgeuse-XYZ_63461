@@ -11,12 +11,15 @@ namespace Assets.Scripts.Managers.Player
 
         public HumanPlayerManager()
         {
-
+            foreach(var regionObject in GameController.Instance.RegionObjects)
+            {
+                regionObject.GetComponent<RegionController>().RegionModel.PopulatePlayerBuildings();
+            }
         }
 
         public void DisplayBuiltBuildings(string regionName)
         {
-            var builtBuildings = SelectedRegionsController.SelectedRegionObjects.FirstOrDefault().RegionModel.PlayerBuildings.Where(b => !b.Built);
+            var builtBuildings = SelectedRegionsController.SelectedRegionObjects.FirstOrDefault().RegionModel.PlayerBuildings.Where(b => b.Built);
 
             foreach (var buildingModel in builtBuildings)
             {
