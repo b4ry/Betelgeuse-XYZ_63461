@@ -1,4 +1,5 @@
-﻿using Assets.Scripts.Enums;
+﻿using Assets.Scripts.Controllers;
+using Assets.Scripts.Enums;
 using Assets.Scripts.Models;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,25 +10,37 @@ namespace Assets.Scripts.Managers.Player
     public class TechPlayerManager : IPlayerManager
     {
         public RaceEnum Race { get; set; }
-        public List<BuildingModel> Buildings { get; set; }
+        public List<BuildingModel> ShipModules { get; set; }
 
-        public void DisplayBuildings(string regionName = "")
+        public TechPlayerManager()
         {
-            var builtBuildings = Buildings.Where(b => b.Built);
+            ShipModules = new List<BuildingModel>();
 
-            foreach(var buildingModel in builtBuildings)
+            foreach (var buildingDefinition in DefinitionsController.Instance.BuildingDefinitions.Values)
             {
-                Debug.Log(buildingModel.Name);
+                var buildingModel = new BuildingModel(buildingDefinition.Name, buildingDefinition.BuildingType, buildingDefinition.Cost, buildingDefinition.Available);
+
+                ShipModules.Add(buildingModel);
             }
         }
 
-        public void Build(string regionName = "")
+        public void DisplayBuiltBuildings(string regionName = "")
         {
-            var availableBuildings = Buildings.Where(b => !b.Built && b.Available);
+            var builtShipModules = ShipModules.Where(b => b.Built);
 
-            foreach (var buildingModel in availableBuildings)
+            foreach(var shipModule in builtShipModules)
             {
-                Debug.Log(buildingModel.Name);
+                Debug.Log(shipModule.Name);
+            }
+        }
+
+        public void DisplayAvailableBuildings(string regionName = "")
+        {
+            var availableShipModules = ShipModules.Where(b => !b.Built && b.Available);
+
+            foreach (var availableShipModule in availableShipModules)
+            {
+                Debug.Log(availableShipModule.Name);
             }
         }
     }

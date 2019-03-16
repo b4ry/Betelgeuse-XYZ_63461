@@ -1,5 +1,6 @@
 ﻿using Assets.Scripts.Controllers;
 using Assets.Scripts.Enums;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -13,6 +14,7 @@ namespace Assets.Scripts.Models
         public List<BiomeModel> Biomes { get; set; }
         public List<ResourceModel> Resources { get; set; }
         public List<GameObject> NeighbourRegions { get; set; }
+        public List<BuildingModel> PlayerBuildings { get; set; }
         public bool Visited { get; set; }
         public OddityModel Oddity { get; set; }
 
@@ -26,6 +28,17 @@ namespace Assets.Scripts.Models
             RandomizeOddityRating();
             CreateBiomes(biomeNames);
             CalculateResourcesAvailability();
+            PopulatePlayerBuildings();
+        }
+
+        private void PopulatePlayerBuildings()
+        {
+            foreach(var buildingDefinition in DefinitionsController.Instance.BuildingDefinitions.Values)
+            {
+                var buildingModel = new BuildingModel(buildingDefinition.Name, buildingDefinition.BuildingType, buildingDefinition.Cost, buildingDefinition.Available);
+
+                PlayerBuildings.Add(buildingModel);
+            }
         }
 
         private void CreateBiomes(string[] biomeNames)

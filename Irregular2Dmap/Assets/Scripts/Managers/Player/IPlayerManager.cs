@@ -6,7 +6,7 @@ namespace Assets.Scripts.Managers.Player
     {
         RaceEnum Race { get; set; }
 
-        void Build(string regionName);
-        void DisplayBuildings(string regionName);
+        void DisplayAvailableBuildings(string regionName);
+        void DisplayBuiltBuildings(string regionName);
     }
 }

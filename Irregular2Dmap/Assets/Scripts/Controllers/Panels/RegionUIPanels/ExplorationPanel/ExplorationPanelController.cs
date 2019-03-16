@@ -25,7 +25,7 @@ namespace Assets.Scripts.Controllers.Panels.RegionUIPanels.ExplorationPanel
         public void SetupPanel()
         {
             var explorationGameAreaPanelController = ExplorationGameAreaPanel.GetComponent<ExplorationGameAreaPanelController>();
-            var regionModel = SelectedRegionsController.Instance.SelectedRegionObjects.FirstOrDefault().RegionModel;
+            var regionModel = SelectedRegionsController.SelectedRegionObjects.FirstOrDefault().RegionModel;
             var drawnBiomesNumber = 0;
 
             foreach (var biome in regionModel.Biomes)

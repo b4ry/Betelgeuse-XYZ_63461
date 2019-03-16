@@ -1,6 +1,7 @@
 ﻿using Assets.Scripts.Enums;
 using Assets.Scripts.Factories;
 using Assets.Scripts.Managers.Player;
+using Assets.Scripts.Models;
 using Assets.Scripts.Readers;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,6 +20,7 @@ namespace Assets.Scripts.Controllers
         public System.Random Rng { get; set; }
         public string MapName { get; set; }
         public IPlayerManager PlayerManager { get; set; }
+        public RaceEnum Race;
 
         [SerializeField]
         private GameObject worldMapObject;
@@ -39,7 +41,6 @@ namespace Assets.Scripts.Controllers
         private List<Sprite> regionFOWSprites = new List<Sprite>();
         private List<Sprite> regionFOWOutlineSprites = new List<Sprite>();
 
-        private RaceEnum race;
         private IFactory<IPlayerManager> playerFactory;
 
         void Awake()
@@ -63,11 +64,8 @@ namespace Assets.Scripts.Controllers
             regionFOWSprites = Resources.LoadAll<Sprite>($"Maps/Regions/{MapName}/FOWs").ToList();
             regionFOWOutlineSprites = Resources.LoadAll<Sprite>($"Maps/Regions/{MapName}/FOWOutlines").ToList();
 
-            race = RaceEnum.TechHuman;
-
-            playerFactory = new PlayerFactory();
-            PlayerManager = playerFactory.Produce(race);
-            PlayerManager.Race = race;
+            // TODO: WILL BE READ FROM STARTING MENU
+            Race = RaceEnum.Human;
 
             BuildMapFromItsDefinition();
 
@@ -128,6 +126,13 @@ namespace Assets.Scripts.Controllers
             worldMapUICanvas.SetActive(true);
 
             regionUICanvas.SetActive(false);
+        }
+
+        public void ProducePlayer()
+        {
+            playerFactory = new PlayerFactory();
+            PlayerManager = playerFactory.Produce(Race);
+            PlayerManager.Race = Race;
         }
     }
 }

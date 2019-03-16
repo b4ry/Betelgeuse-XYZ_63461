@@ -16,6 +16,7 @@ namespace Assets.Scripts.Controllers
         public Dictionary<string, BiomeDefinitionModel> BiomeDefinitions = new Dictionary<string, BiomeDefinitionModel>();
         public Dictionary<string, ResourceDefinitionModel> ResourceDefinitions = new Dictionary<string, ResourceDefinitionModel>();
         public Dictionary<string, TileLayerDefinitionModel> TileLayerDefinitions = new Dictionary<string, TileLayerDefinitionModel>();
+        public Dictionary<string, BuildingDefinitionModel> BuildingDefinitions = new Dictionary<string, BuildingDefinitionModel>();
 
         void Awake()
         {
@@ -37,7 +38,8 @@ namespace Assets.Scripts.Controllers
 
         void Start()
         {
-            ReadBuildingsDefinitions(GameController.Instance.PlayerManager.Race);
+            ReadBuildingsDefinitions(GameController.Instance.Race);
+            GameController.Instance.ProducePlayer();
         }
 
         private void ReadBuildingsDefinitions(RaceEnum race)
@@ -65,7 +67,9 @@ namespace Assets.Scripts.Controllers
                     costModel.Resources.Add(splitCost[0], float.Parse(splitCost[1]));
                 }
 
-                var buildingModel = new BuildingModel(buildingDefinition[0], buildingType, costModel, Convert.ToBoolean(isAvailable));
+                var buildingModel = new BuildingDefinitionModel(buildingDefinition[0], buildingType, costModel, Convert.ToBoolean(isAvailable));
+
+                BuildingDefinitions.Add(buildingModel.Name, buildingModel);
             }
         }
 

@@ -24,7 +24,7 @@ namespace Assets.Scripts.Controllers
 
         public void SetupView()
         {
-            var regionModel = SelectedRegionsController.Instance.SelectedRegionObjects.FirstOrDefault().RegionModel;
+            var regionModel = SelectedRegionsController.SelectedRegionObjects.FirstOrDefault().RegionModel;
 
             GetComponentInChildren<TopPanelController>().SetupPanel(regionModel, spritesReader);
             GetComponentInChildren<LeftPanelController>().SetupPanel(regionModel, spritesReader);

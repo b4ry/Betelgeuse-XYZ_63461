@@ -54,7 +54,7 @@ namespace Assets.Scripts.Controllers
                 spriteRenderer.sprite = RegionOutlineSprite;
 
                 RegionSummaryPanelManager.Instance.SetupRegionSummaryPanel(RegionModel, false);
-                SelectedRegionsController.Instance.SelectedRegionObjects.Add(this);
+                SelectedRegionsController.SelectedRegionObjects.Add(this);
                 RegionSummaryPanelManager.Instance.SetupEnterButton(delegate
                 {
                     EnterRegion();
@@ -105,7 +105,7 @@ namespace Assets.Scripts.Controllers
 
                     RegionSummaryPanelManager.Instance.SetActive(false);
 
-                    SelectedRegionsController.Instance.SelectedRegionObjects.Remove(this);
+                    SelectedRegionsController.SelectedRegionObjects.Remove(this);
 
                     if (RegionModel.Visited)
                     {
@@ -159,7 +159,7 @@ namespace Assets.Scripts.Controllers
                 });
             }
 
-            foreach (var selectedRegion in SelectedRegionsController.Instance.SelectedRegionObjects)
+            foreach (var selectedRegion in SelectedRegionsController.SelectedRegionObjects)
             {
                 selectedRegion.DeselectRegion();
             }
@@ -194,8 +194,8 @@ namespace Assets.Scripts.Controllers
                 }
             }
 
-            SelectedRegionsController.Instance.SelectedRegionObjects.Clear();
-            SelectedRegionsController.Instance.SelectedRegionObjects.Add(this);
+            SelectedRegionsController.SelectedRegionObjects.Clear();
+            SelectedRegionsController.SelectedRegionObjects.Add(this);
         }
 
         private void DeselectRegion()

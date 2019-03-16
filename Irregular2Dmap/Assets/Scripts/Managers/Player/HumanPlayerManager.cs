@@ -1,6 +1,5 @@
-﻿using Assets.Scripts.Enums;
-using Assets.Scripts.Models;
-using System.Collections.Generic;
+﻿using Assets.Scripts.Controllers;
+using Assets.Scripts.Enums;
 using System.Linq;
 using UnityEngine;
 
@@ -9,11 +8,15 @@ namespace Assets.Scripts.Managers.Player
     public class HumanPlayerManager : IPlayerManager
     {
         public RaceEnum Race { get; set; }
-        public Dictionary<string, List<BuildingModel>> Buildings { get; set; }
 
-        public void DisplayBuildings(string regionName)
+        public HumanPlayerManager()
         {
-            var builtBuildings = Buildings[regionName].Where(b => !b.Built);
+
+        }
+
+        public void DisplayBuiltBuildings(string regionName)
+        {
+            var builtBuildings = SelectedRegionsController.SelectedRegionObjects.FirstOrDefault().RegionModel.PlayerBuildings.Where(b => !b.Built);
 
             foreach (var buildingModel in builtBuildings)
             {
@@ -21,9 +24,9 @@ namespace Assets.Scripts.Managers.Player
             }
         }
 
-        public void Build(string regionName)
+        public void DisplayAvailableBuildings(string regionName)
         {
-            var availableBuildings = Buildings[regionName].Where(b => !b.Built && b.Available);
+            var availableBuildings = SelectedRegionsController.SelectedRegionObjects.FirstOrDefault().RegionModel.PlayerBuildings.Where(b => !b.Built && b.Available);
 
             foreach (var buildingModel in availableBuildings)
             {

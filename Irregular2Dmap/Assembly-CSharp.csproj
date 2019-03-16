@@ -96,6 +96,7 @@
     <Compile Include="Assets\Scripts\Models\BuildingModel.cs" />
     <Compile Include="Assets\Scripts\Models\CostModel.cs" />
     <Compile Include="Assets\Scripts\Models\Definitions\BiomeDefinitionModel.cs" />
+    <Compile Include="Assets\Scripts\Models\Definitions\BuildingDefinitionModel.cs" />
     <Compile Include="Assets\Scripts\Models\Definitions\ResourceDefinitionModel.cs" />
     <Compile Include="Assets\Scripts\Models\Definitions\TileLayerDefinitionModel.cs" />
     <Compile Include="Assets\Scripts\Models\ExplorationGameLayerModel.cs" />
