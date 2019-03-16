@@ -17,11 +17,11 @@ namespace Assets.Scripts.Models
 
         public string Name { get; set; }
         public RarityEnum Rarity { get; set; }
-        public DepositTypeEnum DepositType { get; set; }
+        public ResourceDepositSizeEnum DepositType { get; set; }
         public float DepositAmount { get; set; }
         public bool IsAvailable { get; set; }
 
-        public ResourceModel(string name, RarityEnum rarityEnum, DepositTypeEnum depositTypeEnum = DepositTypeEnum.Tiny, float depositAmount = 0)
+        public ResourceModel(string name, RarityEnum rarityEnum, ResourceDepositSizeEnum depositTypeEnum = ResourceDepositSizeEnum.Tiny, float depositAmount = 0)
         {
             Name = name;
             Rarity = rarityEnum;
@@ -44,7 +44,7 @@ namespace Assets.Scripts.Models
 
         public void DetermineAvailability(BiomeModel biomeModel, RegionModel regionModel)
         {
-            var occurenceRating = biomeModel.Area * 2 * (int)biomeModel.Rarity * (GameController.Instance.RNG.NextDouble() + 0.2) * regionModel.Oddity.Rating / (int)Rarity;
+            var occurenceRating = biomeModel.Area * 2 * (int)biomeModel.Rarity * (GameController.Instance.Rng.NextDouble() + 0.2) * regionModel.Oddity.Rating / (int)Rarity;
             IsAvailable = occurenceRating >= rarityOccurenceThresholds[Rarity];
         }
 
@@ -70,31 +70,31 @@ namespace Assets.Scripts.Models
 
         private void DetermineDepositType(float depositTypeThreshold)
         {
-            if (depositTypeThreshold > (int)DepositTypeEnum.Tiny && depositTypeThreshold <= (int)DepositTypeEnum.Small)
+            if (depositTypeThreshold > (int)ResourceDepositSizeEnum.Tiny && depositTypeThreshold <= (int)ResourceDepositSizeEnum.Small)
             {
-                DepositType = DepositTypeEnum.Small;
+                DepositType = ResourceDepositSizeEnum.Small;
             }
-            else if (depositTypeThreshold > (int)DepositTypeEnum.Small && depositTypeThreshold <= (int)DepositTypeEnum.Average)
+            else if (depositTypeThreshold > (int)ResourceDepositSizeEnum.Small && depositTypeThreshold <= (int)ResourceDepositSizeEnum.Average)
             {
-                DepositType = DepositTypeEnum.Average;
+                DepositType = ResourceDepositSizeEnum.Average;
             }
-            else if (depositTypeThreshold > (int)DepositTypeEnum.Average && depositTypeThreshold <= (int)DepositTypeEnum.Large)
+            else if (depositTypeThreshold > (int)ResourceDepositSizeEnum.Average && depositTypeThreshold <= (int)ResourceDepositSizeEnum.Large)
             {
-                DepositType = DepositTypeEnum.Large;
+                DepositType = ResourceDepositSizeEnum.Large;
             }
-            else if (depositTypeThreshold > (int)DepositTypeEnum.Large)
+            else if (depositTypeThreshold > (int)ResourceDepositSizeEnum.Large)
             {
-                DepositType = DepositTypeEnum.Abundant;
+                DepositType = ResourceDepositSizeEnum.Abundant;
             }
             else
             {
-                DepositType = DepositTypeEnum.Tiny;
+                DepositType = ResourceDepositSizeEnum.Tiny;
             }
         }
 
         private void CalculateDepositAmount(BiomeModel biomeModel)
         {
-            DepositAmount = (int)DepositType * biomeModel.Area * (float)(GameController.Instance.RNG.NextDouble() * (1.1 - 0.9) + 0.9) / (int)Rarity;
+            DepositAmount = (int)DepositType * biomeModel.Area * (float)(GameController.Instance.Rng.NextDouble() * (1.1 - 0.9) + 0.9) / (int)Rarity;
             DepositAmount /= 10;
         }
 

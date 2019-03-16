@@ -1,6 +1,6 @@
 ﻿namespace Assets.Scripts.Enums
 {
-    public enum DepositTypeEnum
+    public enum ResourceDepositSizeEnum
     {
         Tiny = 10,
         Small = 20,

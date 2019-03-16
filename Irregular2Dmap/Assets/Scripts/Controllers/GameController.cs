@@ -1,4 +1,6 @@
-﻿using Assets.Scripts.Controllers.Panels.RegionUIPanels;
+﻿using Assets.Scripts.Enums;
+using Assets.Scripts.Factories;
+using Assets.Scripts.Managers.Player;
 using Assets.Scripts.Readers;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,8 +16,9 @@ namespace Assets.Scripts.Controllers
 
         public List<GameObject> RegionObjects = new List<GameObject>();
 
-        public System.Random RNG { get; set; }
+        public System.Random Rng { get; set; }
         public string MapName { get; set; }
+        public IPlayerManager PlayerManager { get; set; }
 
         [SerializeField]
         private GameObject worldMapObject;
@@ -35,6 +38,9 @@ namespace Assets.Scripts.Controllers
         private List<Sprite> regionNFOWOutlineSprites = new List<Sprite>();
         private List<Sprite> regionFOWSprites = new List<Sprite>();
         private List<Sprite> regionFOWOutlineSprites = new List<Sprite>();
+
+        private RaceEnum race;
+        private IFactory<IPlayerManager> playerFactory;
 
         void Awake()
         {
@@ -57,11 +63,17 @@ namespace Assets.Scripts.Controllers
             regionFOWSprites = Resources.LoadAll<Sprite>($"Maps/Regions/{MapName}/FOWs").ToList();
             regionFOWOutlineSprites = Resources.LoadAll<Sprite>($"Maps/Regions/{MapName}/FOWOutlines").ToList();
 
+            race = RaceEnum.TechHuman;
+
+            playerFactory = new PlayerFactory();
+            PlayerManager = playerFactory.Produce(race);
+            PlayerManager.Race = race;
+
             BuildMapFromItsDefinition();
 
-            RNG = new System.Random();
+            Rng = new System.Random();
 
-            var initialRegion = RegionObjects[RNG.Next(0, RegionObjects.Count)];
+            var initialRegion = RegionObjects[Rng.Next(0, RegionObjects.Count)];
 
             initialRegion.GetComponent<RegionController>().SetInitial();
 

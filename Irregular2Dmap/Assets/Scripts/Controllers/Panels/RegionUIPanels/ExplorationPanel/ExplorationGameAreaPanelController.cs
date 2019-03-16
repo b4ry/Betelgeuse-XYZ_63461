@@ -102,7 +102,7 @@ namespace Assets.Scripts.Controllers.Panels.RegionUIPanels.ExplorationPanel
         private void BuildLayers(BiomeModel biomeModel, int currentTileNumber)
         {
             //TODO: THIS ALGORITHM SHOULD BE CHANGED
-            var tilesGeneratedNumber = GameController.Instance.RNG.Next(1, 11);
+            var tilesGeneratedNumber = GameController.Instance.Rng.Next(1, 11);
 
             biomeModel.Tiles.Add(new List<ExplorationGameLayerModel>());
 
@@ -124,7 +124,7 @@ namespace Assets.Scripts.Controllers.Panels.RegionUIPanels.ExplorationPanel
                 }
 
                 var tileLayerModel = new TileLayerModel(tileLayerDefinitionModel.Name, tileLayerDefinitionModel.MaterialHardness);
-                var sprite = spritesReader.LayersImageSprites.OrderBy(x => GameController.Instance.RNG.Next())
+                var sprite = spritesReader.LayersImageSprites.OrderBy(x => GameController.Instance.Rng.Next())
                                       .FirstOrDefault(s => s.name.Contains(tileLayerModel.Name));
 
                 var explorationGameLayerModel = new ExplorationGameLayerModel(tileLayerModel, sprite);

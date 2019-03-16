@@ -86,7 +86,7 @@ namespace Assets.Scripts.Models
 
             foreach (var biome in Biomes)
             {
-                biome.Area = GameController.Instance.RNG.Next(1, biomeMaxSize + 1);
+                biome.Area = GameController.Instance.Rng.Next(1, biomeMaxSize + 1);
                 pool += biomeMaxSize - biome.Area;
             }
 
@@ -101,7 +101,7 @@ namespace Assets.Scripts.Models
 
             int roundLeftover = maxSize - totalBiomesSize;
 
-            Biomes[GameController.Instance.RNG.Next(0, Biomes.Count)].Area += roundLeftover;
+            Biomes[GameController.Instance.Rng.Next(0, Biomes.Count)].Area += roundLeftover;
 
             foreach(var biome in Biomes)
             {
@@ -113,7 +113,7 @@ namespace Assets.Scripts.Models
         {
             Oddity = new OddityModel();
 
-            var randomizedOddityValue = GameController.Instance.RNG.Next(0, 101);
+            var randomizedOddityValue = GameController.Instance.Rng.Next(0, 101);
 
             Oddity.Rating = (float)(randomizedOddityValue <= 25 ? 0.5 :
                 randomizedOddityValue <= 70 ? 1 :
