@@ -150,6 +150,7 @@
     <None Include="Assets\TextMesh Pro\Resources\LineBreaking Leading Characters.txt" />
     <None Include="Assets\Definitions\Maps\Map1.txt" />
     <None Include="Assets\Definitions\Regions\Map1\Broken Valley.txt" />
+    <None Include="Assets\Definitions\Regions\OneRegionMap\The Great Desert.txt" />
     <None Include="Assets\Definitions\Biomes\Cave.txt" />
     <None Include="Assets\Definitions\Biomes\Mountains.txt" />
     <None Include="Assets\Definitions\Biomes\Desert.txt" />
@@ -159,6 +160,7 @@
     <None Include="Assets\Definitions\Maps\AvailableMaps.txt" />
     <None Include="Assets\Definitions\Resources\Water.txt" />
     <None Include="Assets\Definitions\TileLayers\Grass.txt" />
+    <None Include="Assets\Definitions\Maps\OneRegionMap.txt" />
     <None Include="Assets\Definitions\Buildings\Human\Quarry.txt" />
     <None Include="Assets\Definitions\Buildings\Human\Woodcutter.txt" />
     <None Include="Assets\Definitions\Resources\Silver.txt" />
