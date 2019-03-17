@@ -6,7 +6,7 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Assets.Scripts.Controllers.Panels.RegionUIPanels.ExplorationPanel
+namespace Assets.Scripts.Controllers.Panels.RegionUI.ExplorationPanel
 {
     public class ExplorationGameAreaPanelController : MonoBehaviour
     {

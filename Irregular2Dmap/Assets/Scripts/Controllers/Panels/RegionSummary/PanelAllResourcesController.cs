@@ -2,9 +2,9 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-namespace Assets.Scripts.Controllers.Panels.RegionSummaryPanel
+namespace Assets.Scripts.Controllers.Panels.RegionSummary
 {
-    public class PanelAllBiomesController : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
+    public class PanelAllResourcesController : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     {
         private GameObject cameraObject;
         private Camera cameraComponent;
@@ -24,15 +24,15 @@ namespace Assets.Scripts.Controllers.Panels.RegionSummaryPanel
             localMousePosition.x += rectTransform.anchoredPosition.x;
             localMousePosition.y = localMousePosition.y - 30;
 
-            RegionSummaryPanelManager.Instance.PositionAllBiomesTooltip(localMousePosition);
-            RegionSummaryPanelManager.Instance.SetAllBiomesTooltipText(gameObject.name);
-            RegionSummaryPanelManager.Instance.ShowAllBiomesTooltip(true);
+            RegionSummaryPanelManager.Instance.PositionAllResourcesTooltip(localMousePosition);
+            RegionSummaryPanelManager.Instance.SetAllResourcesTooltipText(gameObject.name);
+            RegionSummaryPanelManager.Instance.ShowAllResourcesTooltip(true);
         }
 
         public void OnPointerExit(PointerEventData eventData)
         {
-            RegionSummaryPanelManager.Instance.ShowAllBiomesTooltip(false);
-            RegionSummaryPanelManager.Instance.PositionAllBiomesTooltip(localMousePosition * -1);
+            RegionSummaryPanelManager.Instance.ShowAllResourcesTooltip(false);
+            RegionSummaryPanelManager.Instance.PositionAllResourcesTooltip(localMousePosition * -1);
         }
     }
 }

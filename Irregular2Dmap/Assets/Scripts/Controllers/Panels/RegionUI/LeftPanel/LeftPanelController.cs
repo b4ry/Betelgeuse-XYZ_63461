@@ -1,4 +1,5 @@
-﻿using Assets.Scripts.Models;
+﻿using Assets.Scripts.Controllers.Panels.RegionUI.LeftPanel;
+using Assets.Scripts.Models;
 using Assets.Scripts.Readers;
 using System.Collections.Generic;
 using UnityEngine;

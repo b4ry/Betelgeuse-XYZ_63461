@@ -2,9 +2,9 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-namespace Assets.Scripts.Controllers.Panels.RegionSummaryPanel
+namespace Assets.Scripts.Controllers.Panels.RegionSummary
 {
-    public class PanelAllResourcesController : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
+    public class PanelResourceController : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     {
         private GameObject cameraObject;
         private Camera cameraComponent;
@@ -22,17 +22,17 @@ namespace Assets.Scripts.Controllers.Panels.RegionSummaryPanel
             var rectTransform = transform.GetComponent<RectTransform>();
 
             localMousePosition.x += rectTransform.anchoredPosition.x;
-            localMousePosition.y = localMousePosition.y - 30;
+            localMousePosition.y = localMousePosition.y - 20;
 
-            RegionSummaryPanelManager.Instance.PositionAllResourcesTooltip(localMousePosition);
-            RegionSummaryPanelManager.Instance.SetAllResourcesTooltipText(gameObject.name);
-            RegionSummaryPanelManager.Instance.ShowAllResourcesTooltip(true);
+            RegionSummaryPanelManager.Instance.PositionResourceTooltip(localMousePosition);
+            RegionSummaryPanelManager.Instance.SetResourceTooltipText(gameObject.name);
+            RegionSummaryPanelManager.Instance.ShowResourceTooltip(true);
         }
 
         public void OnPointerExit(PointerEventData eventData)
         {
-            RegionSummaryPanelManager.Instance.ShowAllResourcesTooltip(false);
-            RegionSummaryPanelManager.Instance.PositionAllResourcesTooltip(localMousePosition * -1);
+            RegionSummaryPanelManager.Instance.ShowResourceTooltip(false);
+            RegionSummaryPanelManager.Instance.PositionResourceTooltip(localMousePosition * -1);
         }
     }
 }

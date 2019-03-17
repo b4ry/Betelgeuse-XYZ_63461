@@ -52,9 +52,8 @@ namespace Assets.Scripts.Controllers
             {
                 Destroy(gameObject);
             }
-
-            // TODO: WILL BE READ FROM STARTING MENU
-            MapName = "Map1";
+            
+            MapName = GameInfoStorageController.Instance.MapName;
 
             // TODO: ASSET BUNDLE
             worldMapSprites = Resources.LoadAll<Sprite>("Maps/Worlds").ToList();
@@ -63,8 +62,7 @@ namespace Assets.Scripts.Controllers
             regionFOWSprites = Resources.LoadAll<Sprite>($"Maps/Regions/{MapName}/FOWs").ToList();
             regionFOWOutlineSprites = Resources.LoadAll<Sprite>($"Maps/Regions/{MapName}/FOWOutlines").ToList();
 
-            // TODO: WILL BE READ FROM STARTING MENU
-            Race = RaceEnum.TechHuman;
+            Race = GameInfoStorageController.Instance.Race;
 
             BuildMapFromItsDefinition();
 
@@ -79,7 +77,6 @@ namespace Assets.Scripts.Controllers
 
         private void BuildMapFromItsDefinition()
         {
-            //TODO: READING FROM MAP CHOICE MENU PANEL
             var path = $"/Assets/Definitions/Maps/{MapName}.txt";
 
             string[] mapDefinition = FileReader.ReadFile(path, true);

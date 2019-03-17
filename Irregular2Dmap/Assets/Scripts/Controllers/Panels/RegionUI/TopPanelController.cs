@@ -5,7 +5,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Assets.Scripts.Controllers.Panels.RegionUIPanels
+namespace Assets.Scripts.Controllers.Panels.RegionUI
 {
     public class TopPanelController : MonoBehaviour
     {

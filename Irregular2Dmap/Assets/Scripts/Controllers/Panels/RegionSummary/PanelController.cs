@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Assets.Scripts.Controllers.Panels.RegionSummaryPanel
+namespace Assets.Scripts.Controllers.Panels.RegionSummary
 {
     public class PanelController : MonoBehaviour
     {

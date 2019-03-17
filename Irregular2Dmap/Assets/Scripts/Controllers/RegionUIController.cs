@@ -1,4 +1,4 @@
-﻿using Assets.Scripts.Controllers.Panels.RegionUIPanels;
+﻿using Assets.Scripts.Controllers.Panels.RegionUI;
 using Assets.Scripts.Controllers.Panels.RegionUIPanels.LeftPanel;
 using Assets.Scripts.Readers;
 using System.Linq;

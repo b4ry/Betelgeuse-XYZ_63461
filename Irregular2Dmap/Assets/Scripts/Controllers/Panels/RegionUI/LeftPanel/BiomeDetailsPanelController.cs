@@ -1,11 +1,12 @@
-﻿using Assets.Scripts.Models;
+﻿using Assets.Scripts.Controllers.Panels.RegionUIPanels.LeftPanel;
+using Assets.Scripts.Models;
 using Assets.Scripts.Readers;
 using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Assets.Scripts.Controllers.Panels.RegionUIPanels.LeftPanel
+namespace Assets.Scripts.Controllers.Panels.RegionUI.LeftPanel
 {
     public class BiomeDetailsPanelController : MonoBehaviour
     {

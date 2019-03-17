@@ -1,9 +1,9 @@
-﻿using Assets.Scripts.Controllers.Panels.RegionUIPanels.ExplorationPanel;
+﻿using Assets.Scripts.Controllers.Panels.RegionUI.ExplorationPanel;
 using Assets.Scripts.Enums;
 using System.Linq;
 using UnityEngine;
 
-namespace Assets.Scripts.Controllers.Panels.RegionUIPanels
+namespace Assets.Scripts.Controllers.Panels.RegionUI
 {
     public class ButtonsPanelController : MonoBehaviour
     {
