@@ -41,7 +41,7 @@ namespace Assets.Scripts.Controllers.Panels.MainMenu
 
             foreach(var availableMap in availableMaps.Maps)
             {
-                var dropdownOption = new Dropdown.OptionData(availableMap.MapName);
+                var dropdownOption = new Dropdown.OptionData(availableMap.Name);
 
                 mapsDropdown.options.Add(dropdownOption);
             }

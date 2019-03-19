@@ -102,6 +102,7 @@
     <Compile Include="Assets\Scripts\Models\Definitions\BiomeDefinitionModel.cs" />
     <Compile Include="Assets\Scripts\Models\Definitions\BuildingDefinitionModel.cs" />
     <Compile Include="Assets\Scripts\Models\Definitions\MapDefinitionModel.cs" />
+    <Compile Include="Assets\Scripts\Models\Definitions\RegionDefinitionModel.cs" />
     <Compile Include="Assets\Scripts\Models\Definitions\ResourceDefinitionModel.cs" />
     <Compile Include="Assets\Scripts\Models\Definitions\TileLayerDefinitionModel.cs" />
     <Compile Include="Assets\Scripts\Models\ExplorationGameLayerModel.cs" />
@@ -151,7 +152,7 @@
     <None Include="Assets\Definitions\Resources\Marble.txt" />
     <None Include="Assets\TextMesh Pro\Resources\LineBreaking Leading Characters.txt" />
     <None Include="Assets\Definitions\Maps\Map1.txt" />
-    <None Include="Assets\Definitions\Regions\Map1\Broken Valley.txt" />
+    <None Include="Assets\Definitions\Regions\Arborea\Broken Valley.txt" />
     <None Include="Assets\Definitions\Regions\OneRegionMap\The Great Desert.txt" />
     <None Include="Assets\Definitions\Biomes\Cave.txt" />
     <None Include="Assets\Definitions\Biomes\Mountains.txt" />
@@ -159,7 +160,6 @@
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMPro_Properties.cginc" />
     <None Include="Assets\Definitions\Resources\Sand.txt" />
     <None Include="Assets\Definitions\Buildings\Human\Barracks.txt" />
-    <None Include="Assets\Definitions\Maps\AvailableMaps.txt" />
     <None Include="Assets\Definitions\Resources\Water.txt" />
     <None Include="Assets\Definitions\TileLayers\Grass.txt" />
     <None Include="Assets\Definitions\Maps\OneRegionMap.txt" />
@@ -170,12 +170,12 @@
     <None Include="Assets\Definitions\Biomes\River.txt" />
     <None Include="Assets\Definitions\Resources\Elderflower.txt" />
     <None Include="Assets\Definitions\Biomes\Forest.txt" />
-    <None Include="Assets\Definitions\Regions\Map1\Kazak Karam Dum.txt" />
+    <None Include="Assets\Definitions\Regions\Arborea\Kazak Karam Dum.txt" />
     <None Include="Assets\Definitions\Biomes\Plateau.txt" />
     <None Include="Assets\Definitions\Maps\AvailableMaps.xml" />
     <None Include="Assets\Definitions\TileLayers\Rocks.txt" />
     <None Include="Assets\Definitions\Buildings\Human\Academy.txt" />
-    <None Include="Assets\Definitions\Regions\Map1\The Great Desert.txt" />
+    <None Include="Assets\Definitions\Regions\Arborea\The Great Desert.txt" />
     <None Include="Assets\Definitions\Biomes\Lake.txt" />
     <None Include="Assets\Definitions\Resources\Iron.txt" />
     <None Include="Assets\TextMesh Pro\Examples &amp; Extras\Fonts\Oswald-Bold - OFL.txt" />
@@ -185,7 +185,7 @@
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Mobile Masking.shader" />
     <None Include="Assets\TextMesh Pro\Examples &amp; Extras\Fonts\Anton OFL.txt" />
     <None Include="Assets\Definitions\Resources\Gold.txt" />
-    <None Include="Assets\Definitions\Regions\Map1\Dohr'andor.txt" />
+    <None Include="Assets\Definitions\Regions\Arborea\Dohr'andor.txt" />
     <None Include="Assets\TextMesh Pro\Examples &amp; Extras\Fonts\Bangers - OFL.txt" />
     <None Include="Assets\Definitions\Buildings\TechHuman\Wood Extractor.txt" />
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_Bitmap-Mobile.shader" />
@@ -193,6 +193,7 @@
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF Overlay.shader" />
     <None Include="Assets\TextMesh Pro\Examples &amp; Extras\Fonts\LiberationSans - OFL.txt" />
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMPro_Surface.cginc" />
+    <None Include="Assets\Definitions\Maps\Arborea.xml" />
     <None Include="Assets\Definitions\TileLayers\AvailableTileLayers.txt" />
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Mobile Overlay.shader" />
     <None Include="Assets\Definitions\Resources\AvailableResources.txt" />

@@ -1,0 +1,15 @@
+<Map name="Arborea">
+	<RegionsNumber>
+		4
+	</RegionsNumber>
+	<Regions>
+		<Region name="Kazak Karam Dum">
+		</Region>
+		<Region name="The Great Desert">
+		</Region>
+		<Region name="Dohr'andor">
+		</Region>
+		<Region name="Broken Valley">
+		</Region>
+	</Regions>
+</Map>

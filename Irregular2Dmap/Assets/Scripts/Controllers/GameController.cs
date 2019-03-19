@@ -1,8 +1,10 @@
 ﻿using Assets.Scripts.Enums;
 using Assets.Scripts.Factories;
 using Assets.Scripts.Managers.Player;
+using Assets.Scripts.Models.Definitions;
 using Assets.Scripts.Readers;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using UnityEngine;
 
@@ -77,21 +79,16 @@ namespace Assets.Scripts.Controllers
 
         private void BuildMapFromItsDefinition()
         {
-            var path = $"/Assets/Definitions/Maps/{MapName}.txt";
+            var path = $"{Directory.GetCurrentDirectory()}/Assets/Definitions/Maps/{MapName}.xml";
+            var mapDefinition = MapDefinitionModel.Load(path);
 
-            string[] mapDefinition = FileReader.ReadFile(path, true);
+            worldMapObject.GetComponent<SpriteRenderer>().sprite = worldMapSprites.FirstOrDefault(wms => wms.name.Contains(mapDefinition.Name));
 
-            var worldMapName = mapDefinition[0];
-            var regionsNumber = mapDefinition[1];
-            var regionNames = mapDefinition[2].Split(';');
-
-            worldMapObject.GetComponent<SpriteRenderer>().sprite = worldMapSprites.FirstOrDefault(wms => wms.name.Contains(worldMapName));
-
-            for(int i = 0; i < int.Parse(regionsNumber); i++)
+            for(int i = 0; i < mapDefinition.RegionsNumber; i++)
             {
                 var regionObject = Instantiate(regionPrefab, regionsObject.transform);
 
-                regionObject.name = regionNames[i];
+                regionObject.name = mapDefinition.Regions[i].Name;
 
                 var regionController = regionObject.GetComponent<RegionController>();
                 regionController.RegionSprite = regionNFOWSprites.FirstOrDefault(rnfows => rnfows.name.Contains(regionObject.name));
