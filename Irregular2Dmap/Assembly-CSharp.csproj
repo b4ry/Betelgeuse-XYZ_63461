@@ -98,8 +98,10 @@
     <Compile Include="Assets\Scripts\Models\BiomeModel.cs" />
     <Compile Include="Assets\Scripts\Models\BuildingModel.cs" />
     <Compile Include="Assets\Scripts\Models\CostModel.cs" />
+    <Compile Include="Assets\Scripts\Models\Definitions\AvailableMapsDefinitionModel.cs" />
     <Compile Include="Assets\Scripts\Models\Definitions\BiomeDefinitionModel.cs" />
     <Compile Include="Assets\Scripts\Models\Definitions\BuildingDefinitionModel.cs" />
+    <Compile Include="Assets\Scripts\Models\Definitions\MapDefinitionModel.cs" />
     <Compile Include="Assets\Scripts\Models\Definitions\ResourceDefinitionModel.cs" />
     <Compile Include="Assets\Scripts\Models\Definitions\TileLayerDefinitionModel.cs" />
     <Compile Include="Assets\Scripts\Models\ExplorationGameLayerModel.cs" />
@@ -170,6 +172,7 @@
     <None Include="Assets\Definitions\Biomes\Forest.txt" />
     <None Include="Assets\Definitions\Regions\Map1\Kazak Karam Dum.txt" />
     <None Include="Assets\Definitions\Biomes\Plateau.txt" />
+    <None Include="Assets\Definitions\Maps\AvailableMaps.xml" />
     <None Include="Assets\Definitions\TileLayers\Rocks.txt" />
     <None Include="Assets\Definitions\Buildings\Human\Academy.txt" />
     <None Include="Assets\Definitions\Regions\Map1\The Great Desert.txt" />

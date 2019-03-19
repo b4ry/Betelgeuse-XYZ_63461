@@ -1,6 +1,8 @@
 ﻿using Assets.Scripts.Enums;
+using Assets.Scripts.Models.Definitions;
 using Assets.Scripts.Readers;
 using System;
+using System.IO;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
@@ -9,6 +11,8 @@ namespace Assets.Scripts.Controllers.Panels.MainMenu
 {
     public class MainMenuPanelController : MonoBehaviour
     {
+        private readonly string AvailableMapsPath = $"{Directory.GetCurrentDirectory()}/Assets/Definitions/Maps/AvailableMaps.xml";
+
         public GameObject MapsDropdownObject;
         public GameObject RacesDropdownObject;
         public GameObject GameInfoStorageObject;
@@ -33,12 +37,11 @@ namespace Assets.Scripts.Controllers.Panels.MainMenu
 
         private void ReadMaps()
         {
-            var path = $"/Assets/Definitions/Maps/AvailableMaps.txt";
-            string[] availableMaps = FileReader.ReadFile(path, true);
+            var availableMaps = AvailableMapsDefinitionModel.Load(AvailableMapsPath);
 
-            foreach(var availableMap in availableMaps)
+            foreach(var availableMap in availableMaps.Maps)
             {
-                var dropdownOption = new Dropdown.OptionData(availableMap);
+                var dropdownOption = new Dropdown.OptionData(availableMap.MapName);
 
                 mapsDropdown.options.Add(dropdownOption);
             }
