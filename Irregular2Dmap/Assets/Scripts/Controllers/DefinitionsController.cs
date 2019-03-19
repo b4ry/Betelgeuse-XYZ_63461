@@ -124,20 +124,16 @@ namespace Assets.Scripts.Controllers
 
         private void ReadTileLayerDefinitions()
         {
-            var path = $"/Assets/Definitions/TileLayers/AvailableTileLayers.txt";
-            string[] availableTileLayers = FileReader.ReadFile(path, true);
+            var availableTileLayersPath = $"{Directory.GetCurrentDirectory()}/Assets/Definitions/TileLayers/AvailableTileLayers.xml";
+            var availableTileLayers = AvailableTileLayersDefinitionModel.Load(availableTileLayersPath);
 
-            foreach (var availableTileLayer in availableTileLayers)
+            foreach (var availableTileLayer in availableTileLayers.TileLayers)
             {
-                path = $"/Assets/Definitions/TileLayers/{availableTileLayer}.txt";
+                var path = $"{Directory.GetCurrentDirectory()}/Assets/Definitions/TileLayers/{availableTileLayer.Name}.xml";
+                var tileLayerDefinition = TileLayerDefinitionModel.Load(path);
+                var newTileLayerDefinitionModel = new TileLayerDefinitionModel(tileLayerDefinition.Name, tileLayerDefinition.MaterialHardness);
 
-                string[] tileLayerDefinition = FileReader.ReadFile(path, true);
-
-                Enum.TryParse(tileLayerDefinition[1], out MaterialHardnessEnum materialHardness);
-
-                var newTileLayerDefinitionModel = new TileLayerDefinitionModel(tileLayerDefinition[0], materialHardness);
-
-                TileLayerDefinitions.Add(tileLayerDefinition[0], newTileLayerDefinitionModel);
+                TileLayerDefinitions.Add(tileLayerDefinition.Name, newTileLayerDefinitionModel);
             }
         }
     }

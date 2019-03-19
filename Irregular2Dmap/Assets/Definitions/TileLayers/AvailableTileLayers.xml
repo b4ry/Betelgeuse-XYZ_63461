@@ -1,0 +1,7 @@
+<AvailableTileLayers>
+    <TileLayers>
+        <TileLayer name="Grass"></TileLayer>
+        <TileLayer name="Rocks"></TileLayer>
+        <TileLayer name="Igneous"></TileLayer>
+    </TileLayers>
+</AvailableTileLayers>
