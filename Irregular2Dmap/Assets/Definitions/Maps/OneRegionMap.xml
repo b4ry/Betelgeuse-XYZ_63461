@@ -1,0 +1,9 @@
+<Map name="OneRegionMap">
+	<RegionsNumber>
+		1
+	</RegionsNumber>
+	<Regions>
+		<Region name="The Great Desert">
+		</Region>
+	</Regions>
+</Map>

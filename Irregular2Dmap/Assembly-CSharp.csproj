@@ -151,11 +151,11 @@
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Surface-Mobile.shader" />
     <None Include="Assets\Definitions\Resources\Marble.txt" />
     <None Include="Assets\TextMesh Pro\Resources\LineBreaking Leading Characters.txt" />
-    <None Include="Assets\Definitions\Maps\Map1.txt" />
     <None Include="Assets\Definitions\Regions\Arborea\Broken Valley.txt" />
     <None Include="Assets\Definitions\Regions\OneRegionMap\The Great Desert.txt" />
     <None Include="Assets\Definitions\Biomes\Cave.txt" />
     <None Include="Assets\Definitions\Biomes\Mountains.txt" />
+    <None Include="Assets\Definitions\Maps\OneRegionMap.xml" />
     <None Include="Assets\Definitions\Biomes\Desert.txt" />
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMPro_Properties.cginc" />
     <None Include="Assets\Definitions\Resources\Sand.txt" />
