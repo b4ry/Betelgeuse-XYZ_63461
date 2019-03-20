@@ -1,0 +1,18 @@
+<Building name="Fuel Generator">
+    <BuildingType>Economic</BuildingType>
+    <Costs>
+        <ResourceCost>
+            <ResourceName>Wood</ResourceName>
+            <Cost>100</Cost>
+        </ResourceCost>
+        <ResourceCost>
+            <ResourceName>Silver</ResourceName>
+            <Cost>80</Cost>
+        </ResourceCost>
+        <ResourceCost>
+            <ResourceName>Gold</ResourceName>
+            <Cost>50</Cost>
+        </ResourceCost>
+    </Costs>
+    <Available>0</Available>
+</Building>

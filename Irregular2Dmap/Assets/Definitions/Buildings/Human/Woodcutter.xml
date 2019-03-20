@@ -1,0 +1,14 @@
+<Building name="Woodcutter">
+    <BuildingType>Economic</BuildingType>
+    <Costs>
+        <ResourceCost>
+            <ResourceName>Wood</ResourceName>
+            <Cost>10.3</Cost>
+        </ResourceCost>
+        <ResourceCost>
+            <ResourceName>Marble</ResourceName>
+            <Cost>3</Cost>
+        </ResourceCost>
+    </Costs>
+    <Available>1</Available>
+</Building>

@@ -45,29 +45,12 @@ namespace Assets.Scripts.Controllers
         private void ReadBuildingsDefinitions(RaceEnum race)
         {
             var path = $"{Directory.GetCurrentDirectory()}/Assets/Definitions/Buildings/{race.ToString()}";
-            var buildingDefinitionPaths = Directory.GetFiles(path, "*.txt");
+            var buildingDefinitionPaths = Directory.GetFiles(path, "*.xml");
 
             foreach(var buildingDefinitionPath in buildingDefinitionPaths)
             {
-                string[] buildingDefinition = FileReader.ReadFile(buildingDefinitionPath, false);
-
-                Enum.TryParse(buildingDefinition[1], out BuildingTypeEnum buildingType);
-                int.TryParse(buildingDefinition[3], out int isAvailable);
-
-                var costs = buildingDefinition[2].Split(';');
-                var costModel = new CostModel
-                {
-                    Resources = new Dictionary<string, float>()
-                };
-
-                foreach (var cost in costs)
-                {
-                    var splitCost = cost.Split('-');
-
-                    costModel.Resources.Add(splitCost[0], float.Parse(splitCost[1]));
-                }
-
-                var buildingModel = new BuildingDefinitionModel(buildingDefinition[0], buildingType, costModel, Convert.ToBoolean(isAvailable));
+                var buildingDefinition = BuildingDefinitionModel.Load(buildingDefinitionPath);
+                var buildingModel = new BuildingDefinitionModel(buildingDefinition.Name, buildingDefinition.BuildingType, buildingDefinition.Cost, buildingDefinition.Available);
 
                 BuildingDefinitions.Add(buildingModel.Name, buildingModel);
             }

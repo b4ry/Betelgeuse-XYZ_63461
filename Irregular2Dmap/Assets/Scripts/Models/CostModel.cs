@@ -1,9 +1,8 @@
-﻿using System.Collections.Generic;
-
-namespace Assets.Scripts.Models
+﻿namespace Assets.Scripts.Models
 {
-    public struct CostModel
+    public struct ResourceCostModel
     {
-        public Dictionary<string, float> Resources { get; set; }
+        public string ResourceName { get; set; }
+        public float Cost { get; set; }
     }
 }
