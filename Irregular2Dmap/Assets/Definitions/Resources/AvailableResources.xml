@@ -1,0 +1,15 @@
+<AvailableResources>
+    <Resources>
+        <Resource name="Iron"></Resource>
+        <Resource name="Silver"></Resource>
+        <Resource name="Gold"></Resource>
+        <Resource name="Sand"></Resource>
+        <Resource name="Wood"></Resource>
+        <Resource name="Water"></Resource>
+        <Resource name="Fish"></Resource>
+        <Resource name="Granite"></Resource>
+        <Resource name="Marble"></Resource>
+        <Resource name="Wheat"></Resource>
+        <Resource name="Elderflower"></Resource>
+    </Resources>
+</AvailableResources>

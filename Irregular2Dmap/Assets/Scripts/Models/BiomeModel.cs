@@ -30,7 +30,7 @@ namespace Assets.Scripts.Models
 
             foreach(var resource in resources)
             {
-                var newResourceModel = new ResourceModel(resource.Name, resource.RarityEnum);
+                var newResourceModel = new ResourceModel(resource.Name, resource.Rarity);
 
                 Resources.Add(newResourceModel);
             }

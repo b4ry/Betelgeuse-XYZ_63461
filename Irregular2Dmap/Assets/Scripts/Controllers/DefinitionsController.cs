@@ -75,20 +75,16 @@ namespace Assets.Scripts.Controllers
 
         private void ReadResourceDefinitions()
         {
-            var path = $"/Assets/Definitions/Resources/AvailableResources.txt";
-            string[] availableResources = FileReader.ReadFile(path, true);
+            var availableResourcesPath = $"{Directory.GetCurrentDirectory()}/Assets/Definitions/Resources/AvailableResources.xml";
+            var availableResources = AvailableResourcesDefinitionModel.Load(availableResourcesPath);
 
-            foreach (var availableResource in availableResources)
+            foreach (var availableResource in availableResources.Resources)
             {
-                path = $"/Assets/Definitions/Resources/{availableResource}.txt";
+                var path = $"{Directory.GetCurrentDirectory()}/Assets/Definitions/Resources/{availableResource.Name}.xml";
+                var resourceDefinition = ResourceDefinitionModel.Load(path);
+                var newResourceDefinitionModel = new ResourceDefinitionModel(resourceDefinition.Name, resourceDefinition.Rarity);
 
-                string[] resourceDefinition = FileReader.ReadFile(path, true);
-
-                Enum.TryParse(resourceDefinition[1], out RarityEnum resourceRarity);
-
-                var newResourceDefinitionModel = new ResourceDefinitionModel(resourceDefinition[0], resourceRarity);
-
-                ResourceDefinitions.Add(resourceDefinition[0], newResourceDefinitionModel);
+                ResourceDefinitions.Add(resourceDefinition.Name, newResourceDefinitionModel);
             }
         }
 
@@ -111,7 +107,7 @@ namespace Assets.Scripts.Controllers
                 foreach(var resource in resources)
                 {
                     var resourceDefinition = ResourceDefinitions[resource];
-                    var newResourceDefinitionModel = new ResourceDefinitionModel(resourceDefinition.Name, resourceDefinition.RarityEnum);
+                    var newResourceDefinitionModel = new ResourceDefinitionModel(resourceDefinition.Name, resourceDefinition.Rarity);
 
                     biomeResourceDefinitionModels.Add(newResourceDefinitionModel);
                 }
