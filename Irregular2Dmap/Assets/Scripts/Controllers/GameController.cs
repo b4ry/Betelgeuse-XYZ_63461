@@ -2,7 +2,6 @@
 using Assets.Scripts.Factories;
 using Assets.Scripts.Managers.Player;
 using Assets.Scripts.Models.Definitions;
-using Assets.Scripts.Readers;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;

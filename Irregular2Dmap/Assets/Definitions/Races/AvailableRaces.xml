@@ -1,0 +1,6 @@
+<AvailableRaces>
+    <Races>
+        <Race name="Human"></Race>
+        <Race name="TechHuman"></Race>
+    </Races>
+</AvailableRaces>

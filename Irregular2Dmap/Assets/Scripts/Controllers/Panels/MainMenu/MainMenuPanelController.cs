@@ -1,6 +1,5 @@
 ﻿using Assets.Scripts.Enums;
 using Assets.Scripts.Models.Definitions;
-using Assets.Scripts.Readers;
 using System;
 using System.IO;
 using System.Linq;
@@ -12,6 +11,7 @@ namespace Assets.Scripts.Controllers.Panels.MainMenu
     public class MainMenuPanelController : MonoBehaviour
     {
         private readonly string AvailableMapsPath = $"{Directory.GetCurrentDirectory()}/Assets/Definitions/Maps/AvailableMaps.xml";
+        private readonly string AvailableRacesPath = $"{Directory.GetCurrentDirectory()}/Assets/Definitions/Races/AvailableRaces.xml";
 
         public GameObject MapsDropdownObject;
         public GameObject RacesDropdownObject;
@@ -49,12 +49,11 @@ namespace Assets.Scripts.Controllers.Panels.MainMenu
 
         private void ReadRaces()
         {
-            var path = $"/Assets/Definitions/Races/AvailableRaces.txt";
-            string[] availableRaces = FileReader.ReadFile(path, true);
+            var availableRaces = AvailableRacesDefinitionModel.Load(AvailableRacesPath);
 
-            foreach (var availableRace in availableRaces)
+            foreach (var availableRace in availableRaces.Races)
             {
-                var dropdownOption = new Dropdown.OptionData(availableRace);
+                var dropdownOption = new Dropdown.OptionData(availableRace.Name);
 
                 racesDropdown.options.Add(dropdownOption);
             }
