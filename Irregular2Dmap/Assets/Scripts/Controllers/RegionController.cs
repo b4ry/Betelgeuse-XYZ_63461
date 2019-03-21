@@ -1,8 +1,10 @@
 ﻿using Assets.Scripts.Enums;
 using Assets.Scripts.Managers.WorldMap;
 using Assets.Scripts.Models;
+using Assets.Scripts.Models.Definitions;
 using Assets.Scripts.Readers;
 using System;
+using System.IO;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -32,17 +34,12 @@ namespace Assets.Scripts.Controllers
 
         void Start()
         {
-            var path = $"/Assets/Definitions/Regions/{GameController.Instance.MapName}/{gameObject.name}.txt";
+            var path = $"{Directory.GetCurrentDirectory()}/Assets/Definitions/Regions/{GameController.Instance.MapName}/{gameObject.name}.xml";
 
-            string[] regionDefinition = FileReader.ReadFile(path, true);
-            string[] biomeNames = regionDefinition[2].Split(';');
-            string[] neighbourNames = regionDefinition[3].Split(';');
+            var regionDefinition = RegionDefinitionModel.Load(path);
+            var neighbourRegions = GameController.Instance.RegionObjects.Where(region => regionDefinition.Neighbours.Any(rd => rd.Name == region.name)).ToList();
 
-            var neighbourRegions = GameController.Instance.RegionObjects.Where(region => neighbourNames.Contains(region.name)).ToList();
-
-            Enum.TryParse(regionDefinition[1], out RegionSizeEnum regionSizeEnum);
-
-            RegionModel = new RegionModel(regionDefinition[0], regionSizeEnum, biomeNames, neighbourRegions);
+            RegionModel = new RegionModel(regionDefinition.Name, regionDefinition.Size, regionDefinition.Biomes, neighbourRegions);
 
             if (isInitial)
             {

@@ -1,0 +1,11 @@
+<Region name="The Great Desert">
+    <Size>Big</Size>
+    <Biomes>
+        <Biome name="Desert"></Biome>
+    </Biomes>
+    <Neighbours>
+        <Neighbour name="Kazak Karam Dum"></Neighbour>
+        <Neighbour name="Broken Valley"></Neighbour>
+        <Neighbour name="Dohr'andor"></Neighbour>
+    </Neighbours>
+</Region>

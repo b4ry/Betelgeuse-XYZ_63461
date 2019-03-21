@@ -158,6 +158,7 @@
     <None Include="Assets\Definitions\Resources\Granite.xml" />
     <None Include="Assets\Definitions\Regions\Arborea\Broken Valley.txt" />
     <None Include="Assets\Definitions\Regions\OneRegionMap\The Great Desert.txt" />
+    <None Include="Assets\Definitions\Regions\Arborea\Broken Valley.xml" />
     <None Include="Assets\Definitions\Maps\OneRegionMap.xml" />
     <None Include="Assets\Definitions\TileLayers\Igneous.xml" />
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMPro_Properties.cginc" />
@@ -186,6 +187,7 @@
     <None Include="Assets\TextMesh Pro\Examples &amp; Extras\Fonts\Anton OFL.txt" />
     <None Include="Assets\Definitions\Resources\Marble.xml" />
     <None Include="Assets\Definitions\Biomes\River.xml" />
+    <None Include="Assets\Definitions\Regions\Arborea\Kazak Karam Dum.xml" />
     <None Include="Assets\Definitions\Regions\Arborea\Dohr'andor.txt" />
     <None Include="Assets\TextMesh Pro\Examples &amp; Extras\Fonts\Bangers - OFL.txt" />
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_Bitmap-Mobile.shader" />
@@ -195,6 +197,7 @@
     <None Include="Assets\Definitions\Biomes\AvailableBiomes.xml" />
     <None Include="Assets\Definitions\Resources\Silver.xml" />
     <None Include="Assets\Definitions\Biomes\Mountains.xml" />
+    <None Include="Assets\Definitions\Regions\Arborea\The Great Desert.xml" />
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF Overlay.shader" />
     <None Include="Assets\TextMesh Pro\Examples &amp; Extras\Fonts\LiberationSans - OFL.txt" />
     <None Include="Assets\Definitions\Biomes\Plateau.xml" />
@@ -205,6 +208,7 @@
     <None Include="Assets\Definitions\Resources\AvailableResources.xml" />
     <None Include="Assets\Definitions\TileLayers\Grass.xml" />
     <None Include="Assets\Definitions\Resources\Wheat.xml" />
+    <None Include="Assets\Definitions\Regions\Arborea\Dohr'andor.xml" />
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_Bitmap.shader" />
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMPro.cginc" />
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF.shader" />

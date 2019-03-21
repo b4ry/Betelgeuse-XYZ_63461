@@ -1,0 +1,12 @@
+<Region name="Dohr'andor">
+    <Size>Small</Size>
+    <Biomes>
+        <Biome name="Plains"></Biome>
+        <Biome name="Mountains"></Biome>
+        <Biome name="Lake"></Biome>
+    </Biomes>
+    <Neighbours>
+        <Neighbour name="The Great Desert"></Neighbour>
+        <Neighbour name="Broken Valley"></Neighbour>
+    </Neighbours>
+</Region>

@@ -1,5 +1,6 @@
 ﻿using Assets.Scripts.Controllers;
 using Assets.Scripts.Enums;
+using Assets.Scripts.Models.Definitions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,7 +19,7 @@ namespace Assets.Scripts.Models
         public bool Visited { get; set; }
         public OddityModel Oddity { get; set; }
 
-        public RegionModel(string name, RegionSizeEnum size, string[] biomeNames, List<GameObject> neighbourRegions)
+        public RegionModel(string name, RegionSizeEnum size, List<BiomeDefinitionModel> biomes, List<GameObject> neighbourRegions)
         {
             Name = name;
             Size = size;
@@ -26,7 +27,7 @@ namespace Assets.Scripts.Models
             Visited = false;
 
             RandomizeOddityRating();
-            CreateBiomes(biomeNames);
+            CreateBiomes(biomes);
             CalculateResourcesAvailability();
 
             PlayerBuildings = new List<BuildingModel>();
@@ -42,13 +43,13 @@ namespace Assets.Scripts.Models
             }
         }
 
-        private void CreateBiomes(string[] biomeNames)
+        private void CreateBiomes(List<BiomeDefinitionModel> biomes)
         {
             Biomes = new List<BiomeModel>();
 
-            foreach(var biomeName in biomeNames)
+            foreach(var biome in biomes)
             {
-                var biomeModel = DefinitionsController.Instance.BiomeDefinitions[biomeName];
+                var biomeModel = DefinitionsController.Instance.BiomeDefinitions[biome.Name];
                 var newBiomeModel = new BiomeModel(biomeModel.Name, biomeModel.Rarity, biomeModel.ResourceDefinitions);
 
                 Biomes.Add(newBiomeModel);

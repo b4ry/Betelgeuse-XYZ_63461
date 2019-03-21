@@ -1,0 +1,11 @@
+<Region name="Kazak Karam Dum">
+    <Size>Medium</Size>
+    <Biomes>
+        <Biome name="Plains"></Biome>
+        <Biome name="River"></Biome>
+        <Biome name="Forest"></Biome>
+    </Biomes>
+    <Neighbours>
+        <Neighbour name="The Great Desert"></Neighbour>
+    </Neighbours>
+</Region>

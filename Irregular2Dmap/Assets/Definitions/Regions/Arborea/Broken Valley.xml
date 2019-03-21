@@ -1,0 +1,16 @@
+<Region name="Broken Valley">
+    <Size>Big</Size>
+    <Biomes>
+        <Biome name="Plains"></Biome>
+        <Biome name="Mountains"></Biome>
+        <Biome name="Plateau"></Biome>
+        <Biome name="River"></Biome>
+        <Biome name="Forest"></Biome>
+        <Biome name="Desert"></Biome>
+        <Biome name="Lake"></Biome>
+    </Biomes>
+    <Neighbours>
+        <Neighbour name="The Great Desert"></Neighbour>
+        <Neighbour name="Dohr'andor"></Neighbour>
+    </Neighbours>
+</Region>
