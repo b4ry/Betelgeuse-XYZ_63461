@@ -1,0 +1,8 @@
+<Biome name="Cave">
+    <Rarity>Common</Rarity>
+    <Resources>
+        <Resource name="Iron"></Resource>
+        <Resource name="Silver"></Resource>
+        <Resource name="Gold"></Resource>
+    </Resources>
+</Biome>

@@ -1,8 +1,0 @@
-Plains
-Mountains
-Plateau
-River
-Forest
-Desert
-Lake
-Cave

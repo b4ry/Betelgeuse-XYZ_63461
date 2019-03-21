@@ -1,0 +1,7 @@
+<Biome name="Mountains">
+    <Rarity>Common</Rarity>
+    <Resources>
+        <Resource name="Granite"></Resource>
+        <Resource name="Marble"></Resource>
+    </Resources>
+</Biome>

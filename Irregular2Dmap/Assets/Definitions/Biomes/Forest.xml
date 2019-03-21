@@ -1,0 +1,6 @@
+<Biome name="Forest">
+    <Rarity>Common</Rarity>
+    <Resources>
+        <Resource name="Wood"></Resource>
+    </Resources>
+</Biome>

@@ -1,0 +1,7 @@
+<Biome name="Plateau">
+    <Rarity>Common</Rarity>
+    <Resources>
+        <Resource name="Elderflower"></Resource>
+        <Resource name="Marble"></Resource>
+    </Resources>
+</Biome>

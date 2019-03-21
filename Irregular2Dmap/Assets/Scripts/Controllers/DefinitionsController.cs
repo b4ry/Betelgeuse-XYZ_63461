@@ -73,31 +73,26 @@ namespace Assets.Scripts.Controllers
 
         private void ReadBiomeDefinitions()
         {
-            var path = $"/Assets/Definitions/Biomes/AvailableBiomes.txt";
-            string[] availableBiomes = FileReader.ReadFile(path, true);
+            var availableBiomesPath = $"{Directory.GetCurrentDirectory()}/Assets/Definitions/Biomes/AvailableBiomes.xml";
+            var availableBiomes = AvailableBiomesDefinitionModel.Load(availableBiomesPath);
 
-            foreach (var availableBiome in availableBiomes)
+            foreach (var availableBiome in availableBiomes.Biomes)
             {
-                path = $"/Assets/Definitions/Biomes/{availableBiome}.txt";
-
-                string[] biomeDefinition = FileReader.ReadFile(path, true);
-
-                Enum.TryParse(biomeDefinition[1], out RarityEnum biomeRarity);
-
+                var path = $"{Directory.GetCurrentDirectory()}/Assets/Definitions/Biomes/{availableBiome.Name}.xml";
+                var biomeDefinition = BiomeDefinitionModel.Load(path);              
                 var biomeResourceDefinitionModels = new List<ResourceDefinitionModel>();
-                var resources = biomeDefinition[2].Split(';');
                 
-                foreach(var resource in resources)
+                foreach(var resource in biomeDefinition.ResourceDefinitions)
                 {
-                    var resourceDefinition = ResourceDefinitions[resource];
+                    var resourceDefinition = ResourceDefinitions[resource.Name];
                     var newResourceDefinitionModel = new ResourceDefinitionModel(resourceDefinition.Name, resourceDefinition.Rarity);
 
                     biomeResourceDefinitionModels.Add(newResourceDefinitionModel);
                 }
 
-                var newBiomeDefinitionModel = new BiomeDefinitionModel(biomeDefinition[0], biomeRarity, biomeResourceDefinitionModels);
+                var newBiomeDefinitionModel = new BiomeDefinitionModel(biomeDefinition.Name, biomeDefinition.Rarity, biomeResourceDefinitionModels);
 
-                BiomeDefinitions.Add(biomeDefinition[0], newBiomeDefinitionModel);
+                BiomeDefinitions.Add(biomeDefinition.Name, newBiomeDefinitionModel);
             }
         }
 
