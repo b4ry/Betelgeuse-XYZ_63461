@@ -1,0 +1,8 @@
+<Region name="The Great Desert">
+    <Size>Big</Size>
+    <Biomes>
+        <Biome name="Desert"></Biome>
+    </Biomes>
+    <Neighbours>
+    </Neighbours>
+</Region>
