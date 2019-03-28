@@ -26,11 +26,14 @@ namespace Assets.Scripts.Controllers
             gameInfoStorageController = GameInfoStorageObject.GetComponent<GameInfoStorageController>();
             availableRaces = AvailableRacesDefinitionModel.Load(AvailableRacesPath).Races;
 
+            var dropdownOptions = RaceDropdownPrefab.GetComponent<Dropdown>().options;
+            dropdownOptions.Clear();
+
             foreach (var availableRace in availableRaces)
             {
                 var dropdownOption = new Dropdown.OptionData(availableRace.Name);
 
-                RaceDropdownPrefab.GetComponent<Dropdown>().options.Add(dropdownOption);
+                dropdownOptions.Add(dropdownOption);
             }
         }
 
