@@ -11,6 +11,7 @@ namespace Assets.Scripts.Managers.Player
     {
         public RaceEnum Race { get; set; }
         public List<BuildingModel> ShipModules { get; set; }
+        public GameObject InitialRegion { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
 
         public TechPlayerManager()
         {

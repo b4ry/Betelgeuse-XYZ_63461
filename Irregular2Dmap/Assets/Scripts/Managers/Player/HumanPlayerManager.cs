@@ -8,6 +8,7 @@ namespace Assets.Scripts.Managers.Player
     public class HumanPlayerManager : IPlayerManager
     {
         public RaceEnum Race { get; set; }
+        public GameObject InitialRegion { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
 
         public HumanPlayerManager()
         {

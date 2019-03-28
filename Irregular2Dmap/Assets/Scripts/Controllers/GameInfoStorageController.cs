@@ -1,4 +1,5 @@
 ﻿using Assets.Scripts.Enums;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Assets.Scripts.Controllers
@@ -9,6 +10,8 @@ namespace Assets.Scripts.Controllers
 
         public RaceEnum Race;
         public string MapName;
+        public int PlayersNumber = 1;
+        public Dictionary<string, RaceEnum> Players;
 
         void Awake()
         {

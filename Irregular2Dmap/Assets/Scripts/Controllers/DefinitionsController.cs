@@ -1,8 +1,5 @@
 ﻿using Assets.Scripts.Enums;
-using Assets.Scripts.Models;
 using Assets.Scripts.Models.Definitions;
-using Assets.Scripts.Readers;
-using System;
 using System.Collections.Generic;
 using System.IO;
 using UnityEngine;

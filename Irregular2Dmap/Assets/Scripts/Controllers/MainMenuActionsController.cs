@@ -1,5 +1,6 @@
 ﻿using Assets.Scripts.Enums;
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -9,8 +10,11 @@ namespace Assets.Scripts.Controllers
     public class MainMenuActionsController : MonoBehaviour
     {
         public GameObject GameInfoStorageObject;
+        public GameObject RaceDropdownPrefab;
+        public GameObject MainMenuPanelObject;
 
         private GameInfoStorageController gameInfoStorageController;
+        private List<GameObject> newRaceDropdowns = new List<GameObject>();
 
         void Awake()
         {
@@ -25,6 +29,37 @@ namespace Assets.Scripts.Controllers
         public void PickRace(Dropdown racesDropdown)
         {
             gameInfoStorageController.Race = (RaceEnum) Enum.Parse(typeof(RaceEnum), racesDropdown.options[racesDropdown.value].text);
+        }
+
+        public void SetNumberOfPlayers(Slider playersNumberSlider)
+        {
+            gameInfoStorageController.PlayersNumber = (int) playersNumberSlider.value;
+
+            if(gameInfoStorageController.PlayersNumber > 1 && gameInfoStorageController.PlayersNumber > newRaceDropdowns.Count)
+            {
+                var dropdownsToAdd = gameInfoStorageController.PlayersNumber - newRaceDropdowns.Count - 1;
+
+                for (int i = 0; i < dropdownsToAdd; i++)
+                {
+                    var racesDropdown = Instantiate(RaceDropdownPrefab, MainMenuPanelObject.transform);
+                    racesDropdown.transform.localPosition += new Vector3(0, (newRaceDropdowns.Count + 1) * (-40));
+
+                    newRaceDropdowns.Add(racesDropdown);
+                }
+            } 
+            else if(gameInfoStorageController.PlayersNumber == 1 || gameInfoStorageController.PlayersNumber <= newRaceDropdowns.Count + 1)
+            {
+                var dropdownsToRemove = newRaceDropdowns.Count + 1 - gameInfoStorageController.PlayersNumber;
+
+                for(var i = 0; i < dropdownsToRemove; i++)
+                {
+                    var indexLast = newRaceDropdowns.Count - 1;
+                    var dropdownToRemove = newRaceDropdowns[indexLast];
+
+                    Destroy(dropdownToRemove);
+                    newRaceDropdowns.RemoveAt(indexLast);
+                }
+            }
         }
 
         public void StartGame()
