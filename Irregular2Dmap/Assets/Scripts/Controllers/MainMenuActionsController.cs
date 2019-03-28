@@ -1,6 +1,8 @@
 ﻿using Assets.Scripts.Enums;
+using Assets.Scripts.Models.Definitions;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -9,16 +11,27 @@ namespace Assets.Scripts.Controllers
 {
     public class MainMenuActionsController : MonoBehaviour
     {
+        private readonly string AvailableRacesPath = $"{Directory.GetCurrentDirectory()}/Assets/Definitions/Races/AvailableRaces.xml";
+
         public GameObject GameInfoStorageObject;
         public GameObject RaceDropdownPrefab;
         public GameObject MainMenuPanelObject;
 
         private GameInfoStorageController gameInfoStorageController;
         private List<GameObject> newRaceDropdowns = new List<GameObject>();
+        private List<RaceDefinitionModel> availableRaces;
 
         void Awake()
         {
             gameInfoStorageController = GameInfoStorageObject.GetComponent<GameInfoStorageController>();
+            availableRaces = AvailableRacesDefinitionModel.Load(AvailableRacesPath).Races;
+
+            foreach (var availableRace in availableRaces)
+            {
+                var dropdownOption = new Dropdown.OptionData(availableRace.Name);
+
+                RaceDropdownPrefab.GetComponent<Dropdown>().options.Add(dropdownOption);
+            }
         }
 
         public void PickMap(Dropdown mapsDropdown)
