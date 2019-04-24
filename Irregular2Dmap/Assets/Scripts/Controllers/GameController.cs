@@ -63,7 +63,7 @@ namespace Assets.Scripts.Controllers
             regionFOWSprites = Resources.LoadAll<Sprite>($"Maps/Regions/{MapName}/FOWs").ToList();
             regionFOWOutlineSprites = Resources.LoadAll<Sprite>($"Maps/Regions/{MapName}/FOWOutlines").ToList();
 
-            Race = GameInfoStorageController.Instance.Race;
+            Race = GameInfoStorageController.Instance.Players.FirstOrDefault().Value;
 
             BuildMapFromItsDefinition();
 
@@ -74,6 +74,11 @@ namespace Assets.Scripts.Controllers
             initialRegion.GetComponent<RegionController>().SetInitial();
 
             DontDestroyOnLoad(gameObject);
+
+            foreach(var player in GameInfoStorageController.Instance.Players)
+            {
+                Debug.Log($"{player.Key} : {player.Value}");
+            }
         }
 
         private void BuildMapFromItsDefinition()

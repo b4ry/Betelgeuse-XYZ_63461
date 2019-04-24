@@ -26,6 +26,11 @@ namespace Assets.Scripts.Controllers
             gameInfoStorageController = GameInfoStorageObject.GetComponent<GameInfoStorageController>();
             availableRaces = AvailableRacesDefinitionModel.Load(AvailableRacesPath).Races;
 
+            var racesDropdown = Instantiate(RaceDropdownPrefab, MainMenuPanelObject.transform);
+            racesDropdown.transform.localPosition += new Vector3(0, 0);
+
+            newRaceDropdowns.Add(racesDropdown);
+
             var dropdownOptions = RaceDropdownPrefab.GetComponent<Dropdown>().options;
             dropdownOptions.Clear();
 
@@ -42,10 +47,10 @@ namespace Assets.Scripts.Controllers
             gameInfoStorageController.MapName = mapsDropdown.options[mapsDropdown.value].text;
         }
 
-        public void PickRace(Dropdown racesDropdown)
-        {
-            gameInfoStorageController.Race = (RaceEnum) Enum.Parse(typeof(RaceEnum), racesDropdown.options[racesDropdown.value].text);
-        }
+        //public void PickRace(Dropdown racesDropdown)
+        //{
+        //    gameInfoStorageController.Race = (RaceEnum) Enum.Parse(typeof(RaceEnum), racesDropdown.options[racesDropdown.value].text);
+        //}
 
         public void SetNumberOfPlayers(Slider playersNumberSlider)
         {
@@ -53,19 +58,19 @@ namespace Assets.Scripts.Controllers
 
             if(gameInfoStorageController.PlayersNumber > 1 && gameInfoStorageController.PlayersNumber > newRaceDropdowns.Count)
             {
-                var dropdownsToAdd = gameInfoStorageController.PlayersNumber - newRaceDropdowns.Count - 1;
+                var dropdownsToAdd = gameInfoStorageController.PlayersNumber - newRaceDropdowns.Count;
 
                 for (int i = 0; i < dropdownsToAdd; i++)
                 {
                     var racesDropdown = Instantiate(RaceDropdownPrefab, MainMenuPanelObject.transform);
-                    racesDropdown.transform.localPosition += new Vector3(0, (newRaceDropdowns.Count + 1) * (-40));
+                    racesDropdown.transform.localPosition += new Vector3(0, newRaceDropdowns.Count * (-40));
 
                     newRaceDropdowns.Add(racesDropdown);
                 }
             } 
-            else if(gameInfoStorageController.PlayersNumber == 1 || gameInfoStorageController.PlayersNumber <= newRaceDropdowns.Count + 1)
+            else if(gameInfoStorageController.PlayersNumber == 1 || gameInfoStorageController.PlayersNumber < newRaceDropdowns.Count)
             {
-                var dropdownsToRemove = newRaceDropdowns.Count + 1 - gameInfoStorageController.PlayersNumber;
+                var dropdownsToRemove = (newRaceDropdowns.Count) - gameInfoStorageController.PlayersNumber;
 
                 for(var i = 0; i < dropdownsToRemove; i++)
                 {
@@ -80,6 +85,14 @@ namespace Assets.Scripts.Controllers
 
         public void StartGame()
         {
+            for (int i = 0; i < newRaceDropdowns.Count; i++)
+            {
+                var dropdown = newRaceDropdowns[i].GetComponent<Dropdown>();
+                var playerRace = (RaceEnum)Enum.Parse(typeof(RaceEnum), dropdown.options[dropdown.value].text);
+
+                gameInfoStorageController.Players.Add($"Player_{i+1}", playerRace);
+            }
+
             SceneManager.LoadScene("GameScene");
         }
     }

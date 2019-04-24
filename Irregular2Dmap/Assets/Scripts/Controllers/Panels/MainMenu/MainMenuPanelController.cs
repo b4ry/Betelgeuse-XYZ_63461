@@ -18,20 +18,20 @@ namespace Assets.Scripts.Controllers.Panels.MainMenu
         public GameObject GameInfoStorageObject;
 
         private Dropdown mapsDropdown;
-        private Dropdown racesDropdown;
+        //private Dropdown racesDropdown;
         private GameInfoStorageController gameInfoStorageController;
 
         void Awake()
         {
             mapsDropdown = MapsDropdownObject.GetComponent<Dropdown>();
-            racesDropdown = RacesDropdownObject.GetComponent<Dropdown>();
+            //racesDropdown = RacesDropdownObject.GetComponent<Dropdown>();
 
             ReadMaps();
-            ReadRaces();
+            //ReadRaces();
 
             var gameInfoStorageController = GameInfoStorageObject.GetComponent<GameInfoStorageController>();
 
-            gameInfoStorageController.Race = (RaceEnum)Enum.Parse(typeof(RaceEnum), racesDropdown.options.FirstOrDefault().text);
+            //gameInfoStorageController.Race = (RaceEnum)Enum.Parse(typeof(RaceEnum), racesDropdown.options.FirstOrDefault().text);
             gameInfoStorageController.MapName = mapsDropdown.options.FirstOrDefault().text;
         }
 
@@ -47,16 +47,16 @@ namespace Assets.Scripts.Controllers.Panels.MainMenu
             }
         }
 
-        private void ReadRaces()
-        {
-            var availableRaces = AvailableRacesDefinitionModel.Load(AvailableRacesPath);
+        //private void ReadRaces()
+        //{
+        //    var availableRaces = AvailableRacesDefinitionModel.Load(AvailableRacesPath);
 
-            foreach (var availableRace in availableRaces.Races)
-            {
-                var dropdownOption = new Dropdown.OptionData(availableRace.Name);
+        //    foreach (var availableRace in availableRaces.Races)
+        //    {
+        //        var dropdownOption = new Dropdown.OptionData(availableRace.Name);
 
-                racesDropdown.options.Add(dropdownOption);
-            }
-        }
+        //        racesDropdown.options.Add(dropdownOption);
+        //    }
+        //}
     }
 }

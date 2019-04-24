@@ -8,7 +8,6 @@ namespace Assets.Scripts.Controllers
     {
         public static GameInfoStorageController Instance = null;
 
-        public RaceEnum Race;
         public string MapName;
         public int PlayersNumber = 1;
         public Dictionary<string, RaceEnum> Players;
@@ -25,6 +24,8 @@ namespace Assets.Scripts.Controllers
             }
 
             DontDestroyOnLoad(gameObject);
+
+            Players = new Dictionary<string, RaceEnum>();
         }
     }
 }
