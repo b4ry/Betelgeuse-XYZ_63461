@@ -12,6 +12,7 @@ namespace Assets.Scripts.Controllers
     public class MainMenuActionsController : MonoBehaviour
     {
         private readonly string AvailableRacesPath = $"{Directory.GetCurrentDirectory()}/Assets/Definitions/Races/AvailableRaces.xml";
+        private readonly string GameScene = "GameScene";
 
         public GameObject GameInfoStorageObject;
         public GameObject RaceDropdownPrefab;
@@ -26,11 +27,6 @@ namespace Assets.Scripts.Controllers
             gameInfoStorageController = GameInfoStorageObject.GetComponent<GameInfoStorageController>();
             availableRaces = AvailableRacesDefinitionModel.Load(AvailableRacesPath).Races;
 
-            var racesDropdown = Instantiate(RaceDropdownPrefab, MainMenuPanelObject.transform);
-            racesDropdown.transform.localPosition += new Vector3(0, 0);
-
-            newRaceDropdowns.Add(racesDropdown);
-
             var dropdownOptions = RaceDropdownPrefab.GetComponent<Dropdown>().options;
             dropdownOptions.Clear();
 
@@ -40,17 +36,17 @@ namespace Assets.Scripts.Controllers
 
                 dropdownOptions.Add(dropdownOption);
             }
+
+            var initialRacesDropdown = Instantiate(RaceDropdownPrefab, MainMenuPanelObject.transform);
+            initialRacesDropdown.transform.localPosition += new Vector3(0, 0);
+
+            newRaceDropdowns.Add(initialRacesDropdown);
         }
 
         public void PickMap(Dropdown mapsDropdown)
         {
             gameInfoStorageController.MapName = mapsDropdown.options[mapsDropdown.value].text;
         }
-
-        //public void PickRace(Dropdown racesDropdown)
-        //{
-        //    gameInfoStorageController.Race = (RaceEnum) Enum.Parse(typeof(RaceEnum), racesDropdown.options[racesDropdown.value].text);
-        //}
 
         public void SetNumberOfPlayers(Slider playersNumberSlider)
         {
@@ -93,7 +89,7 @@ namespace Assets.Scripts.Controllers
                 gameInfoStorageController.Players.Add($"Player_{i+1}", playerRace);
             }
 
-            SceneManager.LoadScene("GameScene");
+            SceneManager.LoadScene(GameScene);
         }
     }
 }
