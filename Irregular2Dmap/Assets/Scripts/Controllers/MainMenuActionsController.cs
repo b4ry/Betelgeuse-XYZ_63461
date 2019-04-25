@@ -1,4 +1,5 @@
 ﻿using Assets.Scripts.Enums;
+using Assets.Scripts.Models;
 using Assets.Scripts.Models.Definitions;
 using System;
 using System.Collections.Generic;
@@ -85,8 +86,12 @@ namespace Assets.Scripts.Controllers
             {
                 var dropdown = newRaceDropdowns[i].GetComponent<Dropdown>();
                 var playerRace = (RaceEnum)Enum.Parse(typeof(RaceEnum), dropdown.options[dropdown.value].text);
+                var newPlayer = new PlayerModel();
 
-                gameInfoStorageController.Players.Add($"Player_{i+1}", playerRace);
+                newPlayer.Nickname = $"Player_{i + 1}";
+                newPlayer.Race = playerRace;
+
+                gameInfoStorageController.Players.Add(newPlayer);
             }
 
             SceneManager.LoadScene(GameScene);

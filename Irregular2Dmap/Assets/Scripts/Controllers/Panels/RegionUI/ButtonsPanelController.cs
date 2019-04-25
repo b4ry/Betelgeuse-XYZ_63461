@@ -23,7 +23,7 @@ namespace Assets.Scripts.Controllers.Panels.RegionUI
 
         void Start()
         {
-            var race = GameController.Instance.PlayerManager.Race;
+            var race = GameController.Instance.ActivePlayer.Race;
 
             if(race == RaceEnum.Human)
             {
@@ -57,10 +57,10 @@ namespace Assets.Scripts.Controllers.Panels.RegionUI
             BuildingPanel.SetActive(true);
 
             Debug.Log("BUILT");
-            GameController.Instance.PlayerManager.DisplayBuiltBuildings(SelectedRegionsController.SelectedRegionObjects.FirstOrDefault().name);
+            GameController.Instance.ActivePlayer.PlayerManager.DisplayBuiltBuildings(SelectedRegionsController.SelectedRegionObjects.FirstOrDefault().name);
 
             Debug.Log("AVAILABLE");
-            GameController.Instance.PlayerManager.DisplayAvailableBuildings(SelectedRegionsController.SelectedRegionObjects.FirstOrDefault().name);
+            GameController.Instance.ActivePlayer.PlayerManager.DisplayAvailableBuildings(SelectedRegionsController.SelectedRegionObjects.FirstOrDefault().name);
         }
 
         public void DisplayDevelopShipPanel()
@@ -69,10 +69,10 @@ namespace Assets.Scripts.Controllers.Panels.RegionUI
             DevelopShipPanel.SetActive(true);
 
             Debug.Log("BUILT");
-            GameController.Instance.PlayerManager.DisplayBuiltBuildings("");
+            GameController.Instance.ActivePlayer.PlayerManager.DisplayBuiltBuildings("");
 
             Debug.Log("AVAILABLE");
-            GameController.Instance.PlayerManager.DisplayAvailableBuildings("");
+            GameController.Instance.ActivePlayer.PlayerManager.DisplayAvailableBuildings("");
         }
     }
 }

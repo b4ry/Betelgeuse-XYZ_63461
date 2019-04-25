@@ -14,7 +14,9 @@ namespace Assets.Scripts.Managers.Player
         {
             foreach(var regionObject in GameController.Instance.RegionObjects)
             {
-                regionObject.GetComponent<RegionController>().RegionModel.PopulatePlayerBuildings();
+                var regionController = regionObject.GetComponent<RegionController>();
+
+                regionController.RegionModel.PopulatePlayerBuildings(RaceEnum.Human);
             }
         }
 

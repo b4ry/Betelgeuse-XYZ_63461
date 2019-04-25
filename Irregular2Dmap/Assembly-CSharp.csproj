@@ -113,6 +113,7 @@
     <Compile Include="Assets\Scripts\Models\ExplorationGameLayerModel.cs" />
     <Compile Include="Assets\Scripts\Models\IFoundableObjectModel.cs" />
     <Compile Include="Assets\Scripts\Models\OddityModel.cs" />
+    <Compile Include="Assets\Scripts\Models\PlayerModel.cs" />
     <Compile Include="Assets\Scripts\Models\RegionModel.cs" />
     <Compile Include="Assets\Scripts\Models\ResourceModel.cs" />
     <Compile Include="Assets\Scripts\Models\TileLayerModel.cs" />

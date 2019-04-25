@@ -1,4 +1,5 @@
 ﻿using Assets.Scripts.Enums;
+using Assets.Scripts.Models;
 using Assets.Scripts.Models.Definitions;
 using System.Collections.Generic;
 using System.IO;
@@ -13,7 +14,7 @@ namespace Assets.Scripts.Controllers
         public Dictionary<string, BiomeDefinitionModel> BiomeDefinitions = new Dictionary<string, BiomeDefinitionModel>();
         public Dictionary<string, ResourceDefinitionModel> ResourceDefinitions = new Dictionary<string, ResourceDefinitionModel>();
         public Dictionary<string, TileLayerDefinitionModel> TileLayerDefinitions = new Dictionary<string, TileLayerDefinitionModel>();
-        public Dictionary<string, BuildingDefinitionModel> BuildingDefinitions = new Dictionary<string, BuildingDefinitionModel>();
+        public Dictionary<RaceEnum, Dictionary<string, BuildingDefinitionModel>> BuildingDefinitions = new Dictionary<RaceEnum, Dictionary<string, BuildingDefinitionModel>>();
 
         void Awake()
         {
@@ -33,23 +34,22 @@ namespace Assets.Scripts.Controllers
             DontDestroyOnLoad(gameObject);
         }
 
-        void Start()
+        public void ReadBuildingsDefinitions(PlayerModel player)
         {
-            ReadBuildingsDefinitions(GameController.Instance.Race);
-            GameController.Instance.ProducePlayer();
-        }
-
-        private void ReadBuildingsDefinitions(RaceEnum race)
-        {
-            var path = $"{Directory.GetCurrentDirectory()}/Assets/Definitions/Buildings/{race.ToString()}";
-            var buildingDefinitionPaths = Directory.GetFiles(path, "*.xml");
-
-            foreach(var buildingDefinitionPath in buildingDefinitionPaths)
+            if (!BuildingDefinitions.ContainsKey(player.Race))
             {
-                var buildingDefinition = BuildingDefinitionModel.Load(buildingDefinitionPath);
-                var buildingModel = new BuildingDefinitionModel(buildingDefinition.Name, buildingDefinition.BuildingType, buildingDefinition.Cost, buildingDefinition.Available);
+                var path = $"{Directory.GetCurrentDirectory()}/Assets/Definitions/Buildings/{player.Race.ToString()}";
+                var buildingDefinitionPaths = Directory.GetFiles(path, "*.xml");
 
-                BuildingDefinitions.Add(buildingModel.Name, buildingModel);
+                BuildingDefinitions.Add(player.Race, new Dictionary<string, BuildingDefinitionModel>());
+
+                foreach (var buildingDefinitionPath in buildingDefinitionPaths)
+                {
+                    var buildingDefinition = BuildingDefinitionModel.Load(buildingDefinitionPath);
+                    var buildingModel = new BuildingDefinitionModel(buildingDefinition.Name, buildingDefinition.BuildingType, buildingDefinition.Cost, buildingDefinition.Available);
+
+                    BuildingDefinitions[player.Race].Add(buildingModel.Name, buildingModel);
+                }
             }
         }
 

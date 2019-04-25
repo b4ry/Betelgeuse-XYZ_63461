@@ -1,6 +1,7 @@
 ﻿using Assets.Scripts.Enums;
 using Assets.Scripts.Factories;
 using Assets.Scripts.Managers.Player;
+using Assets.Scripts.Models;
 using Assets.Scripts.Models.Definitions;
 using System.Collections.Generic;
 using System.IO;
@@ -14,13 +15,13 @@ namespace Assets.Scripts.Controllers
         public static GameController Instance = null;
 
         public GameObject MainCamera;
+        public GameObject Definitions;
 
         public List<GameObject> RegionObjects = new List<GameObject>();
 
         public System.Random Rng { get; set; }
         public string MapName { get; set; }
-        public IPlayerManager PlayerManager { get; set; }
-        public RaceEnum Race;
+        public PlayerModel ActivePlayer { get; set; }
 
         [SerializeField]
         private GameObject worldMapObject;
@@ -42,6 +43,7 @@ namespace Assets.Scripts.Controllers
         private List<Sprite> regionFOWOutlineSprites = new List<Sprite>();
 
         private IFactory<IPlayerManager> playerFactory;
+        private DefinitionsController definitionsController;
 
         void Awake()
         {
@@ -63,8 +65,6 @@ namespace Assets.Scripts.Controllers
             regionFOWSprites = Resources.LoadAll<Sprite>($"Maps/Regions/{MapName}/FOWs").ToList();
             regionFOWOutlineSprites = Resources.LoadAll<Sprite>($"Maps/Regions/{MapName}/FOWOutlines").ToList();
 
-            Race = GameInfoStorageController.Instance.Players.FirstOrDefault().Value;
-
             BuildMapFromItsDefinition();
 
             Rng = new System.Random();
@@ -73,12 +73,32 @@ namespace Assets.Scripts.Controllers
 
             initialRegion.GetComponent<RegionController>().SetInitial();
 
+            definitionsController = Definitions.GetComponent<DefinitionsController>();
+
             DontDestroyOnLoad(gameObject);
 
             foreach(var player in GameInfoStorageController.Instance.Players)
             {
-                Debug.Log($"{player.Key} : {player.Value}");
+                Debug.Log($"{player.Nickname} : {player.Race}");
             }
+        }
+
+        void Start()
+        {
+            foreach(var regionObject in RegionObjects)
+            {
+                var regionController = regionObject.GetComponent<RegionController>();
+
+                regionController.DefineModel();
+            }
+
+            foreach (var player in GameInfoStorageController.Instance.Players)
+            {
+                definitionsController.ReadBuildingsDefinitions(player);
+                ProducePlayer(player);
+            }
+
+            ActivePlayer = GameInfoStorageController.Instance.Players.FirstOrDefault();
         }
 
         private void BuildMapFromItsDefinition()
@@ -106,6 +126,13 @@ namespace Assets.Scripts.Controllers
             }
         }
 
+        private void ProducePlayer(PlayerModel player)
+        {
+            playerFactory = new PlayerFactory();
+            player.PlayerManager = playerFactory.Produce(player);
+            player.PlayerManager.Race = player.Race;
+        }
+
         public void LoadRegionView()
         {
             worldMapObject.SetActive(false);
@@ -123,13 +150,6 @@ namespace Assets.Scripts.Controllers
             worldMapUICanvas.SetActive(true);
 
             regionUICanvas.SetActive(false);
-        }
-
-        public void ProducePlayer()
-        {
-            playerFactory = new PlayerFactory();
-            PlayerManager = playerFactory.Produce(Race);
-            PlayerManager.Race = Race;
         }
     }
 }

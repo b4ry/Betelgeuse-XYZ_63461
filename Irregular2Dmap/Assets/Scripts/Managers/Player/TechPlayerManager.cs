@@ -17,7 +17,7 @@ namespace Assets.Scripts.Managers.Player
         {
             ShipModules = new List<BuildingModel>();
 
-            foreach (var buildingDefinition in DefinitionsController.Instance.BuildingDefinitions.Values)
+            foreach (var buildingDefinition in DefinitionsController.Instance.BuildingDefinitions[RaceEnum.TechHuman].Values)
             {
                 var buildingModel = new BuildingModel(buildingDefinition.Name, buildingDefinition.BuildingType, buildingDefinition.Cost, buildingDefinition.Available);
 

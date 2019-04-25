@@ -33,9 +33,9 @@ namespace Assets.Scripts.Models
             PlayerBuildings = new List<BuildingModel>();
         }
 
-        public void PopulatePlayerBuildings()
+        public void PopulatePlayerBuildings(RaceEnum race)
         {
-            foreach (var buildingDefinition in DefinitionsController.Instance.BuildingDefinitions.Values)
+            foreach (var buildingDefinition in DefinitionsController.Instance.BuildingDefinitions[race].Values)
             {
                 var buildingModel = new BuildingModel(buildingDefinition.Name, buildingDefinition.BuildingType, buildingDefinition.Cost, buildingDefinition.Available);
 

@@ -1,5 +1,6 @@
 ﻿using Assets.Scripts.Enums;
 using Assets.Scripts.Managers.Player;
+using Assets.Scripts.Models;
 using System;
 using UnityEngine;
 
@@ -7,17 +8,15 @@ namespace Assets.Scripts.Factories
 {
     public class PlayerFactory : IFactory<IPlayerManager>
     {
-        public IPlayerManager Produce(Enum product)
+        public IPlayerManager Produce(PlayerModel product)
         {
-            RaceEnum race = (RaceEnum)product;
-
-            if(race == RaceEnum.Human)
+            if(product.Race == RaceEnum.Human)
             {
                 Debug.Log("Produced Humans");
 
                 return new HumanPlayerManager();
             }
-            else if(race == RaceEnum.TechHuman)
+            else if(product.Race == RaceEnum.TechHuman)
             {
                 Debug.Log("Produced Techs");
 

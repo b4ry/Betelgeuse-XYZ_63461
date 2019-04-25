@@ -484,8 +484,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MainCamera: {fileID: 519420028}
+  Definitions: {fileID: 268120414}
   RegionObjects: []
-  Race: 0
   worldMapObject: {fileID: 44501663}
   regionPrefab: {fileID: 7406234492291713761, guid: 55da35a5515625341bd517bf480e9016,
     type: 3}

@@ -1,4 +1,4 @@
-﻿using Assets.Scripts.Enums;
+﻿using Assets.Scripts.Models;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -10,7 +10,7 @@ namespace Assets.Scripts.Controllers
 
         public string MapName;
         public int PlayersNumber = 1;
-        public Dictionary<string, RaceEnum> Players;
+        public List<PlayerModel> Players;
 
         void Awake()
         {
@@ -25,7 +25,7 @@ namespace Assets.Scripts.Controllers
 
             DontDestroyOnLoad(gameObject);
 
-            Players = new Dictionary<string, RaceEnum>();
+            Players = new List<PlayerModel>();
         }
     }
 }

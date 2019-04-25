@@ -32,7 +32,7 @@ namespace Assets.Scripts.Controllers
             spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
         }
 
-        void Start()
+        public void DefineModel()
         {
             var path = $"{Directory.GetCurrentDirectory()}/Assets/Definitions/Regions/{GameController.Instance.MapName}/{gameObject.name}.xml";
 
