@@ -1,9 +1,6 @@
-﻿using Assets.Scripts.Enums;
-using Assets.Scripts.Managers.WorldMap;
+﻿using Assets.Scripts.Managers.WorldMap;
 using Assets.Scripts.Models;
 using Assets.Scripts.Models.Definitions;
-using Assets.Scripts.Readers;
-using System;
 using System.IO;
 using System.Linq;
 using UnityEngine;
@@ -43,15 +40,15 @@ namespace Assets.Scripts.Controllers
 
             if (isInitial)
             {
-                gameObject.SetActive(true);
-                RegionModel.Visited = true;
+                //gameObject.SetActive(true);
+                //RegionModel.Visited = true;
 
-                regionSelected = true;
+                //regionSelected = true;
 
                 spriteRenderer.sprite = RegionOutlineSprite;
 
-                RegionSummaryPanelManager.Instance.SetupRegionSummaryPanel(RegionModel, false);
-                SelectedRegionsController.SelectedRegionObjects.Add(this);
+                //RegionSummaryPanelManager.Instance.SetupRegionSummaryPanel(RegionModel, false);
+                //SelectedRegionsController.SelectedRegionObjects.Add(this);
                 RegionSummaryPanelManager.Instance.SetupEnterButton(delegate
                 {
                     EnterRegion();

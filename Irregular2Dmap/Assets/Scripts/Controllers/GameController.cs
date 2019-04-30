@@ -69,10 +69,6 @@ namespace Assets.Scripts.Controllers
 
             Rng = new System.Random();
 
-            var initialRegion = RegionObjects[Rng.Next(0, RegionObjects.Count)];
-
-            initialRegion.GetComponent<RegionController>().SetInitial();
-
             definitionsController = Definitions.GetComponent<DefinitionsController>();
 
             DontDestroyOnLoad(gameObject);
@@ -85,20 +81,24 @@ namespace Assets.Scripts.Controllers
 
         void Start()
         {
-            foreach(var regionObject in RegionObjects)
+            foreach (var player in GameInfoStorageController.Instance.Players)
+            {
+                definitionsController.ReadBuildingsDefinitions(player);
+                ProducePlayer(player);
+
+                var initialPlayerRegion = RegionObjects[Rng.Next(0, RegionObjects.Count)];
+
+                player.PlayerManager.InitialRegion = initialPlayerRegion;
+            }
+
+            ActivePlayer = GameInfoStorageController.Instance.Players.FirstOrDefault();
+
+            foreach (var regionObject in RegionObjects)
             {
                 var regionController = regionObject.GetComponent<RegionController>();
 
                 regionController.DefineModel();
             }
-
-            foreach (var player in GameInfoStorageController.Instance.Players)
-            {
-                definitionsController.ReadBuildingsDefinitions(player);
-                ProducePlayer(player);
-            }
-
-            ActivePlayer = GameInfoStorageController.Instance.Players.FirstOrDefault();
         }
 
         private void BuildMapFromItsDefinition()
