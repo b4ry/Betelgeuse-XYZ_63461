@@ -81,6 +81,13 @@ namespace Assets.Scripts.Controllers
 
         void Start()
         {
+            foreach (var regionObject in RegionObjects)
+            {
+                var regionController = regionObject.GetComponent<RegionController>();
+
+                regionController.DefineModel();
+            }
+
             foreach (var player in GameInfoStorageController.Instance.Players)
             {
                 definitionsController.ReadBuildingsDefinitions(player);
@@ -93,12 +100,8 @@ namespace Assets.Scripts.Controllers
 
             ActivePlayer = GameInfoStorageController.Instance.Players.FirstOrDefault();
 
-            foreach (var regionObject in RegionObjects)
-            {
-                var regionController = regionObject.GetComponent<RegionController>();
-
-                regionController.DefineModel();
-            }
+            var activeRegionController = ActivePlayer.PlayerManager.InitialRegion.GetComponent<RegionController>();
+            activeRegionController.SetActive();
         }
 
         private void BuildMapFromItsDefinition()

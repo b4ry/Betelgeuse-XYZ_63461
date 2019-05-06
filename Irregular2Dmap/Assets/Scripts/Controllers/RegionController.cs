@@ -38,39 +38,44 @@ namespace Assets.Scripts.Controllers
 
             RegionModel = new RegionModel(regionDefinition.Name, regionDefinition.Size, regionDefinition.Biomes, neighbourRegions);
 
-            if (isInitial)
-            {
-                //gameObject.SetActive(true);
-                //RegionModel.Visited = true;
+            gameObject.SetActive(true);
 
-                //regionSelected = true;
+            spriteRenderer.sprite = RegionFogOfWarSprite;
+            //gameObject.SetActive(false);
 
-                spriteRenderer.sprite = RegionOutlineSprite;
+            //if (isInitial)
+            //{
+            //    //gameObject.SetActive(true);
+            //    //RegionModel.Visited = true;
 
-                //RegionSummaryPanelManager.Instance.SetupRegionSummaryPanel(RegionModel, false);
-                //SelectedRegionsController.SelectedRegionObjects.Add(this);
-                RegionSummaryPanelManager.Instance.SetupEnterButton(delegate
-                {
-                    EnterRegion();
-                });
-            }
-            else
-            {
-                var isInitialTileNeighbour = RegionModel.NeighbourRegions.FirstOrDefault(nr => nr.GetComponent<RegionController>().isInitial);
+            //    //regionSelected = true;
 
-                if (isInitialTileNeighbour != null)
-                {
-                    gameObject.SetActive(true);
+            //    spriteRenderer.sprite = RegionOutlineSprite;
 
-                    spriteRenderer.sprite = RegionFogOfWarSprite;
-                }
-                else
-                {
-                    gameObject.SetActive(false);
+            //    //RegionSummaryPanelManager.Instance.SetupRegionSummaryPanel(RegionModel, false);
+            //    //SelectedRegionsController.SelectedRegionObjects.Add(this);
+            //    RegionSummaryPanelManager.Instance.SetupEnterButton(delegate
+            //    {
+            //        EnterRegion();
+            //    });
+            //}
+            //else
+            //{
+            //    var isInitialTileNeighbour = RegionModel.NeighbourRegions.FirstOrDefault(nr => nr.GetComponent<RegionController>().isInitial);
 
-                    spriteRenderer.sprite = RegionFogOfWarSprite;
-                }
-            }
+            //    if (isInitialTileNeighbour != null)
+            //    {
+            //        gameObject.SetActive(true);
+
+            //        spriteRenderer.sprite = RegionFogOfWarSprite;
+            //    }
+            //    else
+            //    {
+            //        gameObject.SetActive(false);
+
+            //        spriteRenderer.sprite = RegionFogOfWarSprite;
+            //    }
+            //}
 
             gameObject.AddComponent<PolygonCollider2D>();
         }
@@ -78,6 +83,22 @@ namespace Assets.Scripts.Controllers
         public void SetInitial()
         {
             isInitial = true;
+        }
+
+        public void SetActive()
+        {
+            gameObject.SetActive(true);
+            RegionModel.Visited = true;
+            regionSelected = true;
+
+            spriteRenderer.sprite = RegionOutlineSprite;
+
+            RegionSummaryPanelManager.Instance.SetupRegionSummaryPanel(RegionModel, false);
+            SelectedRegionsController.SelectedRegionObjects.Add(this);
+            RegionSummaryPanelManager.Instance.SetupEnterButton(delegate
+            {
+                EnterRegion();
+            });
         }
 
         public void OnMouseDown()
@@ -122,7 +143,8 @@ namespace Assets.Scripts.Controllers
                 {
                     SelectRegion();
                 }
-            } else
+            }
+            else
             {
                 Debug.Log("UI");
             }
@@ -145,7 +167,7 @@ namespace Assets.Scripts.Controllers
             else
             {
                 spriteRenderer.sprite = RegionFogOfWarOutlineSprite;
-                
+
                 RegionSummaryPanelManager.Instance.SetupRegionSummaryPanel(RegionModel, true);
                 RegionSummaryPanelManager.Instance.SetupChartButton(delegate
                 {
