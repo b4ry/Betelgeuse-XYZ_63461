@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Assets.Scripts.Controllers
 {
@@ -16,6 +17,7 @@ namespace Assets.Scripts.Controllers
 
         public GameObject MainCamera;
         public GameObject Definitions;
+        public GameObject PlayerLabel;
 
         public List<GameObject> RegionObjects = new List<GameObject>();
 
@@ -47,6 +49,7 @@ namespace Assets.Scripts.Controllers
         private IFactory<IPlayerManager> playerFactory;
         private DefinitionsController definitionsController;
         private int currentPlayerIndex = 0;
+        private Text playerLabel; 
 
         void Awake()
         {
@@ -73,6 +76,7 @@ namespace Assets.Scripts.Controllers
             Rng = new System.Random();
 
             definitionsController = Definitions.GetComponent<DefinitionsController>();
+            playerLabel = PlayerLabel.GetComponent<Text>();
 
             DontDestroyOnLoad(gameObject);
 
@@ -107,6 +111,8 @@ namespace Assets.Scripts.Controllers
 
             var activeRegionController = ActivePlayer.PlayerManager.InitialRegion.GetComponent<RegionController>();
             activeRegionController.SetActive();
+
+            playerLabel.text = ActivePlayer.Nickname;
         }
 
         private void BuildMapFromItsDefinition()
@@ -187,6 +193,8 @@ namespace Assets.Scripts.Controllers
 
             var activeRegionController = ActivePlayer.PlayerManager.InitialRegion.GetComponent<RegionController>();
             activeRegionController.SetActive();
+
+            playerLabel.text = ActivePlayer.Nickname;
         }
     }
 }
