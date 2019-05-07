@@ -44,6 +44,7 @@ namespace Assets.Scripts.Controllers
 
         private IFactory<IPlayerManager> playerFactory;
         private DefinitionsController definitionsController;
+        private int currentPlayerIndex = 0;
 
         void Awake()
         {
@@ -55,7 +56,7 @@ namespace Assets.Scripts.Controllers
             {
                 Destroy(gameObject);
             }
-            
+
             MapName = GameInfoStorageController.Instance.MapName;
 
             // TODO: ASSET BUNDLE
@@ -73,7 +74,7 @@ namespace Assets.Scripts.Controllers
 
             DontDestroyOnLoad(gameObject);
 
-            foreach(var player in GameInfoStorageController.Instance.Players)
+            foreach (var player in GameInfoStorageController.Instance.Players)
             {
                 Debug.Log($"{player.Nickname} : {player.Race}");
             }
@@ -111,7 +112,7 @@ namespace Assets.Scripts.Controllers
 
             worldMapObject.GetComponent<SpriteRenderer>().sprite = worldMapSprites.FirstOrDefault(wms => wms.name.Contains(mapDefinition.Name));
 
-            for(int i = 0; i < mapDefinition.RegionsNumber; i++)
+            for (int i = 0; i < mapDefinition.RegionsNumber; i++)
             {
                 var regionObject = Instantiate(regionPrefab, regionsObject.transform);
 
@@ -153,6 +154,18 @@ namespace Assets.Scripts.Controllers
             worldMapUICanvas.SetActive(true);
 
             regionUICanvas.SetActive(false);
+        }
+
+        public void EndTurn()
+        {
+            ++currentPlayerIndex;
+
+            if (currentPlayerIndex > GameInfoStorageController.Instance.Players.Count - 1)
+            {
+                currentPlayerIndex = 0;
+            }
+
+            ActivePlayer = GameInfoStorageController.Instance.Players[currentPlayerIndex];
         }
     }
 }

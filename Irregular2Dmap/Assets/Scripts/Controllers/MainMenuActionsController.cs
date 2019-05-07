@@ -86,10 +86,11 @@ namespace Assets.Scripts.Controllers
             {
                 var dropdown = newRaceDropdowns[i].GetComponent<Dropdown>();
                 var playerRace = (RaceEnum)Enum.Parse(typeof(RaceEnum), dropdown.options[dropdown.value].text);
-                var newPlayer = new PlayerModel();
-
-                newPlayer.Nickname = $"Player_{i + 1}";
-                newPlayer.Race = playerRace;
+                var newPlayer = new PlayerModel
+                {
+                    Nickname = $"Player_{i + 1}",
+                    Race = playerRace
+                };
 
                 gameInfoStorageController.Players.Add(newPlayer);
             }
