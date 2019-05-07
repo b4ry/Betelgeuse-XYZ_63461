@@ -150,6 +150,13 @@ namespace Assets.Scripts.Controllers
             }
         }
 
+        public void PlaceFogOfWar()
+        {
+            gameObject.SetActive(true);
+
+            spriteRenderer.sprite = RegionFogOfWarSprite;
+        }
+
         private void SelectRegion()
         {
             regionSelected = true;
@@ -226,13 +233,6 @@ namespace Assets.Scripts.Controllers
             }
 
             regionSelected = false;
-        }
-
-        private void PlaceFogOfWar()
-        {
-            gameObject.SetActive(true);
-
-            GetComponent<SpriteRenderer>().sprite = RegionFogOfWarSprite;
         }
 
         private void EnterRegion()

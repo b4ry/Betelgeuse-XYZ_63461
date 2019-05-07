@@ -166,6 +166,16 @@ namespace Assets.Scripts.Controllers
             }
 
             ActivePlayer = GameInfoStorageController.Instance.Players[currentPlayerIndex];
+
+            foreach (var regionObject in RegionObjects)
+            {
+                var regionController = regionObject.GetComponent<RegionController>();
+
+                regionController.PlaceFogOfWar();
+            }
+
+            var activeRegionController = ActivePlayer.PlayerManager.InitialRegion.GetComponent<RegionController>();
+            activeRegionController.SetActive();
         }
     }
 }
