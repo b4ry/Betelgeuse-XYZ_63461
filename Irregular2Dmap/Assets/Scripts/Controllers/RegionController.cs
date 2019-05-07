@@ -87,8 +87,16 @@ namespace Assets.Scripts.Controllers
 
         public void SetActive()
         {
+            SelectedRegionsController.SelectedRegionObjects.Clear();
+
             gameObject.SetActive(true);
-            RegionModel.Visited = true;
+
+            var regionsVisited = GameController.Instance.ActivePlayer.PlayerManager.VisitedRegions;
+            if (!regionsVisited.Contains(RegionModel.Name))
+            {
+                regionsVisited.Add(RegionModel.Name);
+            }
+
             regionSelected = true;
 
             spriteRenderer.sprite = RegionOutlineSprite;
@@ -101,13 +109,20 @@ namespace Assets.Scripts.Controllers
             });
         }
 
+        public void SetCharted()
+        {
+            spriteRenderer.sprite = RegionSprite;
+        }
+
         public void OnMouseDown()
         {
+            var regionsVisited = GameController.Instance.ActivePlayer.PlayerManager.VisitedRegions;
+
             if (!EventSystem.current.IsPointerOverGameObject())
             {
                 if (regionSelected) // DESELECT region
                 {
-                    if (RegionModel.Visited)
+                    if (regionsVisited.Contains(RegionModel.Name))
                     {
                         spriteRenderer.sprite = RegionSprite;
                     }
@@ -122,22 +137,22 @@ namespace Assets.Scripts.Controllers
 
                     SelectedRegionsController.SelectedRegionObjects.Remove(this);
 
-                    if (RegionModel.Visited)
-                    {
-                        foreach (var neighbourRegion in RegionModel.NeighbourRegions)
-                        {
-                            var neighbourRegionController = neighbourRegion.GetComponent<RegionController>();
+                    //if (regionsVisited.Contains(RegionModel.Name))
+                    //{
+                    //    foreach (var neighbourRegion in RegionModel.NeighbourRegions)
+                    //    {
+                    //        var neighbourRegionController = neighbourRegion.GetComponent<RegionController>();
 
-                            if (neighbourRegionController.RegionModel.Visited)
-                            {
-                                neighbourRegion.SetActive(true);
-                            }
-                            else
-                            {
-                                neighbourRegion.SetActive(false);
-                            }
-                        }
-                    }
+                    //        if (neighbourRegionController.RegionModel.Visited)
+                    //        {
+                    //            neighbourRegion.SetActive(true);
+                    //        }
+                    //        else
+                    //        {
+                    //            neighbourRegion.SetActive(false);
+                    //        }
+                    //    }
+                    //}
                 }
                 else
                 {
@@ -154,14 +169,16 @@ namespace Assets.Scripts.Controllers
         {
             gameObject.SetActive(true);
 
+            regionSelected = false;
             spriteRenderer.sprite = RegionFogOfWarSprite;
         }
 
         private void SelectRegion()
         {
             regionSelected = true;
+            var regionsVisited = GameController.Instance.ActivePlayer.PlayerManager.VisitedRegions;
 
-            if (RegionModel.Visited)
+            if (regionsVisited.Contains(RegionModel.Name))
             {
                 spriteRenderer.sprite = RegionOutlineSprite;
 
@@ -187,35 +204,35 @@ namespace Assets.Scripts.Controllers
                 selectedRegion.DeselectRegion();
             }
 
-            if (RegionModel.Visited)
-            {
-                foreach (var neighbourRegion in RegionModel.NeighbourRegions)
-                {
-                    var neighbourRegionController = neighbourRegion.GetComponent<RegionController>();
+            //if (RegionModel.Visited)
+            //{
+            //    foreach (var neighbourRegion in RegionModel.NeighbourRegions)
+            //    {
+            //        var neighbourRegionController = neighbourRegion.GetComponent<RegionController>();
 
-                    if (!neighbourRegionController.RegionModel.Visited)
-                    {
-                        neighbourRegionController.PlaceFogOfWar();
-                    }
-                }
-            }
+            //        if (!neighbourRegionController.RegionModel.Visited)
+            //        {
+            //            neighbourRegionController.PlaceFogOfWar();
+            //        }
+            //    }
+            //}
 
-            foreach (var region in GameController.Instance.RegionObjects)
-            {
-                var regionController = region.GetComponent<RegionController>();
+            //foreach (var region in GameController.Instance.RegionObjects)
+            //{
+            //    var regionController = region.GetComponent<RegionController>();
 
-                if (!regionController.RegionModel.Visited && !regionController.regionSelected)
-                {
-                    if (RegionModel.Visited && RegionModel.NeighbourRegions.Contains(region))
-                    {
-                        continue;
-                    }
-                    else
-                    {
-                        region.SetActive(false);
-                    }
-                }
-            }
+            //    if (!regionController.RegionModel.Visited && !regionController.regionSelected)
+            //    {
+            //        if (RegionModel.Visited && RegionModel.NeighbourRegions.Contains(region))
+            //        {
+            //            continue;
+            //        }
+            //        else
+            //        {
+            //            region.SetActive(false);
+            //        }
+            //    }
+            //}
 
             SelectedRegionsController.SelectedRegionObjects.Clear();
             SelectedRegionsController.SelectedRegionObjects.Add(this);
@@ -223,7 +240,9 @@ namespace Assets.Scripts.Controllers
 
         private void DeselectRegion()
         {
-            if (RegionModel.Visited)
+            var regionsVisited = GameController.Instance.ActivePlayer.PlayerManager.VisitedRegions;
+
+            if (regionsVisited.Contains(RegionModel.Name))
             {
                 spriteRenderer.sprite = RegionSprite;
             }
@@ -242,21 +261,24 @@ namespace Assets.Scripts.Controllers
 
         private void ChartRegion()
         {
-            RegionModel.Visited = true;
+            var regionsVisited = GameController.Instance.ActivePlayer.PlayerManager.VisitedRegions;
+            if (!regionsVisited.Contains(RegionModel.Name))
+            {
+                regionsVisited.Add(RegionModel.Name);
+            }
+
             spriteRenderer.sprite = RegionOutlineSprite;
 
-            if (RegionModel.Visited)
-            {
-                foreach (var neighbourRegion in RegionModel.NeighbourRegions)
-                {
-                    var neighbourRegionController = neighbourRegion.GetComponent<RegionController>();
+            //    foreach (var neighbourRegion in RegionModel.NeighbourRegions)
+            //    {
+            //        var neighbourRegionController = neighbourRegion.GetComponent<RegionController>();
 
-                    if (!neighbourRegionController.RegionModel.Visited)
-                    {
-                        neighbourRegionController.PlaceFogOfWar();
-                    }
-                }
-            }
+            //        if (!neighbourRegionController.RegionModel.Visited)
+            //        {
+            //            neighbourRegionController.PlaceFogOfWar();
+            //        }
+            //    }
+            //}
 
             RegionSummaryPanelManager.Instance.SetupRegionSummaryPanel(RegionModel, false);
         }

@@ -16,7 +16,6 @@ namespace Assets.Scripts.Models
         public List<ResourceModel> Resources { get; set; }
         public List<GameObject> NeighbourRegions { get; set; }
         public List<BuildingModel> PlayerBuildings { get; set; }
-        public bool Visited { get; set; }
         public OddityModel Oddity { get; set; }
 
         public RegionModel(string name, RegionSizeEnum size, List<BiomeDefinitionModel> biomes, List<GameObject> neighbourRegions)
@@ -24,7 +23,6 @@ namespace Assets.Scripts.Models
             Name = name;
             Size = size;
             NeighbourRegions = neighbourRegions;
-            Visited = false;
 
             RandomizeOddityRating();
             CreateBiomes(biomes);

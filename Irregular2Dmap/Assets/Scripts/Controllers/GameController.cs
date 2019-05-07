@@ -42,6 +42,8 @@ namespace Assets.Scripts.Controllers
         private List<Sprite> regionFOWSprites = new List<Sprite>();
         private List<Sprite> regionFOWOutlineSprites = new List<Sprite>();
 
+        private List<RegionController> regionControllers = new List<RegionController>();
+
         private IFactory<IPlayerManager> playerFactory;
         private DefinitionsController definitionsController;
         private int currentPlayerIndex = 0;
@@ -87,6 +89,8 @@ namespace Assets.Scripts.Controllers
                 var regionController = regionObject.GetComponent<RegionController>();
 
                 regionController.DefineModel();
+
+                regionControllers.Add(regionController);
             }
 
             foreach (var player in GameInfoStorageController.Instance.Players)
@@ -172,6 +176,13 @@ namespace Assets.Scripts.Controllers
                 var regionController = regionObject.GetComponent<RegionController>();
 
                 regionController.PlaceFogOfWar();
+            }
+
+            foreach(var visitedRegion in ActivePlayer.PlayerManager.VisitedRegions)
+            {
+                var regionController = regionControllers.FirstOrDefault(x => x.RegionModel.Name == visitedRegion);
+
+                regionController.SetCharted();
             }
 
             var activeRegionController = ActivePlayer.PlayerManager.InitialRegion.GetComponent<RegionController>();

@@ -1,5 +1,6 @@
 ﻿using Assets.Scripts.Controllers;
 using Assets.Scripts.Enums;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
@@ -9,11 +10,13 @@ namespace Assets.Scripts.Managers.Player
     {
         public RaceEnum Race { get; set; }
         public GameObject InitialRegion { get; set; }
+        public List<string> VisitedRegions { get; set; }
 
         public HumanPlayerManager()
         {
             foreach(var regionObject in GameController.Instance.RegionObjects)
             {
+                VisitedRegions = new List<string>();
                 var regionController = regionObject.GetComponent<RegionController>();
 
                 regionController.RegionModel.PopulatePlayerBuildings(RaceEnum.Human);

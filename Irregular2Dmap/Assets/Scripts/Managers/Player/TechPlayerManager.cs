@@ -11,7 +11,8 @@ namespace Assets.Scripts.Managers.Player
     {
         public RaceEnum Race { get; set; }
         public List<BuildingModel> ShipModules { get; set; }
-        public GameObject InitialRegion { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
+        public GameObject InitialRegion { get; set; }
+        public List<string> VisitedRegions { get; set; }
 
         public TechPlayerManager()
         {
@@ -19,6 +20,7 @@ namespace Assets.Scripts.Managers.Player
 
             foreach (var buildingDefinition in DefinitionsController.Instance.BuildingDefinitions[RaceEnum.TechHuman].Values)
             {
+                VisitedRegions = new List<string>();
                 var buildingModel = new BuildingModel(buildingDefinition.Name, buildingDefinition.BuildingType, buildingDefinition.Cost, buildingDefinition.Available);
 
                 ShipModules.Add(buildingModel);
